@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 15:01:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/13 15:28:06 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/10/13 15:29:48 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/10/13 15:30:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "PhoneBook.hpp"
-# include <iomanip>
+#include "Contact.hpp"
 
-int	main(void)
-{
-	PhoneBook	pb;
-	
-	std::cout << std::setw(10);
-	std::cout << "0" << std::endl;
+Contact::Contact() {
+	return ;
+}
+
+Contact::~Contact() {
+	return ;
 }

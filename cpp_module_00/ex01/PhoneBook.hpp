@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:25:54 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/13 15:28:04 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/20 10:21:39 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ class PhoneBook {
 	
 private:
 	/* data */
-	int	index;
+
 public:
 	PhoneBook(/* args */);
 	~PhoneBook();

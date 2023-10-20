@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:21:23 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/20 10:23:32 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:22:45 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ private:
 public:
 	Contact();
 	~Contact();
+
+	bool	setFirstName(std::string firstName);
+	bool	setLastName(std::string lastName);
+	bool	setNickName(std::string NickName);
 
 	static int	getIndex();
 };

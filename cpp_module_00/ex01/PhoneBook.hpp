@@ -3,25 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:25:54 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/20 10:21:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/20 15:19:28 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONE_BOOK_HPP
 # define PHONE_BOOK_HPP
 # include <iostream>
+# include "Contact.hpp"
 
 class PhoneBook {
-	
 private:
 	/* data */
-
+	// Contact	_contacts[8];
 public:
 	PhoneBook(/* args */);
 	~PhoneBook();
+	void	AddContact();
 };
 
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/13 12:19:28 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/20 14:50:25 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/21 19:06:13 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ SRC			=	PhoneBook.cpp \
 				main.cpp \
 				Contact.cpp \
 				
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CFLAGS	=	-Wall -Wextra -Werror -ggdb -O0 -std=c++98
 CC			=	c++
 NAME		=	phonebook
 OBJ			=	$(SRC:.cpp=.o)

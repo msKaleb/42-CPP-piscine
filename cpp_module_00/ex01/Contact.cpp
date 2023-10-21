@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:29:48 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/21 19:24:06 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/21 19:33:49 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,25 @@ void	Contact::setContact(t_data *td) {
 	this->_darkestSecret = td->ds;
 }
 
+/* Getters */
 std::string	Contact::getFirstName() {
 	return (this->_firstName);
 }
+
+std::string	Contact::getLastName() {
+	return (this->_lastName);
+}
+
+std::string	Contact::getNickName() {
+	return (this->_nickName);
+}
+
+std::string	Contact::getPhoneNumber() {
+	return (this->_phoneNumber);
+}
+
+std::string	Contact::getDarkestSecret() {
+	return (this->_darkestSecret);
+}
+
 // int	Contact::_index = 0;

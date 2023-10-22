@@ -6,12 +6,11 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:01:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/21 19:47:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:04:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-#include <iomanip>
 #include "struct.h"
 
 void	displaySearchingHeader(void) {
@@ -44,10 +43,22 @@ int	main(void)
 	int			searchIndex;
 	t_data		td;
 	
+	/* debugging */
+	td.fn = "Mikel";
+	td.ln = "Soria";
+	td.nn = "msoria-j";
+	td.pn = "680752260";
+	td.ds = "nothing";
+	pb.addContact(&td);
+	/* debugging */
+	
 	while (run)
 	{
+		opt.clear();
+		std::cout << std::endl;
 		std::cout << "Enter an option: ";
 		std::getline(std::cin, opt);
+		// std::cin >> opt;
 		// system("clear");
 		// std::cout << opt << std::endl;
 		if (opt == "a")
@@ -62,11 +73,14 @@ int	main(void)
 			for (int i = 0; i < pb.getNContacts(); i++)
 				pb.showContact(i);
 			std::cout << "Enter index: ";
-			std::cin >> searchIndex;
-			if (searchIndex < 0 || searchIndex > pb.getNContacts())
+			std::cin >> opt;
+			searchIndex = std::atoi(opt.c_str());
+			if (searchIndex <= 0 || searchIndex > pb.getNContacts())
 				std::cout << "Bad index" << std::endl;
-			// else
-			// showContactInfo(searchIndex);
+				// continue ;
+			else
+				pb.showContactInfo(searchIndex - 1);
+				// continue ;
 		}
 		else if (opt == "e")
 			run = 0;

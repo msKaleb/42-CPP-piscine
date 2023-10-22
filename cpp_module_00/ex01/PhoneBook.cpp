@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:08:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/21 19:35:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:17:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,21 @@ void	PhoneBook::showContact(int index) {
 	std::cout << std::setw(10) << this->_phoneContacts[index].getFirstName() << "|";
 	std::cout << std::setw(10) << this->_phoneContacts[index].getLastName() << "|";
 	std::cout << std::setw(10) << this->_phoneContacts[index].getNickName() << "|"<< std::endl;
+	return ;
+}
+
+void	PhoneBook::showContactInfo(int index) {
+#include <iomanip>
+	// std::cout << "Showing info of " << index << std::endl;
+	std::cout << "\t" << std::setw(20) << "First name: ";
+	std::cout << this->_phoneContacts[index].getFirstName() << std::endl;
+	std::cout << "\t" << std::setw(20) << "Last name: ";
+	std::cout << this->_phoneContacts[index].getLastName() << std::endl;
+	std::cout << "\t" << std::setw(20) << "Nickname: ";
+	std::cout << this->_phoneContacts[index].getNickName() << std::endl;
+	std::cout << "\t" << std::setw(20) << "Phone number: ";
+	std::cout << this->_phoneContacts[index].getPhoneNumber() << std::endl;
+	std::cout << "\t" << std::setw(20) << "Darkest secret: ";
+	std::cout << this->_phoneContacts[index].getDarkestSecret() << std::endl;
+	return ;
 }

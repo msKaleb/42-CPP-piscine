@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:21:23 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/21 19:31:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:17:55 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ class Contact {
 		~Contact();
 
 		void		setContact(t_data *td);
-		std::string	getFirstName();
-		std::string	getLastName();
-		std::string	getNickName();
-		std::string	getPhoneNumber();
-		std::string	getDarkestSecret();
+		std::string	getFirstName() const;
+		std::string	getLastName() const;
+		std::string	getNickName() const;
+		std::string	getPhoneNumber() const;
+		std::string	getDarkestSecret() const;
 
 		// static int	getIndex();
 };

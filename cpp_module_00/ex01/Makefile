@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/13 12:19:28 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/22 10:57:46 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/22 22:42:53 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,4 +36,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re
 
-# .SILENT:
+.SILENT:

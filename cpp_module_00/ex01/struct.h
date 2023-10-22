@@ -6,13 +6,14 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 15:40:48 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/21 15:43:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 22:42:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
-# include <iostream>
+
+# include "colors.h"
 
 typedef struct s_data
 {

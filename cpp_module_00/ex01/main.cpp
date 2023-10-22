@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:01:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 18:13:16 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 22:45:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	displaySearchingHeader(void) {
 	std::cout << std::setw(10) << "Last name" << "|";
 	std::cout << std::setw(10) << "Nickname" << "|" << std::endl;
 }
-
-
 
 int	main(void)
 {
@@ -59,13 +57,13 @@ int	main(void)
 		opt.clear();
 		std::cout << "Enter an option: ";
 		std::getline(std::cin, opt);
-		if (opt == "a")
+		if (opt == OPT_ADD)
 		{
 			pb.inputContactInfo(&td);
 			pb.addContact(&td);
 			std::cout << "number of contacts: " << pb.getNContacts() << std::endl;
 		}
-		else if (opt == "s")
+		else if (opt == OPT_SEARCH)
 		{
 			displaySearchingHeader();			
 			for (int i = 0; i < pb.getNContacts(); i++)
@@ -78,7 +76,7 @@ int	main(void)
 			else
 				pb.showContactInfo(searchIndex - 1);
 		}
-		else if (opt == "e")
+		else if (opt == OPT_EXIT)
 			run = 0;
 	}
 }

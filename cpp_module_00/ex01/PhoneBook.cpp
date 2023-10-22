@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:08:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 12:42:19 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:10:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 PhoneBook::PhoneBook(void) {
 	std::cout << "PB Constructor called" << std::endl;
 	this->_nContacts = 0;
+	this->_oldest = 0;
 	return ;
 }
 
@@ -27,16 +28,49 @@ void	PhoneBook::addContact(t_data *td) {
 
 	if (this->_nContacts >= MAX_CONTACTS) // max contacts to be 8
 	{
-		std::cout << "ep, fallo" << std::endl; // change, erase oldest one
-		this->_nContacts = 0;
-		return ;
+		std::cout << "Max contacts reached. Replacing the oldest one..." << std::endl;
+		this->_phoneContacts[this->_oldest].setContact(td);
+		this->_oldest++;
+		if (this->_oldest == MAX_CONTACTS)
+			this->_oldest = 0;
 	}
-	this->_phoneContacts[this->_nContacts].setContact(td);
-	this->_nContacts++;
+	else
+	{
+		this->_phoneContacts[this->_nContacts].setContact(td);
+		if (this->_nContacts <= MAX_CONTACTS)	
+			this->_nContacts++;
+	}
 }
 
 int	PhoneBook::getNContacts() {
 	return (this->_nContacts);
+}
+
+void	PhoneBook::inputContactInfo(t_data *td) {
+	std::cout << BLUE << "Adding contact (no field can be empty)..." << std::endl << RESET;
+	do {
+		std::cout << "First name: ";
+		std::getline(std::cin, td->fn);
+	} while (td->fn == "");
+	do {
+		std::cout << "Last name: ";
+		std::getline(std::cin, td->ln);
+	} while (td->ln == "");		
+	do {
+		std::cout << "Nickname: ";
+		std::getline(std::cin, td->nn);
+	} while (td->nn == "");	
+	do {
+		std::cout << "Phone number: ";
+		std::getline(std::cin, td->pn);
+	} while (td->pn == "");
+	do {
+		std::cout << "Darkest secret: ";
+		std::getline(std::cin, td->ds);
+	} while (td->ds == "");		
+		
+	std::cout << std::endl;
+	return ;
 }
 
 std::string	PhoneBook::_truncateString(std::string field) {
@@ -57,7 +91,6 @@ void	PhoneBook::showContact(int index) {
 }
 
 void	PhoneBook::showContactInfo(int index) {
-#include <iomanip>
 	// std::cout << "Showing info of " << index << std::endl;
 	std::cout << "\t" << std::setw(20) << "First name: ";
 	std::cout << this->_phoneContacts[index].getFirstName() << std::endl;

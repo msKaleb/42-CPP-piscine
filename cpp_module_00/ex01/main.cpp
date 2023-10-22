@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:01:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 12:44:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 18:13:16 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,7 @@ void	displaySearchingHeader(void) {
 	std::cout << std::setw(10) << "Nickname" << "|" << std::endl;
 }
 
-void	inputContactInfo(t_data *td) {
-	std::cout << "First name: ";
-	std::getline(std::cin, td->fn);
-	std::cout << "Last name: ";
-	std::getline(std::cin, td->ln);
-	std::cout << "Nickname: ";
-	std::getline(std::cin, td->nn);
-	std::cout << "Phone number: ";
-	std::getline(std::cin, td->pn);
-	std::cout << "Darkest secret: ";
-	std::getline(std::cin, td->ds);
-	std::cout << std::endl;
-}
+
 
 int	main(void)
 {
@@ -58,6 +46,12 @@ int	main(void)
 		td.ds = "un secreto que flipas";
 		pb.addContact(&td);
 		
+		td.fn = "Marta";
+		td.ln = "Zuchowska";
+		td.nn = "mazuchow";
+		td.pn = "666999888";
+		td.ds = "jamón";
+		pb.addContact(&td);
 	/* debugging */
 
 	while (run)
@@ -67,7 +61,7 @@ int	main(void)
 		std::getline(std::cin, opt);
 		if (opt == "a")
 		{
-			inputContactInfo(&td);
+			pb.inputContactInfo(&td);
 			pb.addContact(&td);
 			std::cout << "number of contacts: " << pb.getNContacts() << std::endl;
 		}
@@ -80,7 +74,7 @@ int	main(void)
 			std::getline(std::cin, opt);
 			searchIndex = std::atoi(opt.c_str());
 			if (searchIndex <= 0 || searchIndex > pb.getNContacts())
-				std::cout << "Bad index" << std::endl;
+				std::cout << RED << "Please enter a valid index" << std::endl << RESET;
 			else
 				pb.showContactInfo(searchIndex - 1);
 		}

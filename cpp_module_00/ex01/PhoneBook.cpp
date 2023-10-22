@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:08:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 12:17:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/22 12:42:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,20 @@ int	PhoneBook::getNContacts() {
 	return (this->_nContacts);
 }
 
+std::string	PhoneBook::_truncateString(std::string field) {
+
+	if (field.length() <= 10)
+		return (field);
+	else
+		return (field.substr(0, 9) + ".");
+}
+
 void	PhoneBook::showContact(int index) {
 	std::cout << "|";
 	std::cout << std::setw(10) << index + 1 << "|";
-	std::cout << std::setw(10) << this->_phoneContacts[index].getFirstName() << "|";
-	std::cout << std::setw(10) << this->_phoneContacts[index].getLastName() << "|";
-	std::cout << std::setw(10) << this->_phoneContacts[index].getNickName() << "|"<< std::endl;
+	std::cout << std::setw(10) << this->_truncateString(this->_phoneContacts[index].getFirstName()) << "|";
+	std::cout << std::setw(10) << this->_truncateString(this->_phoneContacts[index].getLastName()) << "|";
+	std::cout << std::setw(10) << this->_truncateString(this->_phoneContacts[index].getNickName()) << "|"<< std::endl;
 	return ;
 }
 

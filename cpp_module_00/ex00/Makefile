@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/13 12:19:28 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/13 13:14:15 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/22 22:54:56 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,10 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ)
 			$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
-			echo "\tCreated " $(NAME)
+			echo "	Created " $(NAME)
 
 clean:		
-			echo "\tremoving files..."
+			echo "	removing files..."
 			$(RM) $(OBJ)
 
 fclean:		clean

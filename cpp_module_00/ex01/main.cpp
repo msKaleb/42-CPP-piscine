@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:01:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 22:45:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:46:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,32 +30,25 @@ int	main(void)
 	t_data		td;
 	
 	/* debugging */
-		td.fn = "Mikel";
+		/* td.fn = "Mikel";
 		td.ln = "Soria";
 		td.nn = "msoria-j";
-		td.pn = "680752260";
+		td.pn = "666888777";
 		td.ds = "nothing";
 		pb.addContact(&td);
 
 		td.fn = "un_nombre_muy_largo";
 		td.ln = "un_apellido_muy_largo";
 		td.nn = "un_nickname_muy_largo";
-		td.pn = "(+34)680752260";
-		td.ds = "un secreto que flipas";
-		pb.addContact(&td);
-		
-		td.fn = "Marta";
-		td.ln = "Zuchowska";
-		td.nn = "mazuchow";
-		td.pn = "666999888";
-		td.ds = "jamón";
-		pb.addContact(&td);
+		td.pn = "(+34)666888777";
+		td.ds = "un secreto muy largo";
+		pb.addContact(&td); */
 	/* debugging */
 
 	while (run)
 	{
 		opt.clear();
-		std::cout << "Enter an option: ";
+		std::cout << YELLOW << "Enter an option: " << RESET;
 		std::getline(std::cin, opt);
 		if (opt == OPT_ADD)
 		{
@@ -68,7 +61,7 @@ int	main(void)
 			displaySearchingHeader();			
 			for (int i = 0; i < pb.getNContacts(); i++)
 				pb.showContact(i);
-			std::cout << "Enter index: ";
+			std::cout << GREEN << "Enter index: " << RESET;
 			std::getline(std::cin, opt);
 			searchIndex = std::atoi(opt.c_str());
 			if (searchIndex <= 0 || searchIndex > pb.getNContacts())

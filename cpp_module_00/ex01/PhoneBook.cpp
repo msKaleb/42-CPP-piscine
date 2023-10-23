@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:08:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 18:10:48 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:42:36 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
 PhoneBook::PhoneBook(void) {
-	std::cout << "PB Constructor called" << std::endl;
+	// std::cout << "PB Constructor called" << std::endl;
 	this->_nContacts = 0;
 	this->_oldest = 0;
 	return ;
 }
 
 PhoneBook::~PhoneBook(void) {
-	std::cout << "PB destructor called" << std::endl;
+	// std::cout << "PB destructor called" << std::endl;
 	return ;
 }
 
 void	PhoneBook::addContact(t_data *td) {
 
-	if (this->_nContacts >= MAX_CONTACTS) // max contacts to be 8
+	if (this->_nContacts >= MAX_CONTACTS)
 	{
 		std::cout << "Max contacts reached. Replacing the oldest one..." << std::endl;
 		this->_phoneContacts[this->_oldest].setContact(td);

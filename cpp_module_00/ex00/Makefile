@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/13 12:19:28 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/22 22:54:56 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/23 15:02:00 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC			=	megaphone.cpp
-CPPFLAGS	=	-Wall -Wextra -Werror -std=c++98
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
 CC			=	c++
 NAME		=	megaphone
 OBJ			=	$(SRC:.cpp=.o)

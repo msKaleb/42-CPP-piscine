@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:21:23 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/22 12:17:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:22:14 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ class Contact {
 		std::string	_phoneNumber;
 		std::string	_darkestSecret;
 
-		// static int	_index;			// non-member attribute
 	public:
 		Contact();
 		~Contact();
@@ -35,8 +34,6 @@ class Contact {
 		std::string	getNickName() const;
 		std::string	getPhoneNumber() const;
 		std::string	getDarkestSecret() const;
-
-		// static int	getIndex();
 };
 
 #endif /* CONTACT_HPP */

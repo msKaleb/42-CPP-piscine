@@ -35,6 +35,7 @@
 .vscode
 
 *.dSYM
+*.DS_Store
 megaphone
 phonebook
 PhoneBook

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:08:30 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/23 15:42:36 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:35:26 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,34 @@ void	PhoneBook::addContact(t_data *td) {
 	}
 }
 
-int	PhoneBook::getNContacts() {
+int	PhoneBook::getNContacts() const {
 	return (this->_nContacts);
+}
+
+bool	PhoneBook::isValidField(std::string field) const
+{
+	std::string whitespaces (" \t\f\v\n\r");
+	
+	if (field.empty())
+		return (false);
+	if (field.find_last_not_of(whitespaces) == std::string::npos)
+		return (false);
+	return (true);
+}
+
+bool	PhoneBook::isValidPhoneNumber(std::string phoneNumber) const
+{
+	std::string	numbers ("0123456789- ");
+	
+	if (phoneNumber.empty())
+		return (false);
+	if (phoneNumber.find_last_not_of(numbers) != std::string::npos)
+		return (false);
+	if (phoneNumber.find_first_not_of(' ') == std::string::npos)
+		return (false);
+	if (phoneNumber.find_first_not_of('-') == std::string::npos)
+		return (false);
+	return (true);
 }
 
 void	PhoneBook::inputContactInfo(t_data *td) {
@@ -51,23 +77,23 @@ void	PhoneBook::inputContactInfo(t_data *td) {
 	do {
 		std::cout << "First name: ";
 		std::getline(std::cin, td->fn);
-	} while (td->fn == "");
+	} while (!this->isValidField(td->fn));
 	do {
 		std::cout << "Last name: ";
 		std::getline(std::cin, td->ln);
-	} while (td->ln == "");		
+	} while (!this->isValidField(td->ln));		
 	do {
 		std::cout << "Nickname: ";
 		std::getline(std::cin, td->nn);
-	} while (td->nn == "");	
+	} while (!this->isValidField(td->nn));	
 	do {
 		std::cout << "Phone number: ";
 		std::getline(std::cin, td->pn);
-	} while (td->pn == "");
+	} while (!this->isValidPhoneNumber(td->pn));
 	do {
 		std::cout << "Darkest secret: ";
 		std::getline(std::cin, td->ds);
-	} while (td->ds == "");		
+	} while (!this->isValidField(td->ds));		
 		
 	std::cout << std::endl;
 	return ;

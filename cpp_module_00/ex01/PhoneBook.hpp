@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:25:54 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/23 15:40:20 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:22:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ class PhoneBook {
 		void	showContact(int index);
 		void	showContactInfo(int index);
 		void	inputContactInfo(t_data *td);
-		int		getNContacts();
+		int		getNContacts() const;
+		bool	isValidField(std::string field) const;
+		bool	isValidPhoneNumber(std::string phoneNumber) const;
 };
 
 

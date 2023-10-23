@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/23 11:32:33 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/23 11:33:01 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/23 12:51:05 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRC			=	Account.cpp \
 				
 CPPFLAGS	=	-Wall -Wextra -Werror -ggdb -O0 -std=c++98
 CC			=	c++
-NAME		=	phonebook
+NAME		=	account
 OBJ			=	$(SRC:.cpp=.o)
 
 all:		$(NAME)

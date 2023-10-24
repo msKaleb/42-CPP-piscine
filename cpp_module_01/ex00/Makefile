@@ -6,12 +6,14 @@
 #    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/13 12:19:28 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/24 14:11:33 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/24 16:20:54 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC			=	main.cpp \
 				Zombie.cpp \
+				randomChump.cpp \
+				newZombie.cpp\
 				
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
 CC			=	c++

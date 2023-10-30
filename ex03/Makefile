@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/10/27 09:27:34 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/30 08:39:10 by msoria-j         ###   ########.fr        #
+#    Created: 2023/10/30 09:40:31 by msoria-j          #+#    #+#              #
+#    Updated: 2023/10/30 09:41:42 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,14 @@
 # **************************************************************************** # 
 
 SRC			=	main.cpp \
+				Weapon.cpp \
+				HumanA.cpp \
+				HumanB.cpp \
 
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 CC			=	c++ 
-NAME		=	hi
+NAME		=	violence
 OBJ			=	$(SRC:.cpp=.o) 
 
 %.o:		%.cpp 

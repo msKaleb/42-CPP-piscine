@@ -1,30 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Weapon.hpp                                         :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 10:32:57 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/30 22:43:09 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/10/30 22:41:56 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/10/30 22:42:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WEAPON_HPP
-# define WEAPON_HPP
-# include <iostream>
+#include "HumanA.hpp"
 
-class Weapon
-{
-	private:
-		std::string	_type;
-	public:
-		Weapon(/* args */);
-		Weapon(std::string weaponType);
-		~Weapon();
+HumanA::HumanA(/* args */) {
+}
 
-		std::string	&getType();
-		void	setType(std::string newType);
-};
-
-#endif /* WEAPON_HPP */
+HumanA::~HumanA() {
+}

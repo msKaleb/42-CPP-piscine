@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/31 11:47:55 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/31 14:22:47 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/31 18:36:47 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,8 @@
 
 SRC			=	main.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
 CC			=	c++ 
 NAME		=	replacer
 OBJ			=	$(SRC:.cpp=.o) 

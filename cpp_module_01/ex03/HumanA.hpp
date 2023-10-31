@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   HumanA.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 22:41:56 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/30 22:42:15 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/10/30 22:41:13 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/10/30 22:49:13 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
+#include "Weapon.hpp"
 
-HumanA::HumanA(/* args */) {
-}
+class HumanA
+{
+	private:
+		/* data */
+		std::string	_name;
+		Weapon		_weapon;
+	public:
+		HumanA(std::string name, Weapon hWeapon);
+		~HumanA();
 
-HumanA::~HumanA() {
-}
+		void	attack(void);
+};
+
+

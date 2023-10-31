@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/30 09:40:31 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/30 09:41:42 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/10/31 07:46:14 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRC			=	main.cpp \
 				HumanA.cpp \
 				HumanB.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb -O0
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb -O0
 CC			=	c++ 
 NAME		=	violence
 OBJ			=	$(SRC:.cpp=.o) 

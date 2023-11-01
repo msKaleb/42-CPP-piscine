@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:17:35 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/10/31 18:35:00 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:46:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char *argv[]) {
 		return (1);
 	}
 	
-	if (ifs.peek() == EOF)
+	if (ifs.peek() == EOF) // std::ifstream::traits_type::eof()
 		std::cout << "File \'" << infile << "\' is empty!" << std::endl;
 	for (std::string line; std::getline(ifs, line); ) {
 		replace(&line, s1, s2);

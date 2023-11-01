@@ -1,37 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Harl.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 09:33:25 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/01 12:56:43 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/01 09:28:35 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/01 12:52:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-# define HARL_HPP
+#include "Harl.hpp"
 
-# define RESET	"\033[0m"
-# define RED	"\033[31m"
-# define GREEN	"\033[32m"
-std::cout << level <<" is not a valid level" << std::endl;
-# include <iostream>
-
-class Harl
-{
-private:
-	void	debug(void);
-	void	info(void);
-	void	warning(void);
-	void	error(void);
+int	main(int argc, char *argv[]) {
+	Harl	complainingHarl;
 	
-public:
-	Harl();
-	~Harl();
-
-	void	complaint(std::string level);
-};
-
-#endif /* HARL_HPP */
+	if (argc != 2) {
+		std::cout << RED << "Bad argument number. Defining default level as DEBUG... "
+			<< std::endl << RESET;
+		complainingHarl.complaint("DEBUG");
+	}
+	else
+		complainingHarl.complaint(argv[1]);
+	return (0);
+}

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:34:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/01 12:55:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/01 12:55:34 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,36 @@ void	Harl::complaint(std::string level) {
 		&Harl::error
 		};
 
-	for (size_t i = 0; i < (sizeof(levels) / sizeof(*levels)); i++) {
-		if (level == levels[i]) {
-			std::cout  << GREEN << levels[i] << " level:" << std::endl << RESET;
-			// (*this.*funct[i])(); // also works
-			(this->*funct[i])();
-			return ;
+	size_t indexLevel;
+	for (indexLevel = 0; indexLevel < (sizeof(levels) / sizeof(*levels)); indexLevel++) {
+		if (level == levels[indexLevel]) {
+			break ;
 		}
 	}
-	std::cout << RED << level <<" is not a valid level" << std::endl << RESET;
+
+	enum	e_levels {DEBUG, INFO, WARNING, ERROR};
+	// '__attribute__ ((fallthrough))': used to go through different cases without a 'break;'
+	switch (indexLevel)
+	{
+	case DEBUG:
+		std::cout << GREEN << "[ DEBUG ]" << std::endl << RESET;
+		(this->*funct[DEBUG])();
+		__attribute__ ((fallthrough));
+	case INFO:
+		std::cout << GREEN  << "[ INFO ]" << std::endl << RESET;
+		(this->*funct[INFO])();
+		__attribute__ ((fallthrough));
+	case WARNING:
+		std::cout << GREEN  << "[ WARNING ]" << std::endl << RESET;
+		(this->*funct[WARNING])();
+		__attribute__ ((fallthrough));
+	case ERROR:
+		std::cout << GREEN  << "[ ERROR ]" << std::endl << RESET;
+		(this->*funct[ERROR])();
+		break;
+	
+	default:
+		std::cout << RED << level <<" is not a valid level" << std::endl << RESET;
+		break;
+	}
 }

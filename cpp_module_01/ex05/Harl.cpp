@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:34:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/01 12:55:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/06 08:48:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	Harl::error(void) {
 }
 
 void	Harl::complaint(std::string level) {
+	// levels array
 	std::string	levels[] = {
 		std::string("DEBUG"), 
 		std::string("INFO"), 
@@ -45,7 +46,8 @@ void	Harl::complaint(std::string level) {
 		std::string("ERROR")
 		};
 
-	void		(Harl::*funct[4])(void) = {
+	// pointer to functions array
+	void	(Harl::*funct[4])(void) = {
 		&Harl::debug,
 		&Harl::info,
 		&Harl::warning,

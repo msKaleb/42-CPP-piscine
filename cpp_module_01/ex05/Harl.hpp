@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 09:33:25 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/01 12:56:43 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/06 08:46:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # define RESET	"\033[0m"
 # define RED	"\033[31m"
 # define GREEN	"\033[32m"
-std::cout << level <<" is not a valid level" << std::endl;
+
 # include <iostream>
 
 class Harl

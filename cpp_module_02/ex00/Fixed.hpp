@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/04 14:42:52 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:55:30 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,5 @@ class Fixed
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 };
-
 
 #endif /* FIXED_HPP */

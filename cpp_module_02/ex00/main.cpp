@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 08:47:23 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/04 14:47:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/08 12:55:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,4 @@ int	main(void) {
 	std::cout << a.getRawBits() << std::endl;
 	std::cout << b.getRawBits() << std::endl;
 	std::cout << c.getRawBits() << std::endl;
-	
-	/* int	n = 24;
-	int	k;
-	
-	k = n >> 1;
-	if (n != 0)
-		std::cout << n << "-" << k << std::endl; */
-	
 }

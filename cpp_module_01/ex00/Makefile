@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/25 17:39:12 by msoria-j          #+#    #+#              #
-#    Updated: 2023/10/26 19:24:41 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/08 12:12:25 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,4 +52,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re
 
-# .SILENT:
+.SILENT:

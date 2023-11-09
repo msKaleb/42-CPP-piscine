@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/09 12:14:56 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/09 18:38:58 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,63 @@ Fixed	&Fixed::operator=(Fixed const &assign) {
 std::ostream	&operator<<(std::ostream& os, Fixed const& element) {
 	return (os << element.toFloat());
 }
+
+bool Fixed::operator>(Fixed const &rhs) {
+	return (this->getRawBits() > rhs.getRawBits());
+}
+
+bool Fixed::operator<(Fixed const &rhs) {
+	return (this->getRawBits() < rhs.getRawBits());
+}
+
+bool Fixed::operator>=(Fixed const &rhs) {
+	return (this->getRawBits() >= rhs.getRawBits());
+}
+
+bool Fixed::operator<=(Fixed const &rhs) {
+	return (this->getRawBits() <= rhs.getRawBits());
+}
+
+bool Fixed::operator==(Fixed const &rhs) {
+	return (this->getRawBits() == rhs.getRawBits());
+}
+
+bool Fixed::operator!=(Fixed const &rhs) {
+	return (this->getRawBits() != rhs.getRawBits());
+}
+
+Fixed	Fixed::operator+(Fixed const &rhs) const {
+	Fixed	ret(*this);
+	
+	ret.setRawBits(this->getRawBits() + rhs.getRawBits());
+	return (ret);
+}
+
+Fixed	Fixed::operator-(Fixed const &rhs) const {
+	Fixed	ret(*this);
+	
+	ret.setRawBits(this->getRawBits() - rhs.getRawBits());
+	return (ret);
+}
+
+Fixed	Fixed::operator*(Fixed const &rhs) const {
+	Fixed	ret(*this);
+	int		oneFp = 1 << this->_fracBits;
+	
+	ret.setRawBits((this->getRawBits() * rhs.getRawBits()) / oneFp);
+	return (ret);
+}
+
+Fixed	Fixed::operator/(Fixed const &rhs) const {
+	Fixed	ret(*this);
+	int		oneFp = 1 << this->_fracBits;
+	double	a = (double)this->getRawBits();
+	double	b = (double)rhs.getRawBits();
+	
+	ret.setRawBits((a / b) * oneFp);
+	return (ret);
+}
+
 
 /*
 ** ------------------------------ MEMBER FUNCTIONS -----------------------------

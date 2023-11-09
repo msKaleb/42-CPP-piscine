@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 08:47:23 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/08 12:55:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/09 12:25:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "Fixed.hpp"
 
 int	main(void) {
+
 	Fixed	a;
 	Fixed	b(a);
 	Fixed	c;

@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/04 14:55:07 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/04 14:57:17 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/09 08:13:22 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@
 SRC			=	main.cpp \
 				Fixed.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
 CC			=	c++ 
 NAME		=	fixed
 OBJ			=	$(SRC:.cpp=.o) 
@@ -50,4 +50,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re 
 
-.SILENT: 
+# .SILENT: 

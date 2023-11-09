@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/04 15:18:57 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/09 08:32:53 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 
 # include <iostream>
 # include <string>
+# include <cmath>
 
 class Fixed
 {
 	private:
-		int	_fixedPoint;
-		int	_fracBits;
+		static const int	_fracBits = 8;
+		int					_fixedPoint;
 
 	public:
 
@@ -34,7 +35,11 @@ class Fixed
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
+
+		int		toInt(void) const;
+		float	toFloat(void) const;
 };
 
+std::ostream	&operator<<(std::ostream& os, Fixed const& element);
 
 #endif /* FIXED_HPP */

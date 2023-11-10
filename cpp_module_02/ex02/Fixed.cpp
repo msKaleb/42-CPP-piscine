@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/09 18:38:58 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/10 08:11:50 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 */
 
 Fixed::Fixed() {
-	std::cout << "Default constructor called" << std::endl;
+	// std::cout << "Default constructor called" << std::endl;
 	this->_fixedPoint = 0;
 	return ;
 }
 
 Fixed::Fixed(const Fixed &copy) {
-	std::cout << "Copy constructor called" << std::endl;
+	// std::cout << "Copy constructor called" << std::endl;
 	this->operator=(copy);
 	return ;
 }
@@ -60,7 +60,7 @@ Fixed::Fixed(float const value) {
 */
 
 Fixed::~Fixed() {
-	std::cout << "Destructor called" << std::endl;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 
@@ -69,7 +69,7 @@ Fixed::~Fixed() {
 */	
 
 Fixed	&Fixed::operator=(Fixed const &assign) {
-	std::cout << "Copy assignment operator called" << std::endl;
+	// std::cout << "Copy assignment operator called" << std::endl;
 	if (this != &assign) {
 		this->_fixedPoint = assign.getRawBits();
 	}
@@ -136,6 +136,28 @@ Fixed	Fixed::operator/(Fixed const &rhs) const {
 	return (ret);
 }
 
+Fixed	&Fixed::operator++(void) {
+	int		oneFp = 1 << this->_fracBits;
+	
+	this->_fixedPoint += oneFp;
+	return (*this);
+}
+
+Fixed	&Fixed::operator--(void) {
+	int		oneFp = 1 << this->_fracBits;
+	
+	this->_fixedPoint -= oneFp;
+	return (*this);
+}
+
+Fixed	Fixed::operator++(int) {
+	// int		oneFp = 1 << this->_fracBits;
+	Fixed	ret(*this);
+
+	// ret._fixedPoint += oneFp;
+	operator++();
+	return (ret);
+}
 
 /*
 ** ------------------------------ MEMBER FUNCTIONS -----------------------------

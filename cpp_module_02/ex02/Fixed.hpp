@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/09 18:07:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/10 08:05:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,12 @@ class Fixed
 		Fixed	operator-(Fixed const &rhs) const;
 		Fixed	operator*(Fixed const &rhs) const;
 		Fixed	operator/(Fixed const &rhs) const;
+		
+		// increment - decrement operators overload
+		Fixed	&operator++(void);
+		Fixed	&operator--(void);
+		Fixed	operator++(int);
+		Fixed	operator--(int);
 		
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);

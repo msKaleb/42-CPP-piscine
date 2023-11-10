@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 08:47:23 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/09 18:39:16 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/10 08:08:57 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ int	main(void) {
 	a = Fixed(2.5f);
 	Fixed c(Fixed(5.05f) * Fixed(2));
 	Fixed	d = b / a;
-	std::cout << c << std::endl;
+	std::cout << "before " << a << std::endl;
+	a++;
+	std::cout << "after " << a << std::endl;
 	if (a < b)
 		std::cout << "true" << std::endl;
 	

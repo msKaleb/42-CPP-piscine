@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:37 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/10 08:11:50 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:27:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ Fixed::Fixed(const Fixed &copy) {
 // From Int to fixed point:
 // 	Just shift it the number of fractional bits to the left to skip the fractional part 
 Fixed::Fixed(int const value) {
-	std::cout << "Int constructor called" << std::endl;
+	// std::cout << "Int constructor called" << std::endl;
 	this->_fixedPoint = (value << this->_fracBits);
 	return ;
 }
@@ -42,7 +42,7 @@ Fixed::Fixed(int const value) {
 // 	Next, calculate the fractional part and multiply it with oneFp
 // 	Add it to the integer part (rounded)
 Fixed::Fixed(float const value) {
-	std::cout << "Float constructor called" << std::endl;
+	// std::cout << "Float constructor called" << std::endl;
 
 	int		oneFp = 1 << this->_fracBits; 			// constant to represent 1 in fixed-point format
 	int		intPart = (int)value; 					// get the integer part of value
@@ -80,27 +80,27 @@ std::ostream	&operator<<(std::ostream& os, Fixed const& element) {
 	return (os << element.toFloat());
 }
 
-bool Fixed::operator>(Fixed const &rhs) {
+bool Fixed::operator>(Fixed const &rhs) const {
 	return (this->getRawBits() > rhs.getRawBits());
 }
 
-bool Fixed::operator<(Fixed const &rhs) {
+bool Fixed::operator<(Fixed const &rhs) const {
 	return (this->getRawBits() < rhs.getRawBits());
 }
 
-bool Fixed::operator>=(Fixed const &rhs) {
+bool Fixed::operator>=(Fixed const &rhs) const {
 	return (this->getRawBits() >= rhs.getRawBits());
 }
 
-bool Fixed::operator<=(Fixed const &rhs) {
+bool Fixed::operator<=(Fixed const &rhs) const {
 	return (this->getRawBits() <= rhs.getRawBits());
 }
 
-bool Fixed::operator==(Fixed const &rhs) {
+bool Fixed::operator==(Fixed const &rhs) const {
 	return (this->getRawBits() == rhs.getRawBits());
 }
 
-bool Fixed::operator!=(Fixed const &rhs) {
+bool Fixed::operator!=(Fixed const &rhs) const {
 	return (this->getRawBits() != rhs.getRawBits());
 }
 
@@ -136,29 +136,39 @@ Fixed	Fixed::operator/(Fixed const &rhs) const {
 	return (ret);
 }
 
+// pre-increment
 Fixed	&Fixed::operator++(void) {
-	int		oneFp = 1 << this->_fracBits;
+	/* int		oneFp = 1 << this->_fracBits;
 	
-	this->_fixedPoint += oneFp;
+	this->_fixedPoint += oneFp; */
+	++this->_fixedPoint;
 	return (*this);
 }
 
+// pre-decrement
 Fixed	&Fixed::operator--(void) {
-	int		oneFp = 1 << this->_fracBits;
+	/* int		oneFp = 1 << this->_fracBits;
 	
-	this->_fixedPoint -= oneFp;
+	this->_fixedPoint -= oneFp; */
+	--this->_fixedPoint;
 	return (*this);
 }
 
+// post-increment
 Fixed	Fixed::operator++(int) {
-	// int		oneFp = 1 << this->_fracBits;
-	Fixed	ret(*this);
+	Fixed	ret(*this);	// create a dummy
 
-	// ret._fixedPoint += oneFp;
-	operator++();
-	return (ret);
+	operator++();		// pre-increment this instance
+	return (ret);		// return value before increment
 }
 
+// post-decrement
+Fixed	Fixed::operator--(int) {
+	Fixed	ret(*this);	// create a dummy
+
+	operator--();		// pre-decrement this instance
+	return (ret);		// return value before decrement
+}
 /*
 ** ------------------------------ MEMBER FUNCTIONS -----------------------------
 */	
@@ -185,4 +195,28 @@ int		Fixed::toInt(void) const {
 float	Fixed::toFloat(void) const {
 	int		oneFp = 1 << this->_fracBits;
 	return ((float)this->_fixedPoint / oneFp);
+}
+
+Fixed	&Fixed::max(Fixed &a, Fixed &b) {
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+Fixed	&Fixed::min(Fixed &a, Fixed &b) {
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+Fixed const	&Fixed::max(Fixed const &a, Fixed const &b) {
+	if (a > b)
+		return (a);
+	return (b);
+}
+
+Fixed const	&Fixed::min(Fixed const &a, Fixed const &b) {
+	if (a < b)
+		return (a);
+	return (b);
 }

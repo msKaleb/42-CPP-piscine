@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/08 12:12:04 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/09 18:39:56 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/10 16:54:38 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@
 SRC			=	main.cpp \
 				Fixed.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
 CC			=	c++ 
 NAME		=	fixed
 OBJ			=	$(SRC:.cpp=.o) 

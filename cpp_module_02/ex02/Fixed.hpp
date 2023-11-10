@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 21:57:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/10 08:05:33 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/10 18:26:08 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ class Fixed
 		Fixed	&operator=(Fixed const &assign);
 		
 		// comparison operators overload (rhs = right hand side)
-		bool	operator>(Fixed const &rhs);
-		bool	operator<(Fixed const &rhs);
-		bool	operator>=(Fixed const &rhs);
-		bool	operator<=(Fixed const &rhs);
-		bool	operator==(Fixed const &rhs);
-		bool	operator!=(Fixed const &rhs);
+		bool	operator>(Fixed const &rhs) const;
+		bool	operator<(Fixed const &rhs) const;
+		bool	operator>=(Fixed const &rhs) const;
+		bool	operator<=(Fixed const &rhs) const;
+		bool	operator==(Fixed const &rhs) const;
+		bool	operator!=(Fixed const &rhs) const;
 		
 		// arithmetic operators overload
 		Fixed	operator+(Fixed const &rhs) const;
@@ -58,8 +58,13 @@ class Fixed
 
 		int		toInt(void) const;
 		float	toFloat(void) const;
-};
 
+		static Fixed	&max(Fixed &a, Fixed &b);
+		static Fixed	&min(Fixed &a, Fixed &b);
+		
+		static Fixed const	&max(Fixed const &a, Fixed const &b);
+		static Fixed const	&min(Fixed const &a, Fixed const &b);
+};
 std::ostream	&operator<<(std::ostream& os, Fixed const& element);
 
 #endif /* FIXED_HPP */

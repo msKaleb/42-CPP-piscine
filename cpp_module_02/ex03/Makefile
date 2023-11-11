@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/10 18:38:49 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/10 18:43:17 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/11 20:55:08 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC			=	main.cpp \
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 CC			=	c++ 
-NAME		=	
+NAME		=	fixed
 OBJ			=	$(SRC:.cpp=.o) 
 
 %.o:		%.cpp 
@@ -52,4 +52,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re 
 
-.SILENT: 
+# .SILENT: 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Point.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:20:11 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/10 19:20:13 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/11 20:29:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@ Point::Point() : _x(0), _y(0) {}
 
 Point::Point(float const x, float const y) : _x(x), _y(y) {}
 
-Point::Point(const Point &src) {
-	this->operator=(src);
-}
-
+Point::Point(const Point &src) : _x(src.getX()), _y(src.getY()) {}
 
 /*
 ** -------------------------------- DESTRUCTOR --------------------------------
@@ -38,15 +35,17 @@ Point::~Point() {}
 Point	&Point::operator=(Point const &rhs)
 {
 	if ( this != &rhs ) {
-		this->getX().operator=(rhs.getX());
-		this->getY().operator=(rhs.getY());
+		// this->getX().operator=(rhs.getX());
+		// this->getY().operator=(rhs.getY());
+		this->~Point();
+		new(this) Point(rhs);
 	}
 	return *this;
 }
 
 std::ostream	&operator<<(std::ostream &o, Point const &i)
 {
-	//o << "Value = " << i.getValue();
+	o << "x: " << i.getX() << " y: " << i.getY() << std::endl;
 	return o;
 }
 

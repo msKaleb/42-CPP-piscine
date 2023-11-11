@@ -3,79 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:20:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/10 19:20:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/11 21:28:34 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include "Fixed.hpp"
 #include <iomanip>
-#include <cfloat> // for FLT_EPSILON macro
+#include "Point.hpp"
+
+bool bsp( Point const a, Point const b, Point const c, Point const point);
+
+
 
 int	main(void) {
 
-	{
-		Fixed a;
-		Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-		std::cout << a << std::endl;
-		std::cout << ++a << std::endl;
-		std::cout << a << std::endl;
-		std::cout << a++ << std::endl;
-		std::cout << a << std::endl;
-		std::cout << b << std::endl;
-		std::cout << Fixed::max( a, b ) << std::endl;
-
-		return 0;
-	}
-	{
-		
-		Fixed	a;
-	/* 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-		
-		std::cout << a << std::endl;
-		std::cout << ++a << std::endl;
-		std::cout << a << std::endl;
-		std::cout << a++ << std::endl;
-		std::cout << a << std::endl;
-
-		std::cout << b << std::endl;
-
-		std::cout << Fixed::max( a, b ) << std::endl; */
-
-		Fixed	b;
-		
-		b = Fixed(4.5f);
-		// a = Fixed(FLT_EPSILON);
-		a = Fixed(5.1f);
-		Fixed c(Fixed(5.05f) * Fixed(2));
-		Fixed	d = b / a;
-		
-		/* int i = 0;
-		std::cout << "i before incrementing " << i << std::endl;
-		while (i++ <= 5)
-			std::cout << "i after " << i << std::endl;
-
-		std::cout << "i before decrementing " << i << std::endl;
-		while (i-- >= 0)
-			std::cout << "i after " << i << std::endl; */
-			
-		/* std::cout << "a before incrementing " << a << std::endl;
-		while (++a <= 1)
-			std::cout << "a after " << a << std::endl;
-
-		std::cout << "a before decrementing " << a << std::endl;
-		while (--a >= 0)
-			std::cout << "a after " << a << std::endl; */
-			
-		if (a > b)
-			std::cout << "true" << std::endl;
-		
-		std::cout << "max: " << Fixed::max( a, b ) << std::endl;
-		std::cout << "min: " << Fixed::min( a, b ) << std::endl;
-		
-		return 0;
-	}
+	Fixed	a(4.5f);
+	Fixed	b(4);
+	// Point	p(3.3f, 2.2f);
+	Point	p1(0, 0);
+	Point	p2(3.0f, 4.5f);
+	Point	p3(3.2f, 0);
+	Point	p4(1, 1);
+	
+	std::cout << "Fixed a: " << a << std::endl;
+	std::cout << "Fixed b: " << b << std::endl;
+	std::cout << "Point p1 " << p1 << std::endl;
+	std::cout << "Point p2 " << p2 << std::endl;
+	bsp(p1, p2, p3, p4);
+	return 0;
 }

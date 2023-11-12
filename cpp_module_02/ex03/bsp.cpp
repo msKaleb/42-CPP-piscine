@@ -6,15 +6,11 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:16:56 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/12 12:31:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:32:26 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
-
-/* double calculateDistance(double x1, double y1, double x2, double y2) {
-    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
-} */
 
 /**
  * Barycentric coordinate system:
@@ -48,16 +44,20 @@ bool bsp( Point const a, Point const b, Point const c, Point const point) {
 	
 	sC = 1 - sA - sB;
 
-	std::cout << "sA: " << sA << " sB: " << sB << " sC: " << sC << " " << std::endl;
+	// std::cout << "sA: " << sA << " sB: " << sB << " sC: " << sC << " " << std::endl; // debug info
 	return (0 < sA && sA < 1 && 0 < sB && sB < 1 && 0 < sC && sC < 1);
 
 	return true;
 }
 
-// Some previous tests
-	/* ...... */
-	// 0.5 * fabs(x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2));
-	/* float	ax, ay, bx, by, cx, cy;
+// Some previous tests -------------------------------------------------------------------
+/* double calculateDistance(double x1, double y1, double x2, double y2) {
+    return sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+}
+
+bool bsp( Point const a, Point const b, Point const c, Point const point) {
+
+	float	ax, ay, bx, by, cx, cy;
 	(void)point;
 
 	ax = a.getX().toFloat();
@@ -75,5 +75,26 @@ bool bsp( Point const a, Point const b, Point const c, Point const point) {
 	std::cout << "area: " << area << std::endl;
 	std::cout << "AB: " << AB << std::endl;
 	std::cout << "BC: " << BC << std::endl; 
-	std::cout << "CA: " << CA << std::endl;*/
-	
+	std::cout << "CA: " << CA << std::endl;
+}*/
+
+// ----------------------------------------------------------------------------------------------------
+
+/* float	sign(Point p1, Point p2, Point p3) {
+	return ((p1.getX().toFloat() - p3.getX().toFloat()) * (p2.getY().toFloat() - p3.getY().toFloat())
+		- (p2.getX().toFloat() - p3.getX().toFloat()) * (p1.getY().toFloat() - p3.getY().toFloat()));
+}
+
+bool bsp( Point const a, Point const b, Point const c, Point const point) {
+	float	d1, d2, d3;
+	bool	isNeg, isPos;
+
+	d1 = sign(point, a, b);
+	d2 = sign(point, b, c);
+	d3 = sign(point, c, a);
+
+	isNeg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+	isPos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+	return !(isNeg && isPos);
+} */

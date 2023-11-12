@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:19:38 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/10 19:19:40 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:13:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ Fixed::Fixed(float const value) {
 	float	fracPart = value - intPart; 			// get the fractional part of value
 	
 	this->_fixedPoint = intPart << this->_fracBits;	// integer part to fixed point
-	this->_fixedPoint += roundf(oneFp * fracPart);	// fractional part to fixed point and add it to integer part
+	this->_fixedPoint += oneFp * fracPart;	// fractional part to fixed point and add it to integer part
 
-	// this->_fixedPoint = roundf(oneFp * value);	// all of the above can be done just with this line
+	// this->_fixedPoint = (oneFp * value);	// all of the above can be done just with this line
 	return ;
 }
 

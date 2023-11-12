@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:20:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/11 21:28:34 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:33:32 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,33 @@
 #include "Fixed.hpp"
 #include <iomanip>
 #include "Point.hpp"
+#include <cfloat> // for FLT_EPSILON macro
 
 bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 
 
 int	main(void) {
-
-	Fixed	a(4.5f);
-	Fixed	b(4);
-	// Point	p(3.3f, 2.2f);
-	Point	p1(0, 0);
-	Point	p2(3.0f, 4.5f);
-	Point	p3(3.2f, 0);
-	Point	p4(1, 1);
 	
-	std::cout << "Fixed a: " << a << std::endl;
-	std::cout << "Fixed b: " << b << std::endl;
-	std::cout << "Point p1 " << p1 << std::endl;
-	std::cout << "Point p2 " << p2 << std::endl;
-	bsp(p1, p2, p3, p4);
+	/* Point	p1((1.0f / 10.0f), (1.0f / 9.0f));
+	Point	p2((100.0f / 8.0f), (100.0f / 3.0f));
+	Point	p3((100.0f / 4.0f), (100.0f / 9.0f));
+	float	x, y;
+	x = p1.getX().toFloat() + (3.0f / 7.0f) * (p2.getX().toFloat() - p1.getX().toFloat());
+	y = p1.getY().toFloat() + (3.0f / 7.0f) * (p2.getY().toFloat() - p1.getY().toFloat());
+	Point	p4(x, y); */
+	
+	Point	p1(0.0f, 0.0f);
+	Point	p2(12.0f, 12.0f);
+	Point	p3(14.0f, 0.0f);
+	Point	p4(13.0f, 6.0f); // just on the midpoint, fails on (midpoint - FLT_EPSILON)
+	
+	std::cout << "Point p1 " << p1/*  << std::endl */;
+	std::cout << "Point p2 " << p2/*  << std::endl */;
+	std::cout << "Point p3 " << p3/*  << std::endl */; 
+	std::cout << "Point p4 " << p4 << std::endl; 
+	
+	// std::cout << bsp(p1, p2, p3, p4) << std::endl;
+	std::cout << (bsp(p1, p2, p3, p4) ? "inside" : "outside") << std::endl;
 	return 0;
 }

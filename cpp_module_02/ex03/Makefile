@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/10 18:38:49 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/11 20:55:08 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/12 11:33:13 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,8 @@ SRC			=	main.cpp \
 				Point.cpp \
 				bsp.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
 CC			=	c++ 
 NAME		=	fixed
 OBJ			=	$(SRC:.cpp=.o) 

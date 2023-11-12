@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 19:20:11 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/11 20:29:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/12 11:31:49 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ Point	&Point::operator=(Point const &rhs)
 		new(this) Point(rhs);
 	}
 	return *this;
+}
+
+bool	Point::operator==(Point const &rhs) const {
+	return (this->getX().operator==(rhs.getX()) &&
+		this->getY().operator==(rhs.getY()));
 }
 
 std::ostream	&operator<<(std::ostream &o, Point const &i)

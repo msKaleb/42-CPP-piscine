@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 14:55:43 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/13 14:55:44 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/13 16:14:08 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,13 @@
 #                                                                              # 
 # **************************************************************************** # 
 
-SRC			=	\
+SRC			=	main.cpp \
+				ClapTrap.cpp \
 
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 CC			=	c++ 
-NAME		=	
+NAME		=	claptrap
 OBJ			=	$(SRC:.cpp=.o) 
 
 %.o:		%.cpp 

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:05:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/13 15:29:13 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:54:23 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoint
 
 ClapTrap::ClapTrap(ClapTrap const &copy) {
 	std::cout << "Copy constructor called" << std::endl;
+	this->_name = copy.getName();
 	this->operator=(copy);
 }
+
+ClapTrap::~ClapTrap() { std::cout << "Destructor called" << std::endl; }
 
 // getters------------
 unsigned int	ClapTrap::getHitPoints(void) const { return (this->_hitPoints); }
@@ -27,6 +30,8 @@ unsigned int	ClapTrap::getHitPoints(void) const { return (this->_hitPoints); }
 unsigned int	ClapTrap::getEnergyPoints(void) const { return (this->_energyPoints); }
 
 unsigned int	ClapTrap::getAttackDamage(void) const { return (this->_attackDamage); }
+
+std::string		ClapTrap::getName(void) const { return (this->_name); }
 
 // setters------------
 void	ClapTrap::setHitPoints(unsigned int qty) { this->_hitPoints = qty; }
@@ -43,4 +48,11 @@ ClapTrap	&ClapTrap::operator=(ClapTrap const &assign) {
 		this->_attackDamage = assign.getAttackDamage();
 	}
 	return (*this);
+}
+
+// member functions-----------
+void	ClapTrap::attack(const std::string &target) {
+	std::cout << "ClapTrap " << this->getName() << " attacks " << target
+		<< ", causing " << this->getAttackDamage() << " points of damage"
+		<< std::endl;
 }

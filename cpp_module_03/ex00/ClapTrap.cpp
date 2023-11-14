@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:05:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/13 16:54:23 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/14 09:54:46 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,32 @@ ClapTrap	&ClapTrap::operator=(ClapTrap const &assign) {
 
 // member functions-----------
 void	ClapTrap::attack(const std::string &target) {
-	std::cout << "ClapTrap " << this->getName() << " attacks " << target
-		<< ", causing " << this->getAttackDamage() << " points of damage"
-		<< std::endl;
+	if (this->_energyPoints > 0) {
+		std::cout << "ClapTrap " << this->getName() << " attacks " << target
+			<< ", causing " << this->getAttackDamage() << " points of damage"
+			<< std::endl;
+		this->_energyPoints--;
+		return ;
+	}
+	std::cout << "No energy points left" << std::endl;
 }
+
+void	ClapTrap::takeDamage(unsigned int amount) {
+	if (this->_energyPoints > 0) {
+		std::cout << "ClapTrap " << this->getName() << " receives " << amount
+			<< " points of damage " << std::endl;
+		this->_energyPoints--;
+		return ;
+	}
+	std::cout << "No energy points left" << std::endl;
+}
+
+/* void	ClapTrap::beRepaired(unsigned int amount) {
+	if (this->_energyPoints > 0) {
+		std::cout << "ClapTrap " << this->getName() << " attacks " << target
+			<< ", causing " << this->getAttackDamage() << " points of damage"
+			<< std::endl;
+		return ;
+	}
+	std::cout << "No energy points left" << std::endl;
+} */

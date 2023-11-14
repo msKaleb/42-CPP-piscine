@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:52:15 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/14 20:57:49 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/13 15:14:18 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/14 20:59:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
-# include "ClapTrap.hpp"
+int	main(){
 
-class ScavTrap : public ClapTrap
-{
-private:
-	/* data */
-	ScavTrap();
-public:
-	ScavTrap(std::string name);
-	ScavTrap(ScavTrap const &copy);
-	virtual ~ScavTrap();
+	ClapTrap	a("ClatTrap_a");
+	ScavTrap	b("ScavTrap_b");
+	ScavTrap	c("ScavTrap_c");
 
-	ScavTrap	&operator=(ScavTrap const &rhs);
-	void		attack(const std::string &target);
-	void		guardGate(void) const;
-};
-
-#endif /* SCAVTRAP_HPP */
+	a.attack("target");
+	b.attack("target");
+	b.setEnergyPoints(5);
+	for (int i = 0; i < 20; i++) {
+		c.takeDamage(10);
+		a.takeDamage(10);
+		b.beRepaired(1);
+		a.attack("target");
+	}
+	c.attack("target");
+	c.guardGate();
+	return 0;
+}

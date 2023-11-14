@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:14:18 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/14 16:02:32 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:45:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 
 int	main(){
 
-	ClapTrap	a("Mikel");
-	ScavTrap	b("Mikeltxo");
-	ScavTrap	c("Paco");
+	ClapTrap	a("ClatTrap_a");
+	ScavTrap	b("ScavTrap_b");
+	ScavTrap	c("ScavTrap_c");
 
 	a.attack("target");
 	b.attack("target");
-	
-	for (int i = 0; i < 51; i++) {
+	b.setEnergyPoints(5);
+	for (int i = 0; i < 20; i++) {
 		c.takeDamage(10);
+		a.takeDamage(10);
 		b.beRepaired(1);
 		a.attack("target");
 	}

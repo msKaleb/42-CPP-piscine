@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 14:55:43 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/13 16:14:08 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/14 11:25:19 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@
 SRC			=	main.cpp \
 				ClapTrap.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
 CC			=	c++ 
 NAME		=	claptrap
 OBJ			=	$(SRC:.cpp=.o) 

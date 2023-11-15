@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:54:26 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/14 20:57:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:44:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,11 @@ void	ScavTrap::attack(const std::string &target) {
 			<< " can't attack. No energy points left" << std::endl << RESET;
 }
 
-void	ScavTrap::guardGate(void) const {
-	std::cout << BOLDWHITE << "ScavTrap " << this->getName()
-		<< " is in Gate Keeper mode" << std::endl << RESET;
+void	ScavTrap::guardGate(void) const{
+	if (this->_energyPoints > 0 &&  this->_hitPoints > 0) {
+		std::cout << BOLDWHITE << "ScavTrap " << this->getName()
+			<< " is in Gate Keeper mode" << std::endl << RESET;
+	}
+	else
+		std::cout << WHITE << "No energy / hit points left" << std::endl << RESET;
 }

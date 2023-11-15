@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:50:39 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/14 21:01:26 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/15 19:16:16 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "ClapTrap.hpp"
 
-class FragTrap
+class FragTrap : public ClapTrap
 {
 private:
 	/* data */

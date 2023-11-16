@@ -6,18 +6,28 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:56:29 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/15 20:23:30 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 22:55:46 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
+FragTrap::FragTrap() {
+	_hitPoints = 100;
+	_energyPoints = 100;
+	_attackDamage = 30;
+}
+
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
 	std::cout << CYAN << "Fragtrap constructor called with name [" 
 		<< name << "]" << std::endl << RESET;
-	this->setAttackDamage(30);
+
+	_hitPoints = 100;
+	_energyPoints = 100;
+	_attackDamage = 30;
+	/* this->setAttackDamage(30);
 	this->setEnergyPoints(100);
-	this->setHitPoints(100);
+	this->setHitPoints(100); */
 }
 
 FragTrap::~FragTrap() {

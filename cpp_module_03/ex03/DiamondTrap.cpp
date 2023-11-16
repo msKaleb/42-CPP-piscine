@@ -4,23 +4,28 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), _name(name) {
-	// temporal instances for the getters
-	ScavTrap	scavTrapTmp("scavTrapTmp");
-	FragTrap	fragTrapTmp("fragTrapTmp");
+DiamondTrap::DiamondTrap() {}
 
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), _name(name) {
+	
 	std::cout << CYAN << "DiamondTrap constructor called with name [" 
 		<< name << "]" << std::endl << RESET;
-	
+	// std::cout << "ScavTrap::_energyPoints: " << ScavTrap().getEnergyPoints() << std::endl;
+
+	// _hitPoints = tmp->FragTrap::_hitPoints;
+	_energyPoints = ScavTrap().getEnergyPoints();
+	// _attackDamage = ScavTrap().getAttackDamage();
+
 	// use the getters to initialise the attributes
-	this->_hitPoints = fragTrapTmp.getHitPoints();
+	/* this->_hitPoints = fragTrapTmp.getHitPoints();
 	this->_energyPoints = scavTrapTmp.getEnergyPoints();
-	this->_attackDamage = fragTrapTmp.getAttackDamage();
+	this->_attackDamage = fragTrapTmp.getAttackDamage(); */
 }
 
-DiamondTrap::DiamondTrap( const DiamondTrap & src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {
+DiamondTrap::DiamondTrap( const DiamondTrap &src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {
 	std::cout << CYAN << "DiamondTrap copy constructor called for [" 
-	<< this->getName() << "]" << std::endl << RESET;
+	<< src.getName() << "]" << std::endl << RESET;
+	this->operator=(src);
 }
 
 
@@ -40,11 +45,10 @@ DiamondTrap::~DiamondTrap() {
 
 DiamondTrap	&DiamondTrap::operator=( DiamondTrap const &rhs )
 {
-	//if ( this != &rhs )
-	//{
-		//this->_value = rhs.getValue();
-	//}
-	ClapTrap::operator=(rhs);
+	if ( this != &rhs ) {
+		this->_name = rhs.getName();
+		ClapTrap::operator=(rhs);
+	}
 	return *this;
 }
 

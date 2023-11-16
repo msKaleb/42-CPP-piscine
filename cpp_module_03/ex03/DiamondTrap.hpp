@@ -5,15 +5,15 @@
 # include "ScavTrap.hpp"
 # include "FragTrap.hpp"
 
-class DiamondTrap : public virtual ScavTrap, public virtual FragTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
 	private:
 		std::string	_name;
 
-		DiamondTrap();
 
 	public:
 
+		DiamondTrap();
 		DiamondTrap(std::string name);
 		DiamondTrap( DiamondTrap const &src );
 		virtual ~DiamondTrap();

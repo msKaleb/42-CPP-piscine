@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:52:15 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/15 19:57:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:46:03 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 class ScavTrap : public virtual ClapTrap
 {
-private:
+protected:
 	/* data */
-	ScavTrap();
 public:
+	ScavTrap();
 	ScavTrap(std::string name);
 	ScavTrap(ScavTrap const &copy);
 	virtual ~ScavTrap();

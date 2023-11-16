@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 14:56:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/14 20:37:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 22:17:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ class ClapTrap {
 		unsigned int	_energyPoints;
 		unsigned int	_attackDamage;
 
-		// default constructor is private because is useless, but it has to be Canonical
 		ClapTrap();
 
 	public:

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:50:39 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/15 19:57:44 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 20:19:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 class FragTrap : public virtual ClapTrap
 {
-private:
+protected:
 	/* data */
 	FragTrap();
 public:

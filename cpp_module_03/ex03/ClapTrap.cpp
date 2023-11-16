@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:05:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/16 11:43:25 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 22:17:19 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
 
-ClapTrap::ClapTrap(std::string name) : _name(name), _hitPoints(10), _energyPoints(10), _attackDamage(0) {
+ClapTrap::ClapTrap() : _hitPoints(10), _energyPoints(10), _attackDamage(0) {}
+
+ClapTrap::ClapTrap(std::string name) : _name(name) {
 	std::cout << CYAN << "Constructor called with name [" << name << "]" << std::endl << RESET;
 }
 

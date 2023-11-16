@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:05:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/16 11:13:35 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:43:25 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ClapTrap::attack(const std::string &target) {
 void	ClapTrap::takeDamage(unsigned int amount) {
 	if (this->_hitPoints > 0) {
 		// check if it's about to die
-		if ((int)(this->_hitPoints - amount) < 0) this->_hitPoints = 0;
+		if ((this->_hitPoints - amount) > this->_hitPoints) this->_hitPoints = 0; // since it is unsigned int, negative values would wrap around
 		else this->_hitPoints -= amount;
 		// print message
 		std::cout << RED << this->getName() << " receives " << amount

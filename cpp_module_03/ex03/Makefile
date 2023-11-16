@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/13 14:55:43 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/15 20:20:20 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/16 11:53:39 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRC			=	main.cpp \
 				FragTrap.cpp \
 				DiamondTrap.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -ggdb
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -Wshadow -Wno-shadow -std=c++98 -ggdb
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -Wshadow -Wno-shadow -std=c++98 -ggdb
 CC			=	c++ 
 NAME		=	diamondtrap
 OBJ			=	$(SRC:.cpp=.o) 

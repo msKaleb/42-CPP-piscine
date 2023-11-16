@@ -5,13 +5,16 @@
 */
 
 DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), FragTrap(name) {
+	ScavTrap	scavTrapTmp("scavTrapTmp");
+	FragTrap	fragTrapTmp("fragTrapTmp");
+
 	std::cout << CYAN << "DiamondTrap constructor called with name [" 
 		<< name << "]" << std::endl << RESET;
 	this->_name = name;
 	ClapTrap::_name = name + "_clap_name";
-	this->_hitPoints = FragTrap::_hitPoints;
-	this->_energyPoints = ScavTrap::_energyPoints;
-	this->_attackDamage = FragTrap::_attackDamage;
+	this->_hitPoints = fragTrapTmp.getHitPoints();
+	this->_energyPoints = scavTrapTmp.getEnergyPoints();
+	this->_attackDamage = fragTrapTmp.getAttackDamage();
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap & src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {

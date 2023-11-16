@@ -4,14 +4,15 @@
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name), ScavTrap(name), FragTrap(name) {
+DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), _name(name) {
+	// temporal instances for the getters
 	ScavTrap	scavTrapTmp("scavTrapTmp");
 	FragTrap	fragTrapTmp("fragTrapTmp");
 
 	std::cout << CYAN << "DiamondTrap constructor called with name [" 
 		<< name << "]" << std::endl << RESET;
-	this->_name = name;
-	ClapTrap::_name = name + "_clap_name";
+	
+	// use the getters to initialise the attributes
 	this->_hitPoints = fragTrapTmp.getHitPoints();
 	this->_energyPoints = scavTrapTmp.getEnergyPoints();
 	this->_attackDamage = fragTrapTmp.getAttackDamage();
@@ -28,6 +29,8 @@ DiamondTrap::DiamondTrap( const DiamondTrap & src ) : ClapTrap(src), ScavTrap(sr
 */
 
 DiamondTrap::~DiamondTrap() {
+	std::cout << BLUE << "DiamondTrap destructor called for ["
+		<< this->getName() << "]" << std::endl << RESET;
 }
 
 
@@ -45,11 +48,18 @@ DiamondTrap &				DiamondTrap::operator=( DiamondTrap const & rhs )
 	return *this;
 }
 
-/* std::ostream &			operator<<( std::ostream & o, DiamondTrap const & i )
+std::ostream	&operator<<( std::ostream &o, DiamondTrap const &i )
 {
-	//o << "Value = " << i.getValue();
+	o << std::endl;
+	o << "Printing info from " << i.getName() << std::endl;;
+	o << "DiamondTrap name: " << i.getName() << std::endl;
+	o << "DiamondTrap clapTrapName: " << i.getClapTrapName() << std::endl;
+	o << "DiamondTrap Hit Points: " << i.getHitPoints() << std::endl;
+	o << "DiamondTrap Energy Points: " << i.getEnergyPoints() << std::endl;
+	o << "DiamondTrap Attack Damage: " << i.getAttackDamage() << std::endl;
+
 	return o;
-} */
+}
 
 
 /*
@@ -57,6 +67,8 @@ DiamondTrap &				DiamondTrap::operator=( DiamondTrap const & rhs )
 */
 void	DiamondTrap::attack(std::string const &target) {
 	ScavTrap::attack(target);
+	if (this->_energyPoints > 0)
+		this->_energyPoints--;
 }
 /*
 ** --------------------------------- ACCESSOR ---------------------------------

@@ -26,6 +26,6 @@ class DiamondTrap : public ScavTrap, public FragTrap
 
 };
 
-// std::ostream &			operator<<( std::ostream &o, DiamondTrap const &i );
+std::ostream	&operator<<( std::ostream &o, DiamondTrap const &i );
 
 #endif /* ***************************************************** DIAMONDTRAP_H */

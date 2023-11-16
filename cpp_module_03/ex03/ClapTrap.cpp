@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:05:59 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/14 18:31:29 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:13:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	ClapTrap::attack(const std::string &target) {
 		std::cout << YELLOW << "ClapTrap "  << this->getName() << " attacks " << target
 			<< ", causing " << this->getAttackDamage() << " points of damage"
 			<< std::endl << RESET;
-		this->_energyPoints--;
+		if (this->_energyPoints > 0)
+			this->_energyPoints--;
 		return ;
 	}
 	if (this->_hitPoints == 0 && this->_energyPoints == 0)
@@ -90,7 +91,8 @@ void	ClapTrap::beRepaired(unsigned int amount) {
 		std::cout << GREEN << this->getName() << " gets "
 			<< amount << " hit points back, for a total of "
 			<< this->_hitPoints << " hit points" << std::endl << RESET;
-		this->_energyPoints--;
+		if (this->_energyPoints > 0)
+			this->_energyPoints--;
 		return ;
 	}
 	if (this->_energyPoints == 0)

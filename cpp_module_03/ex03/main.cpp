@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: msoria-j <msoria-j@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:14:18 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/15 20:35:37 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:07:20 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,21 @@ int	main(){
 	DiamondTrap	d("DiamondTrap_test");
 
 	std::cout << "ScavTrap Energy Points: " << b.getEnergyPoints() << std::endl;
-
-	std::cout << "DiamondTrap name: " << d.getName() << std::endl;
+	b.attack("bTarget");
+/* 	std::cout << "DiamondTrap name: " << d.getName() << std::endl;
 	std::cout << "DiamondTrap clapTrapName: " << d.getClapTrapName() << std::endl;
 	std::cout << "DiamondTrap Hit Points: " << d.getHitPoints() << std::endl;
 	std::cout << "DiamondTrap Energy Points: " << d.getEnergyPoints() << std::endl;
-	std::cout << "DiamondTrap Attack Damage: " << d.getAttackDamage() << std::endl;
+	std::cout << "DiamondTrap Attack Damage: " << d.getAttackDamage() << std::endl; */
+
+	std::cout << d << std::endl;
+	d.setAttackDamage(50);
+	
+	for (int i = 0; i < 100; i++)
+		d.attack("dTarget");
+	
+	d.beRepaired(5);
+	std::cout << d << std::endl;
 	/* std::cout << "printing: " << d.getName() << std::endl;
 	d.setHitPoints(1);
 	std::cout << "d.HitPoints: " << d.getHitPoints() << std::endl;

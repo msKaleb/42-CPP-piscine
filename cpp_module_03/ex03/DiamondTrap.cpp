@@ -38,7 +38,7 @@ DiamondTrap::~DiamondTrap() {
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-DiamondTrap &				DiamondTrap::operator=( DiamondTrap const & rhs )
+DiamondTrap	&DiamondTrap::operator=( DiamondTrap const &rhs )
 {
 	//if ( this != &rhs )
 	//{
@@ -50,13 +50,14 @@ DiamondTrap &				DiamondTrap::operator=( DiamondTrap const & rhs )
 
 std::ostream	&operator<<( std::ostream &o, DiamondTrap const &i )
 {
-	o << std::endl;
-	o << "Printing info from " << i.getName() << std::endl;;
-	o << "DiamondTrap name: " << i.getName() << std::endl;
-	o << "DiamondTrap clapTrapName: " << i.getClapTrapName() << std::endl;
-	o << "DiamondTrap Hit Points: " << i.getHitPoints() << std::endl;
-	o << "DiamondTrap Energy Points: " << i.getEnergyPoints() << std::endl;
-	o << "DiamondTrap Attack Damage: " << i.getAttackDamage() << std::endl;
+	o << BOLDMAGENTA << std::endl
+		<< "Printing info from " << i.getName() << std::endl
+		<< "DiamondTrap name: " << i.getName() << std::endl
+		<< "DiamondTrap clapTrapName: " << i.getClapTrapName() << std::endl
+		<< "DiamondTrap Hit Points: " << i.getHitPoints() << std::endl
+		<< "DiamondTrap Energy Points: " << i.getEnergyPoints() << std::endl
+		<< "DiamondTrap Attack Damage: " << i.getAttackDamage() << std::endl
+		<< RESET;
 
 	return o;
 }
@@ -67,17 +68,26 @@ std::ostream	&operator<<( std::ostream &o, DiamondTrap const &i )
 */
 void	DiamondTrap::attack(std::string const &target) {
 	ScavTrap::attack(target);
-	if (this->_energyPoints > 0)
-		this->_energyPoints--;
+	/* if (this->_energyPoints > 0)
+		this->_energyPoints--; */
 }
 /*
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-std::string		DiamondTrap::getName(void) const { return (this->_name); }
+std::string	DiamondTrap::getName(void) const { return (this->_name); }
 
 std::string	DiamondTrap::getClapTrapName(void) const {
 	std::string	clapTrapName = ClapTrap::getName();
 	return clapTrapName;
 }
+
+void	DiamondTrap::whoAmI(void) const {
+	std::cout << MAGENTA << std::endl << "whoAmI member function:" << std::endl
+		<< "DiamondTrap name: " << this->getName() << std::endl
+		<< "ClapTrap name: " << this->getClapTrapName() << std::endl << RESET;
+	// std::string	clapTrapName = ClapTrap::getName();
+	return ;
+}
+
 /* ************************************************************************** */

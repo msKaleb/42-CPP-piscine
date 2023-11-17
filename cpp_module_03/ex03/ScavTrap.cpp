@@ -6,16 +6,16 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:54:26 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/16 22:40:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:41:39 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
 ScavTrap::ScavTrap() {
-	_hitPoints = 100;
+	/* _hitPoints = 100;
 	_energyPoints = 50;
-	_attackDamage = 20;
+	_attackDamage = 20; */
 }
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
@@ -24,6 +24,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 	_hitPoints = 100;
 	_energyPoints = 50;
 	_attackDamage = 20;
+	_scavEnergyPoints = _energyPoints;
 	/* this->setAttackDamage(20);
 	this->setEnergyPoints(50);
 	this->setHitPoints(100); */

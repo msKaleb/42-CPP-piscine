@@ -10,16 +10,10 @@ DiamondTrap::DiamondTrap(std::string name) : ClapTrap(name + "_clap_name"), Scav
 	
 	std::cout << CYAN << "DiamondTrap constructor called with name [" 
 		<< name << "]" << std::endl << RESET;
-	// std::cout << "ScavTrap::_energyPoints: " << ScavTrap().getEnergyPoints() << std::endl;
 
-	// _hitPoints = tmp->FragTrap::_hitPoints;
-	_energyPoints = ScavTrap().getEnergyPoints();
-	// _attackDamage = ScavTrap().getAttackDamage();
-
-	// use the getters to initialise the attributes
-	/* this->_hitPoints = fragTrapTmp.getHitPoints();
-	this->_energyPoints = scavTrapTmp.getEnergyPoints();
-	this->_attackDamage = fragTrapTmp.getAttackDamage(); */
+	// by default inherits the attributes from FragTrap (because it's the last in the initialization list)
+	// _energyPoints has to be overwritten in order to inherit it from ScavTrap
+	_energyPoints = ScavTrap::_scavEnergyPoints;
 }
 
 DiamondTrap::DiamondTrap( const DiamondTrap &src ) : ClapTrap(src), ScavTrap(src), FragTrap(src) {
@@ -81,16 +75,12 @@ void	DiamondTrap::attack(std::string const &target) {
 
 std::string	DiamondTrap::getName(void) const { return (this->_name); }
 
-std::string	DiamondTrap::getClapTrapName(void) const {
-	std::string	clapTrapName = ClapTrap::getName();
-	return clapTrapName;
-}
+std::string	DiamondTrap::getClapTrapName(void) const { return ClapTrap::_name; }
 
 void	DiamondTrap::whoAmI(void) const {
 	std::cout << MAGENTA << std::endl << "whoAmI member function:" << std::endl
 		<< "DiamondTrap name: " << this->getName() << std::endl
 		<< "ClapTrap name: " << this->getClapTrapName() << std::endl << RESET;
-	// std::string	clapTrapName = ClapTrap::getName();
 	return ;
 }
 

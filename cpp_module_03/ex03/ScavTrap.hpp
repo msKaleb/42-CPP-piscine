@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:52:15 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/16 20:46:03 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:36:42 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ class ScavTrap : public virtual ClapTrap
 {
 protected:
 	/* data */
+	unsigned int	_scavEnergyPoints;
+	
 public:
 	ScavTrap();
 	ScavTrap(std::string name);

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:14:18 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/16 22:48:39 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/17 08:50:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,20 @@
 int	main(){
 {
 	DiamondTrap	dt("Mikel");
-	ScavTrap	a("ft");
+	DiamondTrap	dd("dt");
+
+	/* ScavTrap	a("ft");
+	std::cout << "ScavTrap Hit Points: " << a.getHitPoints() << std::endl;
+	std::cout << "ScavTrap Energy Points: " << a.getEnergyPoints() << std::endl;
+	std::cout << "ScavTrap Attack Points: " << a.getAttackDamage() << std::endl; */
 
 	std::cout << dt << std::endl;
 	dt.whoAmI();
-	std::cout << "ScavTrap Hit Points: " << a.getHitPoints() << std::endl;
-	std::cout << "ScavTrap Energy Points: " << a.getEnergyPoints() << std::endl;
-	std::cout << "ScavTrap Attack Points: " << a.getAttackDamage() << std::endl;
+	dd.whoAmI();
+	dd = dt;
+	dd.whoAmI();
+	dt.attack("mikelo");
+	
 	return 0;
 }
 	ClapTrap	a("ClatTrap_a");

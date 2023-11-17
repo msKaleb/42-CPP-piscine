@@ -48,7 +48,7 @@ DiamondTrap	&DiamondTrap::operator=( DiamondTrap const &rhs )
 
 std::ostream	&operator<<( std::ostream &o, DiamondTrap const &i )
 {
-	o << BOLDMAGENTA << std::endl
+	o << BOLDMAGENTA
 		<< "Printing info from " << i.getName() << std::endl
 		<< "DiamondTrap name: " << i.getName() << std::endl
 		<< "DiamondTrap clapTrapName: " << i.getClapTrapName() << std::endl
@@ -78,7 +78,8 @@ std::string	DiamondTrap::getName(void) const { return (this->_name); }
 std::string	DiamondTrap::getClapTrapName(void) const { return ClapTrap::_name; }
 
 void	DiamondTrap::whoAmI(void) const {
-	std::cout << MAGENTA << std::endl << "whoAmI member function:" << std::endl
+	std::cout << MAGENTA
+		<< "whoAmI member function:" << std::endl
 		<< "DiamondTrap name: " << this->getName() << std::endl
 		<< "ClapTrap name: " << this->getClapTrapName() << std::endl << RESET;
 	return ;

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 15:14:18 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/17 08:50:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:54:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,7 @@
 #include "DiamondTrap.hpp"
 
 int	main(){
-{
-	DiamondTrap	dt("Mikel");
-	DiamondTrap	dd("dt");
 
-	/* ScavTrap	a("ft");
-	std::cout << "ScavTrap Hit Points: " << a.getHitPoints() << std::endl;
-	std::cout << "ScavTrap Energy Points: " << a.getEnergyPoints() << std::endl;
-	std::cout << "ScavTrap Attack Points: " << a.getAttackDamage() << std::endl; */
-
-	std::cout << dt << std::endl;
-	dt.whoAmI();
-	dd.whoAmI();
-	dd = dt;
-	dd.whoAmI();
-	dt.attack("mikelo");
-	
-	return 0;
-}
 	ClapTrap	a("ClatTrap_a");
 	ScavTrap	b("ScavTrap_b");
 	FragTrap	c("FragTrap_c");
@@ -43,6 +26,7 @@ int	main(){
 	std::cout << "ScavTrap Energy Points: " << b.getEnergyPoints() << std::endl;
 	b.attack("bTarget");
 
+	e.whoAmI();
 	e = d;
 	e.whoAmI();
 	
@@ -50,7 +34,7 @@ int	main(){
 	for (int i = 0; i < 100; i++)
 		d.attack("dTarget");
 	for (int i = 0; i < 100; i++)
-		d.takeDamage(2);
+		d.takeDamage(1);
 	
 	d.setEnergyPoints(10);
 	d.beRepaired(5);

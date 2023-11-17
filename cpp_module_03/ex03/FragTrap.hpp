@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 20:50:39 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/16 20:19:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:41:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ protected:
 public:
 	FragTrap(std::string name);
 	FragTrap(FragTrap const &copy);
-	virtual ~FragTrap();
+	~FragTrap();
 
 	FragTrap	&operator=(FragTrap const &rhs);
 	void		highFivesGuys(void) const;

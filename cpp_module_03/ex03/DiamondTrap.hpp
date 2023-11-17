@@ -16,7 +16,7 @@ class DiamondTrap : public ScavTrap, public FragTrap
 		DiamondTrap();
 		DiamondTrap(std::string name);
 		DiamondTrap( DiamondTrap const &src );
-		virtual ~DiamondTrap();
+		~DiamondTrap();
 
 		DiamondTrap	&operator=( DiamondTrap const &rhs );
 

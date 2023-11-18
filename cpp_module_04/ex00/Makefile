@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/11/13 14:55:43 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/17 18:34:05 by msoria-j         ###   ########.fr        #
+#    Created: 2023/11/17 17:54:07 by msoria-j          #+#    #+#              #
+#    Updated: 2023/11/18 11:05:59 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,15 +22,12 @@
 # **************************************************************************** # 
 
 SRC			=	main.cpp \
-				ClapTrap.cpp \
-				ScavTrap.cpp \
-				FragTrap.cpp \
-				DiamondTrap.cpp \
+				Animal.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -Wshadow -std=c++98
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -Wshadow -std=c++98
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++ 
-NAME		=	diamondtrap
+NAME		=	animal
 OBJ			=	$(SRC:.cpp=.o) 
 
 %.o:		%.cpp 
@@ -53,4 +50,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re 
 
-.SILENT: 
+# .SILENT: 

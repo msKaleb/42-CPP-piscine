@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/17 17:54:07 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/18 11:05:59 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/19 13:11:52 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,11 @@
 
 SRC			=	main.cpp \
 				Animal.cpp \
-
+				Cat.cpp \
+				Dog.cpp \
+				WrongAnimal.cpp \
+				WrongCat.cpp \
+				
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++ 

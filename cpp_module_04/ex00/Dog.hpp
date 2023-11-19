@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/19 11:26:14 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/19 11:45:46 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/19 12:18:45 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/19 13:05:59 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-# define ANIMAL_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 
-# include <iostream>
-# include <string>
+# include "Animal.hpp"
 
-class Animal
+class Dog : public Animal
 {
-	protected:
-		std::string	_type;
-		Animal(std::string const &type);
-
+	private:
+	
 	public:
-		Animal();
-		Animal( Animal const & src );
-		virtual ~Animal();
+		/* Orthodox Canonical Form */
+		Dog();
+		Dog(const Dog &src);
+		Dog	&operator=(const Dog &rhs);
+		~Dog();
 
-		Animal			&operator=( Animal const & rhs );
-		std::string		getType(void) const;
 		virtual void	makeSound(void) const;
-
 };
 
-std::ostream &			operator<<( std::ostream & o, Animal const & i );
-
-#endif /* ANIMAL_HPP*/
+#endif /* DOG_HPP */

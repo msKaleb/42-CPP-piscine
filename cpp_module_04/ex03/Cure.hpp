@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   Cure.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 22:42:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 05:39:18 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/21 05:38:32 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/21 05:38:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-# define ICE_HPP
+#ifndef CURE_HPP
+# define CURE_HPP
 
 # include <iostream>
-# include "AMateria.hpp"
 
-class	Ice : public AMateria
+class	Cure
 {
 private:
 	/* data */
-
 public:
 	/* Orthodox canonical */
-	Ice ();
-	Ice (Ice const &obj);
-	~Ice ();
-	Ice &operator= (const Ice &obj);
+	Cure();
+	Cure(Cure const &copy);
+	~Cure();
+	Cure &operator=(const Cure &rhs);
 
-	virtual AMateria	*clone() const;
-	virtual void		use(ICharacter &target);
 };
 
-#endif /* ICE_HPP */
+#endif /* CURE_HPP */

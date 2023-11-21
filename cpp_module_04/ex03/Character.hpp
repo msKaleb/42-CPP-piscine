@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.hpp                                            :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 22:42:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 05:39:18 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/21 06:09:17 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/21 06:09:18 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ICE_HPP
-# define ICE_HPP
+#ifndef CHARACTER_HPP
+# define CHARACTER_HPP
 
 # include <iostream>
-# include "AMateria.hpp"
 
-class	Ice : public AMateria
+class	Character
 {
 private:
 	/* data */
-
 public:
 	/* Orthodox canonical */
-	Ice ();
-	Ice (Ice const &obj);
-	~Ice ();
-	Ice &operator= (const Ice &obj);
+	Character();
+	Character(Character const &copy);
+	~Character();
+	Character &operator=(const Character &rhs);
 
-	virtual AMateria	*clone() const;
-	virtual void		use(ICharacter &target);
 };
 
-#endif /* ICE_HPP */
+#endif /* CHARACTER_HPP */

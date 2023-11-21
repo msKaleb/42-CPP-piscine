@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/20 21:16:24 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/20 22:33:52 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/21 11:52:59 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,13 +25,11 @@ SRC			=	main.cpp \
 				AMateria.cpp \
 				Ice.cpp \
 				Cure.cpp \
-				ICharacter.cpp \
 				Character.cpp \
-				IMateriaSource.cpp \
 				MateriaSource.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++ 
 NAME		=	materia
 OBJ			=	$(SRC:.cpp=.o) 
@@ -56,4 +54,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re 
 
-.SILENT: 
+# .SILENT: 

@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*   MateriaSource.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 05:38:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 12:15:05 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/21 09:30:15 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/21 09:30:16 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-# define CURE_HPP
+#ifndef MATERIASOURCE_HPP
+# define MATERIASOURCE_HPP
 
 # include <iostream>
-# include "AMateria.hpp"
 
-class ICharacter;
-
-class	Cure : public AMateria
+class	MateriaSource
 {
 private:
 	/* data */
+
 public:
 	/* Orthodox canonical */
-	Cure();
-	Cure(Cure const &copy);
-	~Cure();
-	Cure &operator=(const Cure &rhs);
+	MateriaSource();
+	~MateriaSource();
+	MateriaSource(MateriaSource const &copy);
+	MateriaSource &operator=(const MateriaSource &rhs);
 
-	virtual AMateria	*clone() const;
-	virtual void		use(ICharacter &target);
 };
 
-#endif /* CURE_HPP */
+#endif /* MATERIASOURCE_HPP */

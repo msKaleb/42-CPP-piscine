@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:42:19 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 05:39:18 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:13:33 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include "AMateria.hpp"
+
+class ICharacter;
 
 class	Ice : public AMateria
 {

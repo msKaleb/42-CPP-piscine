@@ -8,12 +8,12 @@ Ice::~Ice() {
 	std::cout << "Ice: Destructor Called" << std::endl;
 }
 
-Ice::Ice(Ice const &obj) {
+Ice::Ice(Ice const &obj) : AMateria(obj) {
 	std::cout << "Copy Constructor Called" << std::endl;
 	if (this != &obj)
 		*this = obj; // operator= ??
 }
-
+// TO BE IMPLEMENTED
 Ice	&Ice::operator= (const Ice &obj) {
 	std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &obj)
@@ -34,5 +34,5 @@ AMateria	*Ice::clone() const {
 
 void	Ice::use(ICharacter &target) {
 	std::cout << "* shoots an ice bolt at "
-		<< target.getName() << "*" << std::endl;
+		<< target.getName() << " *" << std::endl;
 }

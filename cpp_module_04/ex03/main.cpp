@@ -1,36 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/21 05:38:32 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 12:15:05 by msoria-j         ###   ########.fr       */
+/*   Created: 2023/11/21 10:38:33 by msoria-j          #+#    #+#             */
+/*   Updated: 2023/11/21 12:31:29 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-# define CURE_HPP
+#include "Ice.hpp"
+#include "Cure.hpp"
+#include "Character.hpp"
 
-# include <iostream>
-# include "AMateria.hpp"
+int	main(void) {
+	ICharacter	*me = new Character("Mikel");
+	ICharacter	*you = new Character("Marta");
 
-class ICharacter;
+	std::cout << me->getName() << std::endl;
+	std::cout << you->getName() << std::endl;
+	me->equip(new Ice());
+	me->equip(new Cure());
+	me->equip(new Ice());
 
-class	Cure : public AMateria
-{
-private:
-	/* data */
-public:
-	/* Orthodox canonical */
-	Cure();
-	Cure(Cure const &copy);
-	~Cure();
-	Cure &operator=(const Cure &rhs);
-
-	virtual AMateria	*clone() const;
-	virtual void		use(ICharacter &target);
-};
-
-#endif /* CURE_HPP */
+	me->use(2, *you);
+	delete me;
+	delete you;
+}

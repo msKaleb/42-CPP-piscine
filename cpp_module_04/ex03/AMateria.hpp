@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 21:20:00 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 05:49:45 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:13:12 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 # include <iostream>
 # include "ICharacter.hpp"
+
+class ICharacter;
 
 class AMateria // Abstract class
 {

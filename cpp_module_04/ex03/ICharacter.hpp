@@ -6,13 +6,15 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 22:25:51 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/20 22:29:59 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:55:24 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 # include "AMateria.hpp"
+
+class AMateria;
 
 class ICharacter
 {

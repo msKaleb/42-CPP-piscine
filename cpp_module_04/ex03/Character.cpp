@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 16:05:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:48:51 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,19 @@
 // 	std::cout << "Character : Default Constructor Called" << std::endl;
 // }
 
-Character::Character(std::string name) : _name(name), _inventory(new AMateria *[4]) {
+int	Character::_discarded = 0;
+Node *Character::_head = NULL;
+Node *Character::_current = NULL;
+
+Character::Character(std::string name) : 
+	_name(name), _inventory(new AMateria *[4]), _slots(0) {
+
 	std::cout << "Character: Parametrized Constructor Called with name " 
 		<< this->_name << std::endl;
-	this->_slots = 0;
-	/* for (int i = 0; i < 4; i++) {
-		this->_inventory[i] = new Ice();
-	} */
+
+	for (int i = 0; i < 4; i++) {
+		this->_inventory[i] = NULL;
+	}
 }
 
 Character::~Character() {
@@ -69,10 +75,39 @@ void	Character::equip(AMateria *m) {
 }
 
 void	Character::unequip(int idx) {
-	std::cout << "unequip " << idx << std::endl;
+	if (idx < 0 || idx > 3) return ;
+	
+	// leave on the floor (save the address)
+	// Node	*discardedMateria = new Node(this->_inventory[idx]);
+	// Node	*discardedMateria = NULL;
+	// discardedMateria->discarded = this->_inventory[idx];
+	
+	if (!this->_inventory[idx]) {
+		std::cout << "* Slot [" << idx << "] is already empty *" << std::endl;
+		return ;
+	}
+	// Character::_current->discarded = this->_inventory[idx];
+	if (Character::_discarded == 0) {
+		// Character::_head = discardedMateria;
+		Character::_head = new Node(this->_inventory[idx]);
+		Character::_current = _head;
+	}
+	else {
+		while (Character::_current->next != NULL)
+			Character::_current = Character::_current->next;
+		Character::_current->next = new Node(this->_inventory[idx]);
+	}
+	this->_inventory[idx] = NULL;
+	std::cout << "* Slot [" << idx << "] unequipped *" << std::endl;
+	Character::_discarded++;
+	
+	// should I have to decrement _slots and rearrange _inventory???
+	// ...
 }
 
 void	Character::use(int idx, ICharacter &target) {
+	// only from 0 to 3
+	if (idx < 0 || idx > 3) return ;
 	// should I delete the used materia?
 	if (!this->_inventory[idx]) {
 		std::cout << "* Slot [" << idx << "] is empty *" << std::endl;

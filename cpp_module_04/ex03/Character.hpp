@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:17 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 13:32:02 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:41:49 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,22 @@
 
 # include <iostream>
 # include "ICharacter.hpp"
+# include "Node.hpp"
 
 class	Character : public ICharacter
 {
 private:
 	/* data */
 	std::string const	_name;
-	AMateria			**_inventory;	// array of materias
-	int					_slots;			// occupied slots
+	AMateria			**_inventory;	// array of materias, each slot is a pointer
+	int					_slots;			// number of occupied slots
 	Character();
+
+	// linked list related
+	static Node	*_head;
+	static Node	*_current;
+	static int	_discarded;
+
 public:
 	Character(std::string name);
 	Character(Character const &copy);

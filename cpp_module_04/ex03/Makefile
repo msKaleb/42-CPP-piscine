@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/20 21:16:24 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/21 11:52:59 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/11/22 19:39:56 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC			=	main.cpp \
 				Cure.cpp \
 				Character.cpp \
 				MateriaSource.cpp \
+				Node.cpp \
 
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0

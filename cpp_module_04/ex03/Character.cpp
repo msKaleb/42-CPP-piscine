@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/23 09:22:01 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:55:07 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 // }
 
 // initialize static variables
-int	Character::_discarded = 0;
-int	Character::_characterCount = 0;
-Node *Character::_head = NULL;
-Node *Character::_current = NULL;
+Node	*Character::_head = NULL;
+Node	*Character::_current = NULL;
+int		Character::_discarded = 0;
+int		Character::_characterCount = 0;
 
 Character::Character(std::string name) : 
 	_name(name), _inventory(new AMateria *[4]), _slots(0) {
@@ -52,10 +52,11 @@ Character::~Character() {
 			delete Character::_head->discarded;
 			delete Character::_head;
 			Character::_head = Character::_current;
+			Character::_discarded--;
 		}
 	}
 }
-// check
+// check ---------------------------------------
 Character::Character(Character const &copy) :
 	_name(copy.getName()), _inventory(new AMateria *[4]), _slots(copy.getSlotsCount()) {
 
@@ -63,7 +64,7 @@ Character::Character(Character const &copy) :
 	if (this != &copy) {
 		for (int i = 0; i < copy.getSlotsCount(); i++) {
 			// this->_inventory[i] = copy.getSlot(i); // shallow
-			this->_inventory[i] = copy.getSlot(i)->clone(); // deep
+			this->_inventory[i] = copy.getSlot(i)->clone(); // deep copy needed
 		}
 		Character::_characterCount++;
 	}
@@ -87,34 +88,34 @@ std::string const	&Character::getName() const {
 void	Character::equip(AMateria *m) {
 	std::cout << this->getName() << " equips " 
 		<< m->getType() << std::endl;
-	if (this->_slots == 3) return ;
-	this->_inventory[this->_slots] = m; // shallow copy
+	// if the inventory is full, do nothing
+	if (this->_slots == 4) return ;
+	// shallow copy, don't have to duplicate it
+	this->_inventory[this->_slots] = m;
 	this->_slots++;
 }
 
+// leave on the floor (save the address)
 void	Character::unequip(int idx) {
+	// return if out of bounds
 	if (idx < 0 || idx > 3) return ;
-	
-	// leave on the floor (save the address)
-	// Node	*discardedMateria = new Node(this->_inventory[idx]);
-	// Node	*discardedMateria = NULL;
-	// discardedMateria->discarded = this->_inventory[idx];
-	
+	// check if it's already empty (NULL)
 	if (!this->_inventory[idx]) {
 		std::cout << "* Slot [" << idx << "] is already empty *" << std::endl;
 		return ;
 	}
-	// Character::_current->discarded = this->_inventory[idx];
+	// if it's the first discarded item, make it the head of the list
 	if (Character::_discarded == 0) {
-		// Character::_head = discardedMateria;
 		Character::_head = new Node(this->_inventory[idx]);
 		Character::_current = _head;
 	}
+	// else, add it to the last element of the list
 	else {
 		while (Character::_current->next != NULL)
 			Character::_current = Character::_current->next;
 		Character::_current->next = new Node(this->_inventory[idx]);
 	}
+	// make the slot empty
 	this->_inventory[idx] = NULL;
 	std::cout << "* Slot [" << idx << "] unequipped *" << std::endl;
 	Character::_discarded++;
@@ -126,16 +127,15 @@ void	Character::unequip(int idx) {
 void	Character::use(int idx, ICharacter &target) {
 	// only from 0 to 3
 	if (idx < 0 || idx > 3) return ;
-	// should I delete the used materia?
 	if (!this->_inventory[idx]) {
 		std::cout << "* Slot [" << idx << "] is empty *" << std::endl;
 		return ;
 	}
-	
 	this->_inventory[idx]->use(target);
+
+	// should I delete the used materia?
 	delete this->_inventory[idx];
 	this->_inventory[idx] = NULL;
-
 }
 
 int	Character::getSlotsCount(void) const {

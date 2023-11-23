@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/22 20:48:51 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/23 09:22:01 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 // 	std::cout << "Character : Default Constructor Called" << std::endl;
 // }
 
+// initialize static variables
 int	Character::_discarded = 0;
+int	Character::_characterCount = 0;
 Node *Character::_head = NULL;
 Node *Character::_current = NULL;
 
@@ -29,15 +31,29 @@ Character::Character(std::string name) :
 	for (int i = 0; i < 4; i++) {
 		this->_inventory[i] = NULL;
 	}
+	Character::_characterCount++;
 }
 
 Character::~Character() {
 	std::cout << "Character: Destructor Called" << std::endl;
+	Character::_characterCount--; // decrement character count
+
+	// delete character's inventory
 	for (int i = 0; i < this->_slots; i++) {
 		if (this->_inventory[i])
 			delete this->_inventory[i];
 	}
 	delete [] this->_inventory;
+
+	// if there are no characters left, delete the items on the floor
+	if (Character::_characterCount == 0) {
+		while (Character::_head != NULL) {
+			Character::_current = Character::_head->next;
+			delete Character::_head->discarded;
+			delete Character::_head;
+			Character::_head = Character::_current;
+		}
+	}
 }
 // check
 Character::Character(Character const &copy) :
@@ -49,9 +65,10 @@ Character::Character(Character const &copy) :
 			// this->_inventory[i] = copy.getSlot(i); // shallow
 			this->_inventory[i] = copy.getSlot(i)->clone(); // deep
 		}
+		Character::_characterCount++;
 	}
 }
-// implement
+// implement --------------------
 Character	&Character::operator=(const Character &rhs) {
 	std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
@@ -59,6 +76,7 @@ Character	&Character::operator=(const Character &rhs) {
 		this->~Character();
 		new(this) Character(rhs);
 	}
+	Character::_characterCount++;
 	return (*this);
 }
 

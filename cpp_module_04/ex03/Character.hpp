@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:17 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/22 19:41:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/23 09:13:06 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ private:
 	static Node	*_head;
 	static Node	*_current;
 	static int	_discarded;
+	static int	_characterCount;
 
 public:
 	Character(std::string name);

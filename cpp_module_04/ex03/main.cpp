@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:38:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/23 20:38:55 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/24 06:37:47 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,23 @@ int	main(void) {
 	} */
 	{
 		IMateriaSource	*src = new MateriaSource();
-		src->learnMateria(new Ice());
-		src->learnMateria(new Cure());
+		
+		// learning materia through 'new Materia()' forces a leak
+		/* src->learnMateria(new Ice());
+		src->learnMateria(new Cure()); */
+		// the proper way is defining pointers that can be deleted manually
+		{
+		AMateria		*ice = new Ice();
+		AMateria		*cure = new Cure();
 
-		ICharacter	*me = new Character("Mikel");
+		src->learnMateria(ice);
+		src->learnMateria(cure);
+		delete ice;
+		delete cure;
+		}
+
+		ICharacter	*me = new Character("Me");
+		ICharacter	*you = new Character("You");
 
 		AMateria	*tmp;
 		tmp = src->createMateria("ice");
@@ -44,27 +57,44 @@ int	main(void) {
 		tmp = src->createMateria("cure");
 		me->equip(tmp);
 
+		tmp = src->createMateria("ice");
+		you->equip(tmp);
+		tmp = src->createMateria("cure");
+		you->equip(tmp);
+		tmp = src->createMateria("ice");
+		you->equip(tmp);
+		tmp = src->createMateria("cure");
+		you->equip(tmp);
+
 		me->unequip(0);
-		me->unequip(1);
-		me->unequip(2);
+		me->unequip(0);
+		me->unequip(0);
 		me->unequip(3);
+
+		you->unequip(0);
+		you->unequip(1);
+		you->unequip(2);
+		you->unequip(3);
 		
-		ICharacter	*bob = new Character("bob");
+		ICharacter	*bob = new Character("Bob");
 		
-		me->use(0, *bob);
-		me->use(3, *bob);
 		me->use(1, *bob);
+		me->use(3, *bob);
+		me->use(2, *bob);
+
+		you->use(0, *bob);
+		you->use(2, *bob);
+		you->use(1, *bob);
 		
 		delete bob;
 		delete me;
+		delete you;
 		delete src;
 	
-		// floor->~Node(); // cleanup?
-		
 		return 0;
 	}
-	ICharacter	*me = new Character("Mikel");
-	ICharacter	*you = new Character("Marta");
+	ICharacter	*me = new Character("Me");
+	ICharacter	*you = new Character("You");
 	AMateria	*ice = new Ice();
 	AMateria	*cloneMe;
 	

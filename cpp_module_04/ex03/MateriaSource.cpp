@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:30:13 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 16:03:54 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/24 06:28:27 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ MateriaSource	&MateriaSource::operator=(const MateriaSource &rhs) {
 
 void	MateriaSource::learnMateria(AMateria *m) {
 	if (this->_sourceCounter == 3) return ;
-	this->_sources[this->_sourceCounter] = m; //m->clone();
+	// this->_sources[this->_sourceCounter] = m; // shallow copy
+	this->_sources[this->_sourceCounter] = m->clone(); // leaks with learnMateria(new Materia())
 	this->_sourceCounter++;
 }
 

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/23 20:55:07 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/24 05:59:15 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ std::string const	&Character::getName() const {
 }
 
 void	Character::equip(AMateria *m) {
+	// check if the materia exists
+	if (!m) return;
 	std::cout << this->getName() << " equips " 
 		<< m->getType() << std::endl;
 	// if the inventory is full, do nothing

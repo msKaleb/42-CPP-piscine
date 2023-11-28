@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:38:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/24 06:37:47 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:14:52 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,57 @@ int	main(void) {
 
 		return 0;
 	} */
+
+	// segfault
+	{
+		IMateriaSource	*src = new MateriaSource();
+		{
+		AMateria		*ice = new Ice();
+		AMateria		*cure = new Cure();
+
+		src->learnMateria(ice);
+		src->learnMateria(cure);
+		delete ice;
+		delete cure;
+		}
+
+		Character	me("me");
+		Character	you("you");
+		AMateria	*tmp;
+		tmp = src->createMateria("ice");
+		me.equip(tmp);
+		tmp = src->createMateria("cure");
+		me.equip(tmp);
+		tmp = src->createMateria("ice");
+		me.equip(tmp);
+		tmp = src->createMateria("cure");
+		me.equip(tmp);
+
+		tmp = src->createMateria("ice");
+		you.equip(tmp);
+		tmp = src->createMateria("cure");
+		you.equip(tmp);
+		tmp = src->createMateria("ice");
+		you.equip(tmp);
+		tmp = src->createMateria("cure");
+		you.equip(tmp);
+
+		me.unequip(0);
+		me.unequip(0);
+		me.unequip(0);
+		me.unequip(3);
+
+		me = you;
+
+		you.unequip(0);
+		you.unequip(1);
+		you.unequip(2);
+		you.unequip(3);
+
+		delete src;
+
+		return 0;
+	}
 	{
 		IMateriaSource	*src = new MateriaSource();
 		

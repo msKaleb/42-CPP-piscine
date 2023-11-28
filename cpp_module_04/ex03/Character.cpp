@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/24 05:59:15 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/11/28 10:08:49 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ Character::Character(std::string name) :
 	std::cout << "Character: Parametrized Constructor Called with name " 
 		<< this->_name << std::endl;
 
+	// initialise all slots to NULL
 	for (int i = 0; i < 4; i++) {
 		this->_inventory[i] = NULL;
 	}
@@ -62,6 +63,10 @@ Character::Character(Character const &copy) :
 
 	std::cout << "Copy Constructor Called" << std::endl;
 	if (this != &copy) {
+		// initialise all slots to NULL --------------------------------------------------------
+		for (int i = 0; i < 4; i++)
+			this->_inventory[i] = NULL;
+
 		for (int i = 0; i < copy.getSlotsCount(); i++) {
 			// this->_inventory[i] = copy.getSlot(i); // shallow
 			this->_inventory[i] = copy.getSlot(i)->clone(); // deep copy needed
@@ -73,11 +78,16 @@ Character::Character(Character const &copy) :
 Character	&Character::operator=(const Character &rhs) {
 	std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
+		// unequip everything???
+		for (int i = 0; i < this->getSlotsCount(); i++) {
+			this->unequip(i);
+		}
+
 		// delete the current character
 		this->~Character();
 		new(this) Character(rhs);
 	}
-	Character::_characterCount++;
+	// Character::_characterCount++; // on non-allocated items, cleaning list segfaults
 	return (*this);
 }
 

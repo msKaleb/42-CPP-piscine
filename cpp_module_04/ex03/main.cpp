@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 10:38:33 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/28 10:14:52 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 15:15:14 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,7 @@
 #include "MateriaSource.hpp"
 
 int	main(void) {
-	/* {
-		Character	*me = new Character("Mikel");
-		Character	*you = new Character("Marta");
-
-		me->equip(new Ice());
-		*me = *you;
-		delete me;
-		delete you;
-
-		return 0;
-	} */
-
-	// segfault
-	{
+/* 	{
 		IMateriaSource	*src = new MateriaSource();
 		{
 		AMateria		*ice = new Ice();
@@ -77,7 +64,7 @@ int	main(void) {
 		delete src;
 
 		return 0;
-	}
+	} */
 	{
 		IMateriaSource	*src = new MateriaSource();
 		
@@ -89,6 +76,8 @@ int	main(void) {
 		AMateria		*ice = new Ice();
 		AMateria		*cure = new Cure();
 
+		*cure = *ice;
+		
 		src->learnMateria(ice);
 		src->learnMateria(cure);
 		delete ice;
@@ -162,4 +151,6 @@ int	main(void) {
 	delete you;
 	delete ice;
 	delete cloneMe;
+
+	return 0;
 }

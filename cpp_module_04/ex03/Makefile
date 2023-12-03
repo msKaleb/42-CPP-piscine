@@ -6,7 +6,7 @@
 #    By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/20 21:16:24 by msoria-j          #+#    #+#              #
-#    Updated: 2023/11/22 19:39:56 by msoria-j         ###   ########.fr        #
+#    Updated: 2023/12/03 14:06:35 by msoria-j         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,10 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ) 
 			$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME) 
-			echo "	Created " $(NAME) 
+			@echo "	Created " $(NAME) 
 
 clean:		 
-			echo "	removing files..." 
+			@echo "	removing files..." 
 			$(RM) $(OBJ) 
 
 fclean:		clean 

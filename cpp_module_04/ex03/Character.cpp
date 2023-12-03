@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/28 10:08:49 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 15:10:54 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int		Character::_characterCount = 0;
 Character::Character(std::string name) : 
 	_name(name), _inventory(new AMateria *[4]), _slots(0) {
 
-	std::cout << "Character: Parametrized Constructor Called with name " 
-		<< this->_name << std::endl;
+	/* std::cout << "Character: Parametrized Constructor Called with name " 
+		<< this->_name << std::endl; */
 
 	// initialise all slots to NULL
 	for (int i = 0; i < 4; i++) {
@@ -36,7 +36,7 @@ Character::Character(std::string name) :
 }
 
 Character::~Character() {
-	std::cout << "Character: Destructor Called" << std::endl;
+	// std::cout << "Character: Destructor Called" << std::endl;
 	Character::_characterCount--; // decrement character count
 
 	// delete character's inventory
@@ -61,9 +61,9 @@ Character::~Character() {
 Character::Character(Character const &copy) :
 	_name(copy.getName()), _inventory(new AMateria *[4]), _slots(copy.getSlotsCount()) {
 
-	std::cout << "Copy Constructor Called" << std::endl;
+	// std::cout << "Copy Constructor Called" << std::endl;
 	if (this != &copy) {
-		// initialise all slots to NULL --------------------------------------------------------
+		// initialise all slots to NULL
 		for (int i = 0; i < 4; i++)
 			this->_inventory[i] = NULL;
 
@@ -76,18 +76,17 @@ Character::Character(Character const &copy) :
 }
 // implement --------------------
 Character	&Character::operator=(const Character &rhs) {
-	std::cout << "Copy Assignment Operator Called" << std::endl;
+	// std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
-		// unequip everything???
-		for (int i = 0; i < this->getSlotsCount(); i++) {
+		// unequip everything
+		/* for (int i = 0; i < this->getSlotsCount(); i++) {
 			this->unequip(i);
-		}
+		} */
 
 		// delete the current character
 		this->~Character();
 		new(this) Character(rhs);
 	}
-	// Character::_characterCount++; // on non-allocated items, cleaning list segfaults
 	return (*this);
 }
 
@@ -98,8 +97,8 @@ std::string const	&Character::getName() const {
 void	Character::equip(AMateria *m) {
 	// check if the materia exists
 	if (!m) return;
-	std::cout << this->getName() << " equips " 
-		<< m->getType() << std::endl;
+	/* std::cout << this->getName() << " equips " 
+		<< m->getType() << std::endl; */
 	// if the inventory is full, do nothing
 	if (this->_slots == 4) return ;
 	// shallow copy, don't have to duplicate it
@@ -113,7 +112,7 @@ void	Character::unequip(int idx) {
 	if (idx < 0 || idx > 3) return ;
 	// check if it's already empty (NULL)
 	if (!this->_inventory[idx]) {
-		std::cout << "* Slot [" << idx << "] is already empty *" << std::endl;
+		// std::cout << "* Slot [" << idx << "] is already empty *" << std::endl;
 		return ;
 	}
 	// if it's the first discarded item, make it the head of the list
@@ -129,7 +128,7 @@ void	Character::unequip(int idx) {
 	}
 	// make the slot empty
 	this->_inventory[idx] = NULL;
-	std::cout << "* Slot [" << idx << "] unequipped *" << std::endl;
+	// std::cout << "* Slot [" << idx << "] unequipped *" << std::endl;
 	Character::_discarded++;
 	
 	// should I have to decrement _slots and rearrange _inventory???

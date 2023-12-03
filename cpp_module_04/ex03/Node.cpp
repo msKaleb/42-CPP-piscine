@@ -1,7 +1,7 @@
 #include "Node.hpp"
 
 Node::Node() {
-	std::cout << "Node: Default Constructor Called" << std::endl;
+	// std::cout << "Node: Default Constructor Called" << std::endl;
 }
 
 // shallow copy wanted, just to store the addresses
@@ -11,17 +11,17 @@ Node::Node(AMateria *toDiscard) : discarded(toDiscard) {
 }
 
 Node::~Node() {
-	std::cout << "Node: Destructor Called" << std::endl;
+	// std::cout << "Node: Destructor Called" << std::endl;
 }
 
 Node::Node(Node const &copy) {
-	std::cout << "Node: Copy Constructor Called" << std::endl;
+	// std::cout << "Node: Copy Constructor Called" << std::endl;
 	if (this != &copy)
 		*this = copy;
 }
 
 Node	&Node::operator=(const Node &rhs) {
-	std::cout << "Node: Copy Assignment Operator Called" << std::endl;
+	// std::cout << "Node: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
 		// this->discarded = rhs.getMateria();
 		this->discarded = rhs.discarded;

@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:30:13 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/24 06:28:27 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 14:48:48 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 #include "Cure.hpp"
 
 MateriaSource::MateriaSource() : _sources(new AMateria *[4]), _sourceCounter(0) {
-	std::cout << "MateriaSource: Default Constructor Called" << std::endl;
+	// std::cout << "MateriaSource: Default Constructor Called" << std::endl;
 }
 
 MateriaSource::~MateriaSource() {
-	std::cout << "MateriaSource: Destructor Called" << std::endl;
+	// std::cout << "MateriaSource: Destructor Called" << std::endl;
 	for (int i = 0; i < this->_sourceCounter; i++)
 		delete this->_sources[i];
 	delete [] this->_sources;
 }
 
 MateriaSource::MateriaSource(MateriaSource const &copy) {
-	std::cout << "MateriaSource: Copy Constructor Called" << std::endl;
+	// std::cout << "MateriaSource: Copy Constructor Called" << std::endl;
 	if (this != &copy)
 		*this = copy;
 }
 // implement
 MateriaSource	&MateriaSource::operator=(const MateriaSource &rhs) {
-	std::cout << "MateriaSource: Copy Assignment Operator Called" << std::endl;
+	// std::cout << "MateriaSource: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs)
 	{
 		//	this->attributes = rhs.attributes;

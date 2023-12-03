@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:30:13 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/03 14:48:48 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 15:54:22 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,14 @@ MateriaSource::MateriaSource(MateriaSource const &copy) {
 	if (this != &copy)
 		*this = copy;
 }
-// implement
+
 MateriaSource	&MateriaSource::operator=(const MateriaSource &rhs) {
 	// std::cout << "MateriaSource: Copy Assignment Operator Called" << std::endl;
-	if (this != &rhs)
-	{
-		//	this->attributes = rhs.attributes;
-		//	...
+	if (this != &rhs) {
+		this->_sourceCounter = rhs._sourceCounter;
+		for (int i = 0; i < rhs._sourceCounter; i++) {
+			this->_sources[i] = rhs._sources[i]->clone();
+		}
 	}
 	return (*this);
 }

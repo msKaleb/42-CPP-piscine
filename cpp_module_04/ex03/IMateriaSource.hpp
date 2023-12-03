@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:27:56 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/11/21 09:29:43 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 15:48:40 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 class	IMateriaSource
 {
 public:
-	virtual ~IMateriaSource() {}
+	virtual				~IMateriaSource() {}
 	virtual void		learnMateria(AMateria*) = 0;
 	virtual AMateria	*createMateria(std::string const &type) = 0;
 };

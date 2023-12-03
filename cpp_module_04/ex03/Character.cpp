@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 06:09:21 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/03 15:10:54 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 16:03:35 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ Character::Character(Character const &copy) :
 		Character::_characterCount++;
 	}
 }
-// implement --------------------
+
 Character	&Character::operator=(const Character &rhs) {
 	// std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
@@ -130,9 +130,6 @@ void	Character::unequip(int idx) {
 	this->_inventory[idx] = NULL;
 	// std::cout << "* Slot [" << idx << "] unequipped *" << std::endl;
 	Character::_discarded++;
-	
-	// should I have to decrement _slots and rearrange _inventory???
-	// ...
 }
 
 void	Character::use(int idx, ICharacter &target) {

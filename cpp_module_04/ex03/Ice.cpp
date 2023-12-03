@@ -11,25 +11,20 @@ Ice::~Ice() {
 Ice::Ice(Ice const &obj) : AMateria(obj) {
 	// std::cout << "Copy Constructor Called" << std::endl;
 	if (this != &obj)
-		*this = obj; // operator= ??
+		*this = obj;
 }
-// TO BE IMPLEMENTED
+
 Ice	&Ice::operator= (const Ice &obj) {
 	// std::cout << "Copy Assignment Operator Called" << std::endl;
-	if (this != &obj)
-	{
-		//	this->attributes = obj.attributes;
-		//	...
+	if (this != &obj) {
+		this->~Ice();
+		new(this) Ice();
 	}
 	return (*this);
 }
 
 AMateria	*Ice::clone() const {
-	AMateria	*ret = new Ice();
-
-	// clone things - deep copy
-	// ret->attributes = this->attributes
-	return ret;
+	return new Ice();
 }
 
 void	Ice::use(ICharacter &target) {

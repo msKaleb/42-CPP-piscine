@@ -6,7 +6,7 @@
 /*   By: msoria-j <msoria-j@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 05:38:28 by msoria-j          #+#    #+#             */
-/*   Updated: 2023/12/03 15:18:54 by msoria-j         ###   ########.fr       */
+/*   Updated: 2023/12/03 16:01:56 by msoria-j         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ Cure::~Cure() {
 Cure::Cure(Cure const &copy) : AMateria(copy) {
 	// std::cout << "Copy Constructor Called" << std::endl;
 	if (this != &copy) {
-		*this = copy; // operator= ???
+		*this = copy;
 	}
 }
-// TO BE IMPLEMENTED
+
 Cure	&Cure::operator=(const Cure &rhs) {
 	// std::cout << "Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
@@ -37,11 +37,7 @@ Cure	&Cure::operator=(const Cure &rhs) {
 }
 
 AMateria	*Cure::clone() const {
-	AMateria	*ret = new Cure();
-
-	// clone things - deep copy
-	// ret->attributes = this->attributes
-	return ret;
+	return new Cure();
 }
 
 void	Cure::use(ICharacter &target) {

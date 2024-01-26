@@ -56,3 +56,10 @@ std::ostream	&operator<<(std::ostream &o, Form const &i) {
 
 	return o;
 }
+
+void	Form::beSigned(Bureaucrat &b) {
+	if (b.getGrade() > this->_signGrade)
+		throw this->GradeTooLowException();
+	else
+		this->_signed = true;
+}

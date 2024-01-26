@@ -70,3 +70,11 @@ Bureaucrat::bException	Bureaucrat::GradeTooLowException(void) {
 const char* Bureaucrat::bException::what() const throw() {
 	return "Invalid grade number";
 }
+
+void	Bureaucrat::signForm(Form &f) const {
+	if (this->_grade <= f.getSignGrade())
+		std::cout << this->_name << " signed " << f.getName() << std::endl;
+	else // todo: <reason>
+		std::cout << this->_name << " couldn's sign " << f.getName()
+			<< " because doesn't match grade" << std::endl;
+}

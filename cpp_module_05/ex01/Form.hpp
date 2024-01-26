@@ -2,8 +2,11 @@
 # define FORM_HPP
 
 # include <iostream>
+# include <iomanip>
 # include "Bureaucrat.hpp"
 # include "bException.hpp"
+
+class	Bureaucrat;
 
 class	Form
 {
@@ -34,7 +37,7 @@ public:
 	unsigned int	getSignGrade(void) const;
 	unsigned int	getSignExec(void) const;
 
-	void	beSigned(Bureaucrat &b) const;
+	void	beSigned(Bureaucrat &b);
 };
 
 std::ostream	&operator<<(std::ostream &o, Form const &i);

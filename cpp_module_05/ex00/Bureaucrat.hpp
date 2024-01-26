@@ -14,6 +14,12 @@ private:
 	Bureaucrat();
 
 public:
+	class	bException : public std::exception
+	{
+		virtual const char *what() const throw();
+		// virtual const char* bException::what() const;
+	};
+
 	/* Orthodox canonical */
 	~Bureaucrat();
 	Bureaucrat(Bureaucrat const &copy);
@@ -24,9 +30,13 @@ public:
 	std::string		getName(void) const;
 	unsigned int	getGrade(void) const;
 
+	bException	GradeTooHighException(void);
+	bException	GradeTooLowException(void);
+
 	void	incGrade(void);
 	void	decGrade(void);
 };
+
 
 std::ostream	&operator<<(std::ostream &o, Bureaucrat const &i);
 

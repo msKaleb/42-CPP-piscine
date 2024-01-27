@@ -11,27 +11,27 @@ private:
 	std::string const	_name;
 	unsigned int		_grade;
 
+	/* private constructor */
 	Bureaucrat();
 
 public:
-	class	bException : public std::exception
-	{
+	/* exception classes */
+	class	GradeTooHighException : public std::exception {
 		virtual const char *what() const throw();
-		// virtual const char* bException::what() const;
 	};
 
-	/* Orthodox canonical */
+	class	GradeTooLowException : public std::exception {
+		virtual const char *what() const throw();
+	};
+
 	~Bureaucrat();
 	Bureaucrat(Bureaucrat const &copy);
 	Bureaucrat &operator=(const Bureaucrat &rhs);
 
 	Bureaucrat(std::string name, unsigned int grade);
 
-	std::string		getName(void) const;
-	unsigned int	getGrade(void) const;
-
-	bException	GradeTooHighException(void);
-	bException	GradeTooLowException(void);
+	std::string const	getName(void) const;
+	unsigned int		getGrade(void) const;
 
 	void	incGrade(void);
 	void	decGrade(void);

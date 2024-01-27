@@ -12,7 +12,6 @@
 
 SRC			=	Form.cpp \
 				Bureaucrat.cpp \
-				bException.cpp \
 				main.cpp \
 
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0

@@ -4,7 +4,6 @@
 # include <iostream>
 # include <iomanip>
 # include "Bureaucrat.hpp"
-# include "bException.hpp"
 
 class	Bureaucrat;
 
@@ -14,12 +13,25 @@ private:
 	/* data */
 	std::string const	_name;
 	bool				_signed;
-	unsigned int		_signGrade;
-	unsigned int		_execGrade;
+	unsigned int const	_signGrade;
+	unsigned int const	_execGrade;
 
 	Form();
 
 public:
+	/* exception classes */
+	class	GradeTooHighException : public std::exception {
+		virtual const char *what() const throw();
+	};
+
+	class	GradeTooLowException : public std::exception {
+		virtual const char *what() const throw();
+	};
+
+	class	FormAlreadySigned : public std::exception {
+		virtual const char *what() const throw();
+	};
+
 	/* Orthodox canonical */
 	~Form();
 	Form(Form const &copy);
@@ -28,14 +40,14 @@ public:
 	Form(std::string name, unsigned int toSign, unsigned int toExecute);
 
 	// exceptions
-	bException	GradeTooHighException(void);
-	bException	GradeTooLowException(void);
+	/* bException	GradeTooHighException(void);
+	bException	GradeTooLowException(void); */
 
 	// getters
-	std::string		getName(void) const;
-	bool			getSigned(void) const;
-	unsigned int	getSignGrade(void) const;
-	unsigned int	getSignExec(void) const;
+	std::string const	getName(void) const;
+	unsigned int		getSignGrade(void) const;
+	unsigned int		getSignExec(void) const;
+	bool				getSigned(void) const;
 
 	void	beSigned(Bureaucrat &b);
 };

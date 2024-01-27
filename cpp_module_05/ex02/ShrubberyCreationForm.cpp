@@ -37,8 +37,8 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	std::string		fileName = this->_target + "_shrubbery";
 	std::ofstream	outFile;
 	
-	outFile.open(fileName);
 	try {
+		outFile.open(fileName.c_str());
 		outFile << ShrubberyCreationForm::_asciiTrees << std::endl;
 		outFile.close();
 	}
@@ -48,7 +48,8 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 }
 
 /* static string to store the ASCII trees */
-std::string	ShrubberyCreationForm::_asciiTrees = GREEN "\n" \
+std::string	ShrubberyCreationForm::_asciiTrees = \
+"                                             \n" \
 "               ,@@@@@@@,                   \n" \
 "       ,,,.   ,@@@@@@/@@,  .oo8888o.       \n" \
 "    ,&%%&%&&%,@@@@@/@@@@@@,8888\\88/8o      \n" \
@@ -59,4 +60,4 @@ std::string	ShrubberyCreationForm::_asciiTrees = GREEN "\n" \
 "       |o|        | |         | |          \n" \
 "       |.|        | |         | |          \n" \
 "    \\/ ._\\//_/__/  ,\\_//__\\/.  \\_//__/_  \n" \
-"-------------------------------------------" RESET;
+"---------------------------------------------";

@@ -7,6 +7,8 @@ Bureaucrat::Bureaucrat() {
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : 
 						_name(name), _grade(grade) {
 
+	if (_name.empty())
+		const_cast<std::string&>(this->_name) = "Default Bureaucrat";
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (this->_grade > 150)
@@ -60,13 +62,14 @@ void	Bureaucrat::signForm(Form &f) {
 		std::cout << this->_name << " signed " << f.getName() << std::endl;
 	else // todo: <reason>
 		std::cout << this->_name << " couldn's sign " << f.getName()
-			<< " because doesn't match grade" << std::endl;
+			<< " because: ";
+	f.beSigned(*this);
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	return "Grade too high";
+	return (RED "Grade too high" RESET);
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	return "Grade too low";
+	return RED "Grade too low" RESET;
 }

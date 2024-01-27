@@ -7,6 +7,8 @@ Bureaucrat::Bureaucrat() {
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : 
 						_name(name), _grade(grade) {
 
+	if (_name.empty())
+		const_cast<std::string&>(this->_name) = "Default Bureaucrat";
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (this->_grade > 150)

@@ -64,7 +64,7 @@ std::ostream	&operator<<(std::ostream &o, AForm const &i) {
 	o << "AForm name: " << i.getName() << "\n" \
 		<< "Status: " << status << "\n" \
 		<< "Minimum grade to be signed: " << i.getSignGrade() << "\n" \
-		<< "Minimum grade to be executed: " << i.getSignExec() << "\n"
+		<< "Minimum grade to be executed: " << i.getSignExec() << "\n" \
 		<< std::setfill('-') << std::setw(40) << "\n";
 
 	return o;
@@ -82,8 +82,13 @@ void	AForm::beSigned(Bureaucrat &b) {
 }
 
 void	AForm::execute(Bureaucrat const &executor) const {
+	try {
+
 	if (executor.getGrade() > this->_execGrade)
 		throw AForm::GradeTooLowException();
 	else if (!this->_signed)
 		throw AForm::FormNotSigned();
+	}catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
 }

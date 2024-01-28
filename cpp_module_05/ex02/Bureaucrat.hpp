@@ -58,6 +58,7 @@ public:
 	void	decGrade(void);
 
 	void	signForm(AForm &f);
+	void	executeForm(AForm const &f);
 };
 
 

@@ -1,7 +1,7 @@
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :
-	AForm("Shrub", 145, 137), _target(target) {
+	AForm("Shrubbery Form " + target, 145, 137), _target(target) {
 	// std::cout << "ShrubberyCreationForm: Default Constructor Called" << std::endl;
 	// std::cout << ShrubberyCreationForm::_asciiTrees << std::endl;
 }

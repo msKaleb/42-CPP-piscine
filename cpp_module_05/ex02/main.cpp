@@ -5,13 +5,17 @@
 #include "PresidentialPardonForm.hpp"
 
 int main() {
-	Bureaucrat	mik("mikel", 130);
-	AForm		*shrub = new ShrubberyCreationForm("mikel");
+	try {
+		Bureaucrat	mik("mikel", 135);
+		AForm		*shrub = new ShrubberyCreationForm("home");
 
-	std::cout << *shrub << std::endl;
-	mik.signForm(*shrub);
-	std::cout << *shrub << std::endl;
-	shrub->execute(mik);
-	delete shrub;
+		std::cout << *shrub << std::endl;
+		mik.signForm(*shrub);
+		std::cout << *shrub << std::endl;
+		mik.executeForm(*shrub);
+		delete shrub;
+	} catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
 	return (0);
 }

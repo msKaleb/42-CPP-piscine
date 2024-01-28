@@ -9,10 +9,14 @@ Bureaucrat::Bureaucrat(std::string name, unsigned int grade) :
 
 	if (_name.empty())
 		const_cast<std::string&>(this->_name) = "Default Bureaucrat";
-	if (this->_grade < 1)
+	if (this->_grade < 1) {
+		std::cerr << "Couldn't instantiate " << this->_name << ", reason: ";
 		throw Bureaucrat::GradeTooHighException();
-	else if (this->_grade > 150)
+	}
+	else if (this->_grade > 150) {
+		std::cerr << "Couldn't instantiate " << this->_name << ", reason: ";
 		throw Bureaucrat::GradeTooLowException();
+	}
 }
 
 Bureaucrat::~Bureaucrat() {
@@ -59,11 +63,20 @@ void	Bureaucrat::decGrade(void) {
 
 void	Bureaucrat::signForm(AForm &f) {
 	if (this->_grade <= f.getSignGrade())
-		std::cout << this->_name << " signed " << f.getName() << std::endl;
-	else // todo: <reason>
-		std::cout << this->_name << " couldn's sign " << f.getName()
+		std::cout << GREEN << this->_name << " signed " << f.getName() << RESET << std::endl;
+	else
+		std::cout << this->_name << " couldn't sign " << f.getName()
 			<< " because: ";
 	f.beSigned(*this);
+}
+
+void	Bureaucrat::executeForm(AForm const &f) {
+	if (this->_grade <= f.getSignExec() && f.getSigned())
+		std::cout << GREEN << this->_name << " executed " << f.getName() << RESET << std::endl;
+	else
+		std::cout << this->_name << " couldn't execute " << f.getName()
+			<< " because: ";
+	f.execute(*this);
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {

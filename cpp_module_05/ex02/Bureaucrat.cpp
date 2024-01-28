@@ -62,7 +62,7 @@ void	Bureaucrat::decGrade(void) {
 }
 
 void	Bureaucrat::signForm(AForm &f) {
-	if (this->_grade <= f.getSignGrade())
+	if (this->_grade <= f.getSignGrade() && !f.getSigned())
 		std::cout << GREEN << this->_name << " signed " << f.getName() << RESET << std::endl;
 	else
 		std::cout << this->_name << " couldn't sign " << f.getName()

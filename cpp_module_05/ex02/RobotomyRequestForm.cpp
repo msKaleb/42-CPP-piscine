@@ -1,13 +1,13 @@
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const target) :
-	AForm("Robotomy Form " + target, 72, 45) {
+	AForm("[Robotomy Form " + target + "]", 72, 45) {
 	// std::cout << "RobotomyRequestForm: Default Constructor Called" << std::endl;
 	this->setTarget(target);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
-	std::cout << "RobotomyRequestForm: Destructor Called" << std::endl;
+	// std::cout << "RobotomyRequestForm: Destructor Called" << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy) :

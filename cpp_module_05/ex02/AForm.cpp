@@ -8,7 +8,7 @@ AForm::AForm(std::string name, unsigned int toSign, unsigned int toExecute) :
 	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute), _executed(false) {
 
 		if (_name.empty())
-			const_cast<std::string&>(this->_name) = "Empty AForm";
+			const_cast<std::string&>(this->_name) = "Empty Form";
 		if (_signGrade < 1 || _execGrade < 1)
 			throw AForm::GradeTooHighException();
 		else if (_signGrade > 150 || _execGrade > 150)
@@ -24,6 +24,10 @@ AForm::AForm(AForm const &copy) :
 
 AForm	&AForm::operator=(const AForm &rhs) {
 	std::cout << "AForm: Copy Assignment Operator Called" << std::endl;
+
+	// "error: 'this' pointer cannot be null in well-defined C++ code"
+	// if (!this)
+	// 	new AForm(rhs);
 	if (this != &rhs)
 	{
 		const_cast<std::string&>(this->_name) = rhs.getName();
@@ -68,7 +72,7 @@ const char* AForm::FormNotSigned::what() const throw() {
 std::ostream	&operator<<(std::ostream &o, AForm const &i) {
 	std::string	status = i.getSigned() == false? "Not signed" : "Signed";
 
-	o << "AForm name: " << i.getName() << "\n" \
+	o << "Form name: " << i.getName() << "\n" \
 		<< "Status: " << status << "\n" \
 		<< "Minimum grade to be signed: " << i.getSignGrade() << "\n" \
 		<< "Minimum grade to be executed: " << i.getSignExec() << "\n" \

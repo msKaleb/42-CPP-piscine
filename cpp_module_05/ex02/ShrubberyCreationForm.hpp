@@ -10,7 +10,6 @@ class	ShrubberyCreationForm : public AForm
 private:
 	/* data */
 	static std::string	_asciiTrees;
-	std::string const	_target;
 
 	ShrubberyCreationForm();
 public:
@@ -20,7 +19,7 @@ public:
 	};
 
 	/* Orthodox canonical */
-	ShrubberyCreationForm(std::string target);
+	ShrubberyCreationForm(std::string const target);
 	~ShrubberyCreationForm();
 	ShrubberyCreationForm(ShrubberyCreationForm const &copy);
 	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);

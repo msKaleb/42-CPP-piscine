@@ -16,6 +16,8 @@ private:
 	unsigned int const	_signGrade;
 	unsigned int const	_execGrade;
 
+	std::string const	_target;
+
 	AForm();
 
 public:
@@ -45,6 +47,10 @@ public:
 	unsigned int		getSignGrade(void) const;
 	unsigned int		getSignExec(void) const;
 	bool				getSigned(void) const;
+	std::string const	getTarget(void) const;
+
+	// setters
+	void	setTarget(std::string const &target);
 
 	virtual void	execute(Bureaucrat const &executor) const;
 	void			beSigned(Bureaucrat &b);

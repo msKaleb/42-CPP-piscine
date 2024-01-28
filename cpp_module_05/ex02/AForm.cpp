@@ -39,6 +39,12 @@ std::string const	AForm::getName(void) const { return this->_name; }
 unsigned int		AForm::getSignGrade(void) const { return this->_signGrade; }
 unsigned int		AForm::getSignExec(void) const { return this->_execGrade; }
 bool				AForm::getSigned(void) const { return this->_signed; }
+std::string const	AForm::getTarget(void) const { return this->_target; }
+
+/* setters */
+void	AForm::setTarget(std::string const &target) {
+	const_cast<std::string&>(this->_target) = target;
+}
 
 /* exceptions */
 const char* AForm::GradeTooHighException::what() const throw() {

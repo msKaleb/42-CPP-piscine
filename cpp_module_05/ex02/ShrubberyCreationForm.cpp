@@ -1,9 +1,10 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) :
-	AForm("Shrubbery Form " + target, 145, 137), _target(target) {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const target) :
+	AForm("Shrubbery Form " + target, 145, 137) {
 	// std::cout << "ShrubberyCreationForm: Default Constructor Called" << std::endl;
 	// std::cout << ShrubberyCreationForm::_asciiTrees << std::endl;
+	this->setTarget(target);
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm() {
@@ -11,10 +12,10 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &copy) :
-	AForm(copy), _target(copy._target) {
+	AForm(copy) {
 	// std::cout << "ShrubberyCreationForm: Copy Constructor Called" << std::endl;
-	/* if (this != &copy)
-		*this = copy; */
+	if (this != &copy)
+		this->setTarget(copy.getTarget());
 }
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
@@ -22,7 +23,7 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	if (this != &rhs)
 	{
 		this->AForm::operator=(rhs);
-		const_cast<std::string&>(this->_target) = rhs._target;
+		this->setTarget(rhs.getTarget());
 	}
 	return (*this);
 }
@@ -34,7 +35,7 @@ const char* ShrubberyCreationForm::OutputError::what() const throw() {
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	AForm::execute(executor);
 
-	std::string		fileName = this->_target + "_shrubbery";
+	std::string		fileName = this->getTarget() + "_shrubbery";
 	std::ofstream	outFile;
 	
 	try {

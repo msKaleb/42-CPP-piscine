@@ -35,6 +35,8 @@ const char* ShrubberyCreationForm::OutputError::what() const throw() {
 void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 	AForm::execute(executor);
 
+	if (!this->getExecuted())
+		return ;
 	std::string		fileName = this->getTarget() + "_shrubbery";
 	std::ofstream	outFile;
 	

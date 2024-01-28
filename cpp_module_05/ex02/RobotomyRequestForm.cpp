@@ -30,5 +30,16 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 	AForm::execute(executor);
 
+	if (!this->getExecuted())
+		return ;
+	try {
+	std::srand(std::time(nullptr));
 	std::cout << YELLOW << "Some drilling noises..." << RESET << std::endl;
+	if (std::rand() % 100 < 50)
+		std::cout << GREEN << this->getTarget() << " has been robotomized" << RESET << std::endl;
+	else
+		std::cout << RED << this->getTarget() << " couldn't be robotomized" << RESET << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
 }

@@ -17,6 +17,7 @@ private:
 	unsigned int const	_execGrade;
 
 	std::string const	_target;
+	bool				_executed;
 
 	AForm();
 
@@ -48,6 +49,7 @@ public:
 	unsigned int		getSignExec(void) const;
 	bool				getSigned(void) const;
 	std::string const	getTarget(void) const;
+	bool				getExecuted(void) const;
 
 	// setters
 	void	setTarget(std::string const &target);

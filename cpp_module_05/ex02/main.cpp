@@ -6,13 +6,16 @@
 
 int main() {
 	try {
-		Bureaucrat	mik("mikel", 135);
+		Bureaucrat	employee("mikel", 43);
 		AForm		*shrub = new ShrubberyCreationForm("home");
+		AForm		*robot = new RobotomyRequestForm("paco");
 
 		std::cout << *shrub << std::endl;
-		mik.signForm(*shrub);
+		employee.signForm(*shrub);
+		employee.signForm(*robot);
 		std::cout << *shrub << std::endl;
-		mik.executeForm(*shrub);
+		employee.executeForm(*shrub);
+		employee.executeForm(*robot);
 		delete shrub;
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

@@ -5,7 +5,7 @@
 } */
 
 AForm::AForm(std::string name, unsigned int toSign, unsigned int toExecute) :
-	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute) {
+	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute), _executed(false) {
 
 		if (_name.empty())
 			const_cast<std::string&>(this->_name) = "Empty AForm";
@@ -40,6 +40,7 @@ unsigned int		AForm::getSignGrade(void) const { return this->_signGrade; }
 unsigned int		AForm::getSignExec(void) const { return this->_execGrade; }
 bool				AForm::getSigned(void) const { return this->_signed; }
 std::string const	AForm::getTarget(void) const { return this->_target; }
+bool				AForm::getExecuted(void) const { return this->_executed; }
 
 /* setters */
 void	AForm::setTarget(std::string const &target) {
@@ -88,13 +89,14 @@ void	AForm::beSigned(Bureaucrat &b) {
 }
 
 void	AForm::execute(Bureaucrat const &executor) const {
+	const_cast<bool&>(this->_executed) = true;
 	try {
-
 	if (executor.getGrade() > this->_execGrade)
 		throw AForm::GradeTooLowException();
 	else if (!this->_signed)
 		throw AForm::FormNotSigned();
 	}catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
+		const_cast<bool&>(this->_executed) = false;
 	}
 }

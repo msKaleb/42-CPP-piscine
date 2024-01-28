@@ -4,18 +4,20 @@
 # include <iostream>
 # include "AForm.hpp"
 
-class	PresidentialPardonForm
+class	PresidentialPardonForm : public AForm
 {
 private:
 	/* data */
 
+	PresidentialPardonForm();
 public:
 	/* Orthodox canonical */
-	PresidentialPardonForm();
+	PresidentialPardonForm(std::string const target);
 	~PresidentialPardonForm();
 	PresidentialPardonForm(PresidentialPardonForm const &copy);
 	PresidentialPardonForm &operator=(const PresidentialPardonForm &rhs);
 
+	virtual void	execute(Bureaucrat const &executor) const;
 };
 
 #endif /* PRESIDENTIALPARDONFORM_HPP */

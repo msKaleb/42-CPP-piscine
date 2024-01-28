@@ -4,6 +4,9 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+/**
+ * @todo create executeDerived() in derived classes to comply with the subject
+  */
 int main() {
 	try {
 		// instantiate employees
@@ -13,15 +16,18 @@ int main() {
 
 		AForm		*shrub = new ShrubberyCreationForm("home");
 		AForm		*robot = new RobotomyRequestForm("paco");
+		AForm		*pardon = new PresidentialPardonForm("bill");
+
 		// testing copy constructor and assignment operator
 		/* {	
-			AForm		*copy(shrub);
+			RobotomyRequestForm	srcOne("test1");
+			RobotomyRequestForm	srcTwo("test2");
+			RobotomyRequestForm	cpy(srcOne);
 
-			std::cout << "Testing copy: " << *copy << std::endl;
-			*copy = *robot;
-			std::cout << "Testing copy: " << *copy << std::endl;
+			std::cout << "Testing copy: " << cpy << std::endl;
+			cpy = srcTwo;
+			std::cout << "Testing copy: " << cpy << std::endl;
 
-			delete copy;
 		} */
 
 		try {
@@ -37,15 +43,23 @@ int main() {
 		try {
 
 			std::cout << *robot << std::endl;
+			// employee.signForm(*robot);
+			// employee.executeForm(*robot);
 			manager.signForm(*robot);
-			/* employee.signForm(*robot);
-			employee.executeForm(*robot); */
 			manager.executeForm(*robot);
 
 			delete robot;
 		} catch (std::exception &e) {
 			std::cerr << e.what() << std::endl;
 			delete robot;
+		}
+		try {
+			std::cout << *pardon << std::endl;
+			ceo.signForm(*pardon);
+			ceo.executeForm(*pardon);
+		} catch (std::exception &e) {
+			std::cerr << e.what() << std::endl;
+			delete pardon;
 		}
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;

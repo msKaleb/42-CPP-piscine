@@ -55,6 +55,7 @@ public:
 	void	setTarget(std::string const &target);
 
 	virtual void	execute(Bureaucrat const &executor) const;
+	// virtual void	executeDerived(Bureaucrat const &executor) const = 0; // pure virtual, to be implemented
 	void			beSigned(Bureaucrat &b);
 };
 

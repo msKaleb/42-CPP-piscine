@@ -19,12 +19,18 @@ RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy) :
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs) {
 	std::cout << "RobotomyRequestForm: Copy Assignment Operator Called" << std::endl;
-	if (this != &rhs)
+	if (this != &rhs) {
+		this->~RobotomyRequestForm();
+		new(this) RobotomyRequestForm(rhs.getTarget());
+	}
+	return (*this);
+
+	/* return (*this);	if (this != &rhs)
 	{
 		this->AForm::operator=(rhs);
 		this->setTarget(rhs.getTarget());
 	}
-	return (*this);
+	return (*this); */
 }
 
 void	RobotomyRequestForm::execute(Bureaucrat const &executor) const {
@@ -35,8 +41,8 @@ void	RobotomyRequestForm::execute(Bureaucrat const &executor) const {
 	try {
 	std::srand(std::time(nullptr));
 	std::cout << YELLOW << "Some drilling noises..." << RESET << std::endl;
-	if (std::rand() % 100 < 50)
-		std::cout << GREEN << this->getTarget() << " has been robotomized" << RESET << std::endl;
+	if (std::rand() % 2)
+		std::cout << BLUE << this->getTarget() << " has been robotomized" << RESET << std::endl;
 	else
 		std::cout << RED << this->getTarget() << " couldn't be robotomized" << RESET << std::endl;
 	} catch (std::exception &e) {

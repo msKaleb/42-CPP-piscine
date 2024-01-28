@@ -14,18 +14,26 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 ShrubberyCreationForm::ShrubberyCreationForm(ShrubberyCreationForm const &copy) :
 	AForm(copy) {
 	// std::cout << "ShrubberyCreationForm: Copy Constructor Called" << std::endl;
-	if (this != &copy)
+	if (this != &copy) {
+		*this = copy;
 		this->setTarget(copy.getTarget());
+	}
 }
 
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &rhs) {
 	std::cout << "ShrubberyCreationForm: Copy Assignment Operator Called" << std::endl;
-	if (this != &rhs)
+	if (this != &rhs) {
+		this->~ShrubberyCreationForm();
+		new(this) ShrubberyCreationForm(rhs.getTarget());
+	}
+	return (*this);
+
+	/* if (this != &rhs)
 	{
 		this->AForm::operator=(rhs);
 		this->setTarget(rhs.getTarget());
 	}
-	return (*this);
+	return (*this); */
 }
 
 const char* ShrubberyCreationForm::OutputError::what() const throw() {
@@ -44,6 +52,7 @@ void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
 		outFile.open(fileName.c_str());
 		outFile << ShrubberyCreationForm::_asciiTrees << std::endl;
 		outFile.close();
+		std::cout << BLUE << fileName << " created!" << RESET << std::endl;
 	}
 	catch (std::exception &e) {
 		throw ShrubberyCreationForm::OutputError();

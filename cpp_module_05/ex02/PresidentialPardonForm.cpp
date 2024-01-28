@@ -1,25 +1,39 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm() {
+PresidentialPardonForm::PresidentialPardonForm(std::string const target) :
+	AForm("[Presidential Form " + target + "]", 25, 5) {
 	std::cout << "PresidentialPardonForm: Default Constructor Called" << std::endl;
+	this->setTarget(target);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm() {
 	std::cout << "PresidentialPardonForm: Destructor Called" << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy) {
+PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy) :
+	AForm(copy) {
 	std::cout << "PresidentialPardonForm: Copy Constructor Called" << std::endl;
 	if (this != &copy)
-		*this = copy;
+		this->setTarget(copy.getTarget());
 }
 
 PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs) {
 	std::cout << "PresidentialPardonForm: Copy Assignment Operator Called" << std::endl;
-	if (this != &rhs)
-	{
-		//	this->attributes = rhs.attributes;
-		//	...
+	if (this != &rhs) {
+		this->~PresidentialPardonForm();
+		new(this) PresidentialPardonForm(rhs.getTarget());
 	}
 	return (*this);
+}
+
+void	PresidentialPardonForm::execute(Bureaucrat const &executor) const {
+	AForm::execute(executor);
+
+	if (!this->getExecuted())
+		return ;
+	try {
+		std::cout << BLUE << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
+	} catch (std::exception &e) {
+		std::cerr << e.what() << std::endl;
+	}
 }

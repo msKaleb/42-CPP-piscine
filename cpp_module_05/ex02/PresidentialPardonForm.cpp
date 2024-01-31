@@ -26,9 +26,9 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPard
 	return (*this);
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const &executor) const {
-	AForm::execute(executor);
-
+void	PresidentialPardonForm::executeDerived() const {
+	// AForm::execute(executor);
+	// (void)executor;
 	if (!this->getExecuted())
 		return ;
 	try {

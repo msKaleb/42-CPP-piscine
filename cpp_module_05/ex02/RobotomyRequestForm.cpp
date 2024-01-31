@@ -1,4 +1,5 @@
 #include "RobotomyRequestForm.hpp"
+#include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const target) :
 	AForm("[Robotomy Form " + target + "]", 72, 45) {
@@ -33,13 +34,13 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 	return (*this); */
 }
 
-void	RobotomyRequestForm::execute(Bureaucrat const &executor) const {
-	AForm::execute(executor);
-
+void	RobotomyRequestForm::executeDerived() const {
+	// AForm::execute(executor);
+	// (void)executor;
 	if (!this->getExecuted())
 		return ;
 	try {
-	std::srand(std::time(nullptr));
+	std::srand(std::time(NULL));
 	std::cout << YELLOW << "Some drilling noises..." << RESET << std::endl;
 	if (std::rand() % 2)
 		std::cout << BLUE << this->getTarget() << " has been robotomized" << RESET << std::endl;

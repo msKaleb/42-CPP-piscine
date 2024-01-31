@@ -103,4 +103,5 @@ void	AForm::execute(Bureaucrat const &executor) const {
 		std::cerr << e.what() << std::endl;
 		const_cast<bool&>(this->_executed) = false;
 	}
+	executeDerived();
 }

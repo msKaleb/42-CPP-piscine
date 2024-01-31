@@ -40,9 +40,9 @@ const char* ShrubberyCreationForm::OutputError::what() const throw() {
 	return RED "Couldn't write to file" RESET;
 }
 
-void	ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-	AForm::execute(executor);
-
+void	ShrubberyCreationForm::executeDerived() const {
+	// AForm::execute(executor);
+	// (void)executor;
 	if (!this->getExecuted())
 		return ;
 	std::string		fileName = this->getTarget() + "_shrubbery";

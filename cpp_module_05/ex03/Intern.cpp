@@ -1,27 +1,26 @@
 #include "Intern.hpp"
 
 Intern::Intern() {
-	std::cout << "Intern: Default Constructor Called" << std::endl;
+	// std::cout << "Intern: Default Constructor Called" << std::endl;
 }
 
 Intern::~Intern() {
-	std::cout << "Intern: Destructor Called" << std::endl;
+	// std::cout << "Intern: Destructor Called" << std::endl;
 }
 
 Intern::Intern(Intern const &copy) {
-	std::cout << "Intern: Copy Constructor Called" << std::endl;
+	// std::cout << "Intern: Copy Constructor Called" << std::endl;
 	if (this != &copy)
 		*this = copy;
 }
 
 Intern	&Intern::operator=(const Intern &rhs) {
-	std::cout << "Intern: Copy Assignment Operator Called" << std::endl;
-	if (this != &rhs)
-	{
-		//	this->attributes = rhs.attributes;
-		//	...
-	}
+	// std::cout << "Intern: Copy Assignment Operator Called" << std::endl;
 	return (*this);
+}
+
+const char*	Intern::makeFormException::what() const throw() {
+	return RED "Incorrect form name" RESET;
 }
 
 AForm	*Intern::shrubbery(std::string const &formTarget) {
@@ -44,7 +43,7 @@ AForm	*Intern::makeForm(std::string const &formName, std::string const &formTarg
 		std::string("presidential pardon")
 	};
 	// pointer to functions array
-	AForm	*(Intern::*funct[])(std::string const &target) = {
+	AForm	*(Intern::*functionPtr[])(std::string const &target) = {
 		&Intern::shrubbery,
 		&Intern::robotomy,
 		&Intern::presidential
@@ -52,9 +51,9 @@ AForm	*Intern::makeForm(std::string const &formName, std::string const &formTarg
 
 	for (int i = 0; i < 3; i++) {
 		if (formName == formTypes[i]) {
-			return ((this->*funct[i])(formTarget));
+			std::cout << MAGENTA "Intern creates " << formName << RESET << std::endl;
+			return ((this->*functionPtr[i])(formTarget));
 		}
 	}
-	// try-catch block?
-	return NULL;
+	throw Intern::makeFormException();
 }

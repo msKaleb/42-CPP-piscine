@@ -3,64 +3,32 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 
-/**
- * @todo create executeDerived() in derived classes to comply with the subject
-  */
 int main() {
 	try {
 		// instantiate employees
-		Bureaucrat	employee("newbie", 137);
-		Bureaucrat	manager("mikel", 40);
-		Bureaucrat	ceo("maik", 1);
+		Bureaucrat	employee("CEO", 1);
+		AForm*		emptyForm;
+		Intern		mik;
+		Intern		mik2;
 
-		AForm		*shrub = new ShrubberyCreationForm("home");
-		AForm		*robot = new RobotomyRequestForm("paco");
-		AForm		*pardon = new PresidentialPardonForm("bill");
+		mik2 = mik;
+		emptyForm = mik.makeForm("robotomy request", "Bender");
+		std::cout << *emptyForm << std::endl;
+		employee.signForm(*emptyForm);
+		employee.executeForm(*emptyForm);
+		delete emptyForm;
 
-		// testing copy constructor and assignment operator
-		/* {	
-			RobotomyRequestForm	srcOne("test1");
-			RobotomyRequestForm	srcTwo("test2");
-			RobotomyRequestForm	cpy(srcOne);
+		emptyForm = mik2.makeForm("shrubbery creation", "my_home");
+		employee.signForm(*emptyForm);
+		employee.executeForm(*emptyForm);
+		delete emptyForm;
 
-			std::cout << "Testing copy: " << cpy << std::endl;
-			cpy = srcTwo;
-			std::cout << "Testing copy: " << cpy << std::endl;
-
-		} */
-
-		try {
-			std::cout << *shrub << std::endl;
-			employee.signForm(*shrub);
-			employee.executeForm(*shrub);
-
-			delete shrub;
-		} catch (std::exception &e) {
-			std::cerr << e.what() << std::endl;
-			delete shrub;
-		}
-		try {
-
-			std::cout << *robot << std::endl;
-			// employee.signForm(*robot);
-			// employee.executeForm(*robot);
-			manager.signForm(*robot);
-			manager.executeForm(*robot);
-
-			delete robot;
-		} catch (std::exception &e) {
-			std::cerr << e.what() << std::endl;
-			delete robot;
-		}
-		try {
-			std::cout << *pardon << std::endl;
-			ceo.signForm(*pardon);
-			ceo.executeForm(*pardon);
-		} catch (std::exception &e) {
-			std::cerr << e.what() << std::endl;
-			delete pardon;
-		}
+		emptyForm = mik2.makeForm("presidential pardon", "my_home");
+		employee.signForm(*emptyForm);
+		employee.executeForm(*emptyForm);
+		delete emptyForm;
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
 	}

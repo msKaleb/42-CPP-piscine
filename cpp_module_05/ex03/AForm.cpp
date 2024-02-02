@@ -70,6 +70,7 @@ const char* AForm::FormNotSigned::what() const throw() {
 
 /* operator override */
 std::ostream	&operator<<(std::ostream &o, AForm const &i) {
+
 	std::string	status = i.getSigned() == false? "Not signed" : "Signed";
 
 	o << "Form name: " << i.getName() << "\n" \
@@ -77,7 +78,6 @@ std::ostream	&operator<<(std::ostream &o, AForm const &i) {
 		<< "Minimum grade to be signed: " << i.getSignGrade() << "\n" \
 		<< "Minimum grade to be executed: " << i.getSignExec() << "\n" \
 		<< std::setfill('-') << std::setw(40) << "\n";
-
 	return o;
 }
 

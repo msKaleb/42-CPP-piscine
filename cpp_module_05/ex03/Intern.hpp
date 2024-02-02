@@ -15,8 +15,14 @@ class	Intern
 {
 private:
 	/* data */
+	AForm	*shrubbery(std::string const &formTarget);
+	AForm	*robotomy(std::string const &formTarget);
+	AForm	*presidential(std::string const &formTarget);
 
 public:
+	class	makeFormException : public std::exception {
+		virtual const char *what() const throw();
+	};
 	/* Orthodox canonical */
 	Intern();
 	~Intern();
@@ -25,9 +31,6 @@ public:
 
 	AForm	*makeForm(std::string const &formName, std::string const &formTarget);
 
-	AForm	*shrubbery(std::string const &formTarget);
-	AForm	*robotomy(std::string const &formTarget);
-	AForm	*presidential(std::string const &formTarget);
 };
 
 #endif /* INTERN_HPP */

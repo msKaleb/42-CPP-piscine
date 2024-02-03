@@ -24,7 +24,6 @@ public:
 	ShrubberyCreationForm(ShrubberyCreationForm const &copy);
 	ShrubberyCreationForm &operator=(const ShrubberyCreationForm &rhs);
 
-	// virtual void	execute(Bureaucrat const &executor) const;
 	virtual void	executeDerived() const;
 };
 

@@ -21,11 +21,13 @@ int main() {
 		delete emptyForm;
 
 		emptyForm = mik2.makeForm("shrubbery creation", "my_home");
+		std::cout << *emptyForm << std::endl;
 		employee.signForm(*emptyForm);
 		employee.executeForm(*emptyForm);
 		delete emptyForm;
 
-		emptyForm = mik2.makeForm("presidential pardon", "my_home");
+		emptyForm = mik2.makeForm("presidential pardon", "Stan");
+		std::cout << *emptyForm << std::endl;
 		employee.signForm(*emptyForm);
 		employee.executeForm(*emptyForm);
 		delete emptyForm;

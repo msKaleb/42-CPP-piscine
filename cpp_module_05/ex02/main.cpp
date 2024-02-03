@@ -4,9 +4,6 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-/**
- * @todo create executeDerived() in derived classes to comply with the subject
-  */
 int main() {
 	try {
 		// instantiate employees

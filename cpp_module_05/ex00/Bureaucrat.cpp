@@ -58,9 +58,9 @@ void	Bureaucrat::decGrade(void) {
 }
 
 const char* Bureaucrat::GradeTooHighException::what() const throw() {
-	return "Grade too high";
+	return (RED "Grade too high" RESET);
 }
 
 const char* Bureaucrat::GradeTooLowException::what() const throw() {
-	return "Grade too low";
+	return RED "Grade too low" RESET;
 }

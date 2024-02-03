@@ -39,10 +39,6 @@ public:
 
 	Form(std::string name, unsigned int toSign, unsigned int toExecute);
 
-	// exceptions
-	/* bException	GradeTooHighException(void);
-	bException	GradeTooLowException(void); */
-
 	// getters
 	std::string const	getName(void) const;
 	unsigned int		getSignGrade(void) const;

@@ -35,8 +35,6 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 }
 
 void	RobotomyRequestForm::executeDerived() const {
-	// AForm::execute(executor);
-	// (void)executor;
 	if (!this->getExecuted())
 		return ;
 	try {

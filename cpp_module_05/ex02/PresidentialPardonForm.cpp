@@ -27,8 +27,6 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPard
 }
 
 void	PresidentialPardonForm::executeDerived() const {
-	// AForm::execute(executor);
-	// (void)executor;
 	if (!this->getExecuted())
 		return ;
 	try {

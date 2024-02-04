@@ -21,7 +21,7 @@ private:
 
 public:
 	class	makeFormException : public std::exception {
-		virtual const char *what() const throw();
+		public: virtual const char *what() const throw();
 	};
 	/* Orthodox canonical */
 	Intern();

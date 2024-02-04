@@ -21,15 +21,15 @@ private:
 public:
 	/* exception classes */
 	class	GradeTooHighException : public std::exception {
-		virtual const char *what() const throw();
+		public: virtual const char *what() const throw();
 	};
 
 	class	GradeTooLowException : public std::exception {
-		virtual const char *what() const throw();
+		public: virtual const char *what() const throw();
 	};
 
 	class	FormAlreadySigned : public std::exception {
-		virtual const char *what() const throw();
+		public: virtual const char *what() const throw();
 	};
 
 	/* Orthodox canonical */

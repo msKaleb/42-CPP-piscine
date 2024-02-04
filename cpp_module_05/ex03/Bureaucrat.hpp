@@ -37,11 +37,13 @@ private:
 
 public:
 	/* exception classes */
-	class	GradeTooHighException : public std::exception {
+	class	BaseException : public std::exception {};
+
+	class	GradeTooHighException : public BaseException {
 		public: virtual const char *what() const throw();
 	};
 
-	class	GradeTooLowException : public std::exception {
+	class	GradeTooLowException : public BaseException {
 		public: virtual const char *what() const throw();
 	};
 

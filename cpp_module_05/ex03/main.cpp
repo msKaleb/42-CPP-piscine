@@ -6,10 +6,10 @@
 #include "Intern.hpp"
 
 int main() {
+	AForm*		emptyForm;
 	try {
 		// instantiate employees
 		Bureaucrat	employee("CEO", 1);
-		AForm*		emptyForm;
 		Intern		mik;
 		Intern		mik2;
 
@@ -31,8 +31,16 @@ int main() {
 		employee.signForm(*emptyForm);
 		employee.executeForm(*emptyForm);
 		delete emptyForm;
+	} catch (Bureaucrat::BaseException &e) {
+		std::cerr << e.what() << std::endl;
+	} catch (AForm::BaseException &e) {
+		std::cerr << e.what() << std::endl;
+		delete emptyForm;
+	} catch (Intern::makeFormException &e) {
+		std::cerr << e.what() << std::endl;
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
+		delete emptyForm;
 	}
 	return (0);
 }

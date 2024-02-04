@@ -5,15 +5,16 @@
 #include "PresidentialPardonForm.hpp"
 
 int main() {
+	AForm		*shrub = new ShrubberyCreationForm("home");
+	AForm		*robot = new RobotomyRequestForm("paco");
+	AForm		*pardon = new PresidentialPardonForm("bill");
+
 	try {
 		// instantiate employees
 		Bureaucrat	employee("newbie", 137);
 		Bureaucrat	manager("mikel", 40);
 		Bureaucrat	ceo("maik", 1);
 
-		AForm		*shrub = new ShrubberyCreationForm("home");
-		AForm		*robot = new RobotomyRequestForm("paco");
-		AForm		*pardon = new PresidentialPardonForm("bill");
 
 		// testing copy constructor and assignment operator
 		{	
@@ -62,6 +63,9 @@ int main() {
 		}
 	} catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
+		delete shrub;
+		delete robot;
+		delete pardon;
 	}
 	return (0);
 }

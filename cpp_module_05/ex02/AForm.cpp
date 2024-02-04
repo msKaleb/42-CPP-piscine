@@ -92,8 +92,6 @@ void	AForm::beSigned(Bureaucrat &b) {
 }
 
 void	AForm::execute(Bureaucrat const &executor) const {
-	const_cast<bool&>(this->_executed) = true;
-	// this->setExecuted(true);
 	try {
 		if (executor.getGrade() > this->_execGrade)
 			throw AForm::GradeTooLowException();
@@ -101,7 +99,7 @@ void	AForm::execute(Bureaucrat const &executor) const {
 			throw AForm::FormNotSigned();
 	}catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
-		const_cast<bool&>(this->_executed) = false;
+		return ;
 	}
 	executeDerived();
 }

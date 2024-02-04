@@ -35,8 +35,8 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 }
 
 void	RobotomyRequestForm::executeDerived() const {
-	if (!this->getExecuted())
-		return ;
+	/* if (!this->getExecuted())
+		return ; */
 	try {
 	std::srand(std::time(NULL));
 	std::cout << YELLOW << "Some drilling noises..." << RESET << std::endl;

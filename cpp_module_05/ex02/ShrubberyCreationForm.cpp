@@ -41,8 +41,8 @@ const char* ShrubberyCreationForm::OutputError::what() const throw() {
 }
 
 void	ShrubberyCreationForm::executeDerived() const {
-	if (!this->getExecuted())
-		return ;
+	/* if (!this->getExecuted())
+		return ; */
 	std::string		fileName = this->getTarget() + "_shrubbery";
 	std::ofstream	outFile;
 	

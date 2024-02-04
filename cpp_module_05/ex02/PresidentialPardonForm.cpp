@@ -27,8 +27,8 @@ PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPard
 }
 
 void	PresidentialPardonForm::executeDerived() const {
-	if (!this->getExecuted())
-		return ;
+	/* if (!this->getExecuted())
+		return ; */
 	try {
 		std::cout << BLUE << this->getTarget() << " has been pardoned by Zaphod Beeblebrox" << RESET << std::endl;
 	} catch (std::exception &e) {

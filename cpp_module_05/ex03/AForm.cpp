@@ -4,11 +4,11 @@
 	std::cout << "AForm: Default Constructor Called" << std::endl;
 } */
 
-AForm::AForm(std::string name, unsigned int toSign, unsigned int toExecute) :
-	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute), _executed(false) {
+AForm::AForm(std::string name, unsigned int toSign,unsigned int toExecute, std::string const target) :
+	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute), _target(target), _executed(false) {
 
-		if (_name.empty())
-			const_cast<std::string&>(this->_name) = "Empty Form";
+		/* if (_name.empty())
+			const_cast<std::string&>(this->_name) = "Empty Form"; */
 		if (_signGrade < 1 || _execGrade < 1)
 			throw AForm::GradeTooHighException();
 		else if (_signGrade > 150 || _execGrade > 150)
@@ -20,7 +20,8 @@ AForm::~AForm() {
 }
 
 AForm::AForm(AForm const &copy) :
-	_name(copy._name), _signed(copy._signed), _signGrade(copy._signGrade), _execGrade(copy._execGrade) {}
+	_name(copy._name), _signed(copy._signed), _signGrade(copy._signGrade),
+	_execGrade(copy._execGrade), _target(copy._target) {}
 
 AForm	&AForm::operator=(const AForm &rhs) {
 	std::cout << "AForm: Copy Assignment Operator Called" << std::endl;
@@ -30,10 +31,10 @@ AForm	&AForm::operator=(const AForm &rhs) {
 	// 	new AForm(rhs);
 	if (this != &rhs)
 	{
-		const_cast<std::string&>(this->_name) = rhs.getName();
 		this->_signed = rhs.getSigned();
+		/* const_cast<std::string&>(this->_name) = rhs.getName();
 		const_cast<unsigned int&>(this->_signGrade) = rhs.getSignGrade();
-		const_cast<unsigned int&>(this->_execGrade) = rhs.getSignExec();
+		const_cast<unsigned int&>(this->_execGrade) = rhs.getSignExec(); */
 	}
 	return (*this);
 }
@@ -47,9 +48,7 @@ std::string const	AForm::getTarget(void) const { return this->_target; }
 bool				AForm::getExecuted(void) const { return this->_executed; }
 
 /* setters */
-void	AForm::setTarget(std::string const &target) {
-	const_cast<std::string&>(this->_target) = target;
-}
+void	AForm::setExecuted(bool status) { this->_executed = status; }
 
 /* exceptions */
 const char* AForm::GradeTooHighException::what() const throw() {
@@ -70,7 +69,6 @@ const char* AForm::FormNotSigned::what() const throw() {
 
 /* operator override */
 std::ostream	&operator<<(std::ostream &o, AForm const &i) {
-
 	std::string	status = i.getSigned() == false? "Not signed" : "Signed";
 
 	o << "Form name: " << i.getName() << "\n" \
@@ -78,6 +76,7 @@ std::ostream	&operator<<(std::ostream &o, AForm const &i) {
 		<< "Minimum grade to be signed: " << i.getSignGrade() << "\n" \
 		<< "Minimum grade to be executed: " << i.getSignExec() << "\n" \
 		<< std::setfill('-') << std::setw(40) << "\n";
+
 	return o;
 }
 
@@ -93,15 +92,14 @@ void	AForm::beSigned(Bureaucrat &b) {
 }
 
 void	AForm::execute(Bureaucrat const &executor) const {
-	const_cast<bool&>(this->_executed) = true;
 	try {
-	if (executor.getGrade() > this->_execGrade)
-		throw AForm::GradeTooLowException();
-	else if (!this->_signed)
-		throw AForm::FormNotSigned();
+		if (executor.getGrade() > this->_execGrade)
+			throw AForm::GradeTooLowException();
+		else if (!this->_signed)
+			throw AForm::FormNotSigned();
 	}catch (std::exception &e) {
 		std::cerr << e.what() << std::endl;
-		const_cast<bool&>(this->_executed) = false;
+		return ;
 	}
 	executeDerived();
 }

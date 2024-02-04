@@ -10,12 +10,12 @@ int main() {
 		Form		fEqual("fEqual", 10, 1);
 
 		std::cout << fOne << std::endl;
-		std::cout << fCopy << std::endl;
+		std::cout << "Testing copy constructor:\n" << fCopy << std::endl;
 		mik.signForm(fOne);
 		std::cout << fOne << std::endl;
-		std::cout << fEqual << std::endl;
+		std::cout << "Testing assignment operator before:\n" << fEqual << std::endl;
 		fEqual = fOne;
-		std::cout << fEqual << std::endl;
+		std::cout << "Testing assignment operator after:\n"  << fEqual << std::endl;
 		mik.signForm(fCeo);
 		// maik.signForm(fOne);
 		// maik.incGrade();

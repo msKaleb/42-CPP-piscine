@@ -2,9 +2,9 @@
 #include <cstdlib>
 
 RobotomyRequestForm::RobotomyRequestForm(std::string const target) :
-	AForm("[Robotomy Form " + target + "]", 72, 45) {
+	AForm("[Robotomy Form " + target + "]", 72, 45, target) {
 	// std::cout << "RobotomyRequestForm: Default Constructor Called" << std::endl;
-	this->setTarget(target);
+	// this->setTarget(target);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {
@@ -14,8 +14,8 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy) :
 	AForm(copy) {
 	// std::cout << "RobotomyRequestForm: Copy Constructor Called" << std::endl;
-	if (this != &copy)
-		this->setTarget(copy.getTarget());
+	// if (this != &copy)
+	// 	this->setTarget(copy.getTarget());
 }
 
 RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &rhs) {
@@ -35,8 +35,8 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &r
 }
 
 void	RobotomyRequestForm::executeDerived() const {
-	if (!this->getExecuted())
-		return ;
+	/* if (!this->getExecuted())
+		return ; */
 	try {
 	std::srand(std::time(NULL));
 	std::cout << YELLOW << "Some drilling noises..." << RESET << std::endl;

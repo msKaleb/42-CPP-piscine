@@ -7,8 +7,8 @@
 Form::Form(std::string name, unsigned int toSign, unsigned int toExecute) :
 	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute) {
 
-		if (_name.empty())
-			const_cast<std::string&>(this->_name) = "Empty Form";
+		/* if (_name.empty())
+			const_cast<std::string&>(this->_name) = "Empty Form"; */
 		if (_signGrade < 1 || _execGrade < 1)
 			throw Form::GradeTooHighException();
 		else if (_signGrade > 150 || _execGrade > 150)
@@ -26,10 +26,12 @@ Form	&Form::operator=(const Form &rhs) {
 	std::cout << "Form: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs)
 	{
-		const_cast<std::string&>(this->_name) = rhs.getName();
+		/* const_cast<std::string&>(this->_name) = rhs.getName();
 		this->_signed = rhs.getSigned();
 		const_cast<unsigned int&>(this->_signGrade) = rhs.getSignGrade();
-		const_cast<unsigned int&>(this->_execGrade) = rhs.getSignExec();
+		const_cast<unsigned int&>(this->_execGrade) = rhs.getSignExec(); */
+		this->~Form();
+		new(this) Form(rhs);
 	}
 	return (*this);
 }

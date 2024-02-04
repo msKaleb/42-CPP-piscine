@@ -41,7 +41,7 @@ public:
 	AForm(AForm const &copy);
 	AForm &operator=(const AForm &rhs);
 
-	AForm(std::string name, unsigned int toSign, unsigned int toExecute);
+	AForm(std::string name, unsigned int toSign, unsigned int toExecute, std::string const target);
 
 	// getters
 	std::string const	getName(void) const;
@@ -52,7 +52,7 @@ public:
 	bool				getExecuted(void) const;
 
 	// setters
-	void	setTarget(std::string const &target);
+	void	setExecuted(bool status);
 
 	void	execute(Bureaucrat const &executor) const;
 	void	beSigned(Bureaucrat &b);

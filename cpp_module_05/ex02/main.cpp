@@ -16,16 +16,16 @@ int main() {
 		AForm		*pardon = new PresidentialPardonForm("bill");
 
 		// testing copy constructor and assignment operator
-		/* {	
-			RobotomyRequestForm	srcOne("test1");
-			RobotomyRequestForm	srcTwo("test2");
-			RobotomyRequestForm	cpy(srcOne);
+		{	
+			PresidentialPardonForm	srcOne("test1");
+			PresidentialPardonForm	srcTwo("test2");
+			PresidentialPardonForm	cpy(srcOne);
 
-			std::cout << "Testing copy: " << cpy << std::endl;
+			std::cout << "Testing copy before: \n" << cpy << std::endl;
 			cpy = srcTwo;
-			std::cout << "Testing copy: " << cpy << std::endl;
+			std::cout << "Testing copy after: \n" << cpy << std::endl;
 
-		} */
+		}
 
 		try {
 			std::cout << *shrub << std::endl;
@@ -54,6 +54,8 @@ int main() {
 			std::cout << *pardon << std::endl;
 			ceo.signForm(*pardon);
 			ceo.executeForm(*pardon);
+
+			delete pardon;
 		} catch (std::exception &e) {
 			std::cerr << e.what() << std::endl;
 			delete pardon;

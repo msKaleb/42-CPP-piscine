@@ -7,8 +7,6 @@ Bureaucrat::Bureaucrat() {
 Bureaucrat::Bureaucrat(std::string name, unsigned int grade) : 
 						_name(name), _grade(grade) {
 
-	/* if (_name.empty())
-		const_cast<std::string&>(this->_name) = "Default Bureaucrat"; */
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();
 	else if (this->_grade > 150)
@@ -29,8 +27,6 @@ Bureaucrat::Bureaucrat(Bureaucrat const &copy) :
 Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &rhs) {
 	// std::cout << "Bureaucrat: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs) {
-		/* const_cast<std::string&>(this->_name) = rhs.getName();
-		this->_grade = rhs.getGrade(); */
 		this->~Bureaucrat();
 		new(this) Bureaucrat(rhs);
 	}

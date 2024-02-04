@@ -1,9 +1,9 @@
 #include "PresidentialPardonForm.hpp"
 
 PresidentialPardonForm::PresidentialPardonForm(std::string const target) :
-	AForm("[Presidential Form " + target + "]", 25, 5) {
+	AForm("[Presidential Form " + target + "]", 25, 5, target) {
 	std::cout << "PresidentialPardonForm: Default Constructor Called" << std::endl;
-	this->setTarget(target);
+	// this->setTarget(target);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm() {
@@ -12,9 +12,9 @@ PresidentialPardonForm::~PresidentialPardonForm() {
 
 PresidentialPardonForm::PresidentialPardonForm(PresidentialPardonForm const &copy) :
 	AForm(copy) {
-	std::cout << "PresidentialPardonForm: Copy Constructor Called" << std::endl;
-	if (this != &copy)
-		this->setTarget(copy.getTarget());
+	// std::cout << "PresidentialPardonForm: Copy Constructor Called" << std::endl;
+	// if (this != &copy)
+	// 	this->setTarget(copy.getTarget());
 }
 
 PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPardonForm &rhs) {

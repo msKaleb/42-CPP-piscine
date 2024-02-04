@@ -4,8 +4,8 @@
 	std::cout << "AForm: Default Constructor Called" << std::endl;
 } */
 
-AForm::AForm(std::string name, unsigned int toSign, unsigned int toExecute) :
-	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute), _executed(false) {
+AForm::AForm(std::string name, unsigned int toSign,unsigned int toExecute, std::string const target) :
+	_name(name), _signed(false), _signGrade(toSign), _execGrade(toExecute), _target(target), _executed(false) {
 
 		if (_name.empty())
 			const_cast<std::string&>(this->_name) = "Empty Form";
@@ -20,7 +20,8 @@ AForm::~AForm() {
 }
 
 AForm::AForm(AForm const &copy) :
-	_name(copy._name), _signed(copy._signed), _signGrade(copy._signGrade), _execGrade(copy._execGrade) {}
+	_name(copy._name), _signed(copy._signed), _signGrade(copy._signGrade),
+	_execGrade(copy._execGrade), _target(copy._target) {}
 
 AForm	&AForm::operator=(const AForm &rhs) {
 	std::cout << "AForm: Copy Assignment Operator Called" << std::endl;
@@ -47,9 +48,7 @@ std::string const	AForm::getTarget(void) const { return this->_target; }
 bool				AForm::getExecuted(void) const { return this->_executed; }
 
 /* setters */
-void	AForm::setTarget(std::string const &target) {
-	const_cast<std::string&>(this->_target) = target;
-}
+void	AForm::setExecuted(bool status) { this->_executed = status; }
 
 /* exceptions */
 const char* AForm::GradeTooHighException::what() const throw() {
@@ -94,6 +93,7 @@ void	AForm::beSigned(Bureaucrat &b) {
 
 void	AForm::execute(Bureaucrat const &executor) const {
 	const_cast<bool&>(this->_executed) = true;
+	// this->setExecuted(true);
 	try {
 		if (executor.getGrade() > this->_execGrade)
 			throw AForm::GradeTooLowException();

@@ -3,7 +3,7 @@
 
 # include <iostream>
 # include <cstdlib>
-# include <limits>
+# include <limits.h>
 
 class	ScalarConverter
 {
@@ -14,7 +14,7 @@ private:
 	ScalarConverter(ScalarConverter const &copy);
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
-	ScalarConverter(std::string const &literal);
+	explicit ScalarConverter(std::string const &literal);
 	/* data */
 	std::string const	_literal;
 
@@ -27,6 +27,10 @@ private:
 	bool	_isChar;
 
 public:
+	bool	isInt() const;
+	bool	isFloat() const;
+	bool	isDouble() const;
+	bool	isChar() const;
 
 	static void	convert(std::string const &literal);
 

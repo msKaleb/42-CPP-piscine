@@ -25,50 +25,77 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &rhs) {
 }
 
 bool	ScalarConverter::isInt() const {
-	std::string	numbers("1234567890");
+	std::string	numbers("-+1234567890");
 
-	if (this->_literal.find_last_not_of(numbers) == std::string::npos)
-		return true;
+	if (this->_literal.find_last_not_of(numbers) == std::string::npos) {
+		long	number = std::atoll(this->_literal.c_str());
+		if (number < INT_MAX && number > INT_MIN)
+			return true;
+	}
 	return false;
 }
 
 bool	ScalarConverter::isChar() const {
-	std::string	characters("1234567890"); // bad
+	if (this->_literal.length() > 1)
+		return false;
+	int	len = this->_literal.length();
+	for (int i = 0; i < len; i++) {
+		if ((this->_literal[i] >= 'a' && this->_literal[i] <= 'z') \
+			|| (this->_literal[i] >= 'A' && this->_literal[i] <= 'Z'))
+			return true;
+	}
+	return false;
+}
 
-	if (this->_literal.find_first_of(characters) == std::string::npos) {
-		return true;
+bool	ScalarConverter::isFloat() const {
+	std::string	floatNumbers("-+1234567890.f");
+
+	int	len = this->_literal.length();
+	int	points = 0, fNum = 0;
+
+	for (int i = 0; i < len; i++) {
+		if (this->_literal[i] == 'f')
+			fNum++;
+		if (this->_literal[i] == '.')
+			points++;
+	}
+	if (points > 1 || fNum > 1)
+		return false;
+	if ((points == 0 && fNum > 0) || this->_literal[len - 1] != 'f')
+		return false;
+	if (this->_literal.find_last_not_of(floatNumbers) == std::string::npos) {
+		long	number = std::atoll(this->_literal.c_str());
+		if (errno != ERANGE && number > -std::numeric_limits<float>::max() \
+			&& number < std::numeric_limits<float>::max()) // how many decimals???
+			return true;
 	}
 	return false;
 }
 
 ScalarConverter::ScalarConverter(std::string const &literal):
-	_literal(literal), _isInt(false), _isChar(false) {
-	/* this->_intType = static_cast<int>(std::atoi(_literal.c_str()));
-	this->_floatType = static_cast<float>(std::atof(_literal.c_str()));
-	this->_doubleType = static_cast<double>(std::atof(_literal.c_str()));
-	this->_charType = static_cast<char>(std::atoi(_literal.c_str()));
+	_literal(literal), _isInt(false), _isChar(false) {}
 
-	if (_doubleType > __INT_MAX__)
-		this->_isInt = false;
-	if (_doubleType > 255)
-		this->_isChar = false; */
+void	ScalarConverter::printInt(int number) const { // bad
+	if (number < INT_MAX && number > INT_MIN)
+		std::cout << "int: " << static_cast<int>(number) << std::endl;
+	else
+		std::cout << "int: impossible" << std::endl;
+}
+
+void	ScalarConverter::printChar(std::string const &literal) const {
+
 }
 
 void	ScalarConverter::convert(std::string const &literal) {
 	ScalarConverter	sC(literal);
-	long		tmp;
 
 	std::cout << "_literal: " << sC._literal << std::endl;
-	// if (sC.isInt()) {
-		tmp = std::atoll(sC._literal.c_str());
-		std::cout << "tmp: " << tmp << std::endl;
-		if (tmp < INT_MAX && tmp > INT_MIN) {
-			sC._intType = tmp;
-			std::cout << "int: " << sC._intType << std::endl;
-		}
-		else
-			std::cout << "int: impossible" << std::endl;
-	// }
+	if (sC.isInt())
+		std::cout << "is int" << std::endl;
+	if (sC.isChar())
+		std::cout << "is char" << std::endl;
+	if (sC.isFloat())
+		std::cout << "is float" << std::endl;
 	// else
 	// 	std::cout << "int: impossible" << std::endl;
 

@@ -2,8 +2,11 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
+# include <string>
+# include <cerrno>
 # include <cstdlib>
 # include <limits.h>
+# include <limits>
 
 class	ScalarConverter
 {
@@ -31,6 +34,9 @@ public:
 	bool	isFloat() const;
 	bool	isDouble() const;
 	bool	isChar() const;
+
+	void	printInt(int number) const;
+	void	printChar(std::string const &literal) const;
 
 	static void	convert(std::string const &literal);
 

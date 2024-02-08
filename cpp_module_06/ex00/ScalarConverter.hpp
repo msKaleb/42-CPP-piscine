@@ -21,10 +21,10 @@ private:
 	explicit ScalarConverter(std::string const &literal);
 
 	/* explicit constructors for each type */
-	explicit ScalarConverter(int literal);
-	explicit ScalarConverter(float literal);
-	explicit ScalarConverter(double literal);
-	explicit ScalarConverter(char literal);
+	explicit ScalarConverter(int input, std::string const &literal);
+	explicit ScalarConverter(float input, std::string const &literal);
+	explicit ScalarConverter(double input, std::string const &literal);
+	explicit ScalarConverter(char input, std::string const &literal);
 
 	/* data */
 	std::string const	_literal;
@@ -44,6 +44,7 @@ public:
 	bool	isChar() const;
 
 	void	printInt(int number) const;
+	void	printFloat(std::string const &literal) const;
 	void	printChar(std::string const &literal) const;
 
 	static void	convert(std::string const &literal);

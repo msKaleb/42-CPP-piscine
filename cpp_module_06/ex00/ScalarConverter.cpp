@@ -26,7 +26,15 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &rhs) {
 
 bool	ScalarConverter::isInt() const {
 	std::string	numbers("-+1234567890");
+	int	len = this->_literal.length();
+	int	plusMinus = 0;
 
+	for (int i = 0; i < len; i++) {
+		if (this->_literal[i] == '-' || this->_literal[i] == '+')
+			plusMinus++;
+	}
+	if (plusMinus > 1)
+		return false;
 	if (this->_literal.find_last_not_of(numbers) == std::string::npos) {
 		long	number = std::atoll(this->_literal.c_str());
 		if (number < INT_MAX && number > INT_MIN)
@@ -51,15 +59,17 @@ bool	ScalarConverter::isFloat() const {
 	std::string	floatNumbers("-+1234567890.f");
 
 	int	len = this->_literal.length();
-	int	points = 0, fNum = 0;
+	int	points = 0, fNum = 0, plusMinus = 0;
 
 	for (int i = 0; i < len; i++) {
 		if (this->_literal[i] == 'f')
 			fNum++;
 		if (this->_literal[i] == '.')
 			points++;
+		else if (this->_literal[i] == '-' || this->_literal[i] == '+')
+			plusMinus++;
 	}
-	if (points > 1 || fNum > 1)
+	if (points > 1 || fNum > 1 || plusMinus > 1)
 		return false;
 	if ((points == 0 && fNum > 0) || this->_literal[len - 1] != 'f')
 		return false;
@@ -76,12 +86,15 @@ bool	ScalarConverter::isDouble() const {
 	std::string	doubleNumbers("-+1234567890.");
 
 	int	len = this->_literal.length();
-	int	points = 0;
+	int	points = 0, plusMinus = 0;
 
-	for (int i = 0; i < len; i++)
+	for (int i = 0; i < len; i++) {
 		if (this->_literal[i] == '.')
 			points++;
-	if (points != 1)
+		else if (this->_literal[i] == '-' || this->_literal[i] == '+')
+			plusMinus++;
+	}
+	if (points != 1 || plusMinus > 1)
 		return false;
 	if (this->_literal.find_last_not_of(doubleNumbers) == std::string::npos) {
 		long	number = std::atoll(this->_literal.c_str());
@@ -98,22 +111,33 @@ bool	ScalarConverter::isDouble() const {
 ScalarConverter::ScalarConverter(std::string const &literal):
 	_literal(literal), _isInt(false), _isChar(false) {}
 
-ScalarConverter::ScalarConverter(int literal) {
-	this->_floatType = static_cast<float>(literal);
-	// std::cout << std::setprecision(1) << "float: " << this->_floatType << "f" << std::endl;
-	std::cout << "float: ";
-	std::cout << std::setprecision(1) << std::fixed << static_cast<float>(literal) << "f" << std::endl;
-}
-/* void	ScalarConverter::printInt(int number) const { // bad
-	if (number < INT_MAX && number > INT_MIN)
-		std::cout << "int: " << static_cast<int>(number) << std::endl;
+/* ---------------------------------- explicit constructors ---------------------------------- */
+// int constructor
+ScalarConverter::ScalarConverter(int input, std::string const &literal) : _literal(literal) {
+	this->_floatType = static_cast<float>(input);
+	this->_doubleType = static_cast<double>(input);
+	this->_charType = static_cast<char>(input);
+
+	std::cout << "char: ";
+	if (isprint(this->_charType))
+		std::cout << "'" << this->_charType << "'" << std::endl;
+	else if (isascii(this->_charType))
+		std::cout << "non displayable" << std::endl;
 	else
-		std::cout << "int: impossible" << std::endl;
+		std::cout << "impossible" << std::endl;
+	std::cout << "float: ";
+	if (input > -std::numeric_limits<float>::max() \
+		&& input < std::numeric_limits<float>::max())
+		std::cout << std::setprecision(1) << std::fixed << static_cast<float>(input) << "f" << std::endl;
+	else
+		std::cout << "impossible" << std::endl;
 }
 
-void	ScalarConverter::printChar(std::string const &literal) const {
-
-} */
+// float constructor
+ScalarConverter::ScalarConverter(float input, std::string const &literal) : _literal(literal) {
+	this->_floatType = static_cast<float>(input);
+}
+/* ------------------------------------------------------------------------------------------- */
 
 void	ScalarConverter::convert(std::string const &literal) {
 	ScalarConverter	sC(literal);
@@ -121,12 +145,13 @@ void	ScalarConverter::convert(std::string const &literal) {
 
 	// std::cout << "_literal: " << sC._literal << std::endl;
 	if (sC.isInt())
-		ptr = new ScalarConverter(std::atoi(literal.c_str()));
+		ptr = new ScalarConverter(std::atoi(literal.c_str()), literal);
 		// std::cout << "is int" << std::endl;
 	if (sC.isChar())
 		std::cout << "is char" << std::endl;
 	if (sC.isFloat())
-		std::cout << "is float" << std::endl;
+		ptr = new ScalarConverter(static_cast<float>(std::atof(literal.c_str())), literal);
+		// std::cout << "is float" << std::endl;
 	if (sC.isDouble())
 		std::cout << "is double" << std::endl;
 	// delete ptr;

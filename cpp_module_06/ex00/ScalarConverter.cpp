@@ -72,10 +72,39 @@ bool	ScalarConverter::isFloat() const {
 	return false;
 }
 
+bool	ScalarConverter::isDouble() const {
+	std::string	doubleNumbers("-+1234567890.");
+
+	int	len = this->_literal.length();
+	int	points = 0;
+
+	for (int i = 0; i < len; i++)
+		if (this->_literal[i] == '.')
+			points++;
+	if (points != 1)
+		return false;
+	if (this->_literal.find_last_not_of(doubleNumbers) == std::string::npos) {
+		long	number = std::atoll(this->_literal.c_str());
+		if (errno != ERANGE && number > -std::numeric_limits<double>::max() \
+			&& number < std::numeric_limits<double>::max()) { // how many decimals???
+				double	tmp = std::atof(this->_literal.c_str());
+				std::cout << static_cast<float>(tmp) << std::endl;
+				return true;
+			}
+	}
+	return false;
+}
+
 ScalarConverter::ScalarConverter(std::string const &literal):
 	_literal(literal), _isInt(false), _isChar(false) {}
 
-void	ScalarConverter::printInt(int number) const { // bad
+ScalarConverter::ScalarConverter(int literal) {
+	this->_floatType = static_cast<float>(literal);
+	// std::cout << std::setprecision(1) << "float: " << this->_floatType << "f" << std::endl;
+	std::cout << "float: ";
+	std::cout << std::setprecision(1) << std::fixed << static_cast<float>(literal) << "f" << std::endl;
+}
+/* void	ScalarConverter::printInt(int number) const { // bad
 	if (number < INT_MAX && number > INT_MIN)
 		std::cout << "int: " << static_cast<int>(number) << std::endl;
 	else
@@ -84,18 +113,25 @@ void	ScalarConverter::printInt(int number) const { // bad
 
 void	ScalarConverter::printChar(std::string const &literal) const {
 
-}
+} */
 
 void	ScalarConverter::convert(std::string const &literal) {
 	ScalarConverter	sC(literal);
+	ScalarConverter	*ptr;
 
-	std::cout << "_literal: " << sC._literal << std::endl;
+	// std::cout << "_literal: " << sC._literal << std::endl;
 	if (sC.isInt())
-		std::cout << "is int" << std::endl;
+		ptr = new ScalarConverter(std::atoi(literal.c_str()));
+		// std::cout << "is int" << std::endl;
 	if (sC.isChar())
 		std::cout << "is char" << std::endl;
 	if (sC.isFloat())
 		std::cout << "is float" << std::endl;
+	if (sC.isDouble())
+		std::cout << "is double" << std::endl;
+	// delete ptr;
+
+
 	// else
 	// 	std::cout << "int: impossible" << std::endl;
 

@@ -4,6 +4,7 @@
  * @todo remove -Wno-unused
  * @todo add enum for input type
  * @todo array of pointers to functions for conversion
+ * @todo make isType() functions static and remove str constructor???
   */
 int main(int argc, char* argv[]) {
 	if (argc != 2) {

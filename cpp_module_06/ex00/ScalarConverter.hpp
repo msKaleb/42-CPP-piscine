@@ -2,6 +2,7 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <string>
 # include <cerrno>
 # include <cstdlib>
@@ -18,6 +19,13 @@ private:
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
 	explicit ScalarConverter(std::string const &literal);
+
+	/* explicit constructors for each type */
+	explicit ScalarConverter(int literal);
+	explicit ScalarConverter(float literal);
+	explicit ScalarConverter(double literal);
+	explicit ScalarConverter(char literal);
+
 	/* data */
 	std::string const	_literal;
 

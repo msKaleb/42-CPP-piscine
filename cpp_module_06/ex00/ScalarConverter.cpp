@@ -27,9 +27,26 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &rhs) {
 /* ***************************************************************************************** */
 void	ScalarConverter::convert(std::string literal) {
 	CheckType	c(literal);
+	int			type = c.getType();
 
-	if (c.isInt())
+	switch (type)
+	{
+	case typeChar:
+		std::cout << "is char" << std::endl;
+		// explicit constructors here... after impossible check
+		break;
+	case typeInt:
 		std::cout << "is int" << std::endl;
-	else if (c.isDouble())
+		break;
+	case typeFloat:
+		std::cout << "is float" << std::endl;
+		break;
+	case typeDouble:
 		std::cout << "is double" << std::endl;
+		break;
+	default:
+		std::cout << "is none" << std::endl;
+		break;
+	}
+	// std::cout << c.getType() << std::endl;
 }

@@ -3,6 +3,7 @@
 
 # include <iostream>
 # include "CheckType.hpp"
+# include "types.h"
 
 class	ScalarConverter
 {

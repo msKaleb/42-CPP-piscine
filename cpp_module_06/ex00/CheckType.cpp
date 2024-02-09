@@ -88,11 +88,9 @@ bool	CheckType::isFloat() const {
 
 bool	CheckType::isDouble() const {
 	std::string	doubleNumbers("-+1234567890.");
-
-	int	len = this->_literal.length();
 	int	points = 0, plusMinus = 0;
 
-	for (int i = 0; i < len; i++) {
+	for (size_t i = 0; i < this->_literal.length(); i++) {
 		if (this->_literal[i] == '.')
 			points++;
 		else if (this->_literal[i] == '-' || this->_literal[i] == '+')
@@ -102,13 +100,40 @@ bool	CheckType::isDouble() const {
 		return false;
 	if (this->_literal.find_last_not_of(doubleNumbers) == std::string::npos) {
 		double	number = std::atof(this->_literal.c_str());
-		if (!errno && number > MINDOUBLE && number < MAXDOUBLE) {
-				double	tmp = std::atof(this->_literal.c_str());
-				std::cout << static_cast<float>(tmp) << std::endl;
-				return true;
-			}
+		if (!errno && number > MINDOUBLE && number < MAXDOUBLE)
+			return true;
 	}
 	errno = 0;
 	return false;
 }
 /* ***************************************************************************************** */
+
+/* ***************************************************************************************** */
+char	CheckType::getChar() const { return this->_cNum; }
+int		CheckType::getInt() const { return this->_iNum; }
+float	CheckType::getFloat() const { return this->_fNum; }
+double	CheckType::getDouble() const { return this->_dNum; }
+/* ***************************************************************************************** */
+
+/* ***************************************************************************************** */
+void	CheckType::setChar(char cNum) { this->_cNum = cNum; }
+void	CheckType::setInt(int iNum) { this->_cNum = iNum; }
+void	CheckType::setFloat(float fNum) { this->_cNum = fNum; }
+void	CheckType::setDouble(double dNum) { this->_cNum = dNum; }
+/* ***************************************************************************************** */
+
+int	CheckType::getType() {
+	bool	(CheckType::*functPtr[])() const = {
+		&CheckType::isChar,
+		&CheckType::isInt,
+		&CheckType::isFloat,
+		&CheckType::isDouble
+	};
+
+	int	i;
+	for (i = 0; i < 4; i++) {
+		if ((this->*functPtr[i])())
+			break ;
+	}
+	return i;
+}

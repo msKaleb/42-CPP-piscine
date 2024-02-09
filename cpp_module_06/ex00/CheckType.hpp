@@ -2,6 +2,7 @@
 # define CHECKTYPE_HPP
 
 # include <iostream>
+# include <iomanip>
 # include <limits>
 # include <cstdlib>
 # include <cerrno>
@@ -18,6 +19,11 @@ class	CheckType
 private:
 	/* data */
 	std::string	_literal;
+	char		_cNum;
+	int			_iNum;
+	float		_fNum;
+	double		_dNum;
+
 public:
 	/* Orthodox canonical */
 	CheckType();
@@ -26,6 +32,19 @@ public:
 	CheckType &operator=(const CheckType &rhs);
 
 	CheckType(std::string literal);
+	// explicit constructors here...
+
+	int	getType();
+
+	char	getChar() const;
+	int		getInt() const;
+	float	getFloat() const;
+	double	getDouble() const;
+
+	void	setChar(char cNum);
+	void	setInt(int iNum);
+	void	setFloat(float fNum);
+	void	setDouble(double dNum);
 
 	bool	isInt() const;
 	bool	isFloat() const;

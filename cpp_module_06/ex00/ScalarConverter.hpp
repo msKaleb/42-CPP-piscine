@@ -2,15 +2,11 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
-# include <iomanip>
-# include <string>
-# include <cerrno>
-# include <cstdlib>
-# include <limits.h>
-# include <limits>
+# include "CheckType.hpp"
 
 class	ScalarConverter
 {
+
 private:
 	/* Orthodox canonical */
 	ScalarConverter();
@@ -18,37 +14,8 @@ private:
 	ScalarConverter(ScalarConverter const &copy);
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
-	explicit ScalarConverter(std::string const &literal);
-
-	/* explicit constructors for each type */
-	explicit ScalarConverter(int input, std::string const &literal);
-	explicit ScalarConverter(float input, std::string const &literal);
-	explicit ScalarConverter(double input, std::string const &literal);
-	explicit ScalarConverter(char input, std::string const &literal);
-
-	/* data */
-	std::string const	_literal;
-
-	int		_intType;
-	float	_floatType;
-	double	_doubleType;
-	char	_charType;
-
-	bool	_isInt;
-	bool	_isChar;
-
 public:
-	bool	isInt() const;
-	bool	isFloat() const;
-	bool	isDouble() const;
-	bool	isChar() const;
-
-	void	printInt(int number) const;
-	void	printFloat(std::string const &literal) const;
-	void	printChar(std::string const &literal) const;
-
-	static void	convert(std::string const &literal);
-
+	static void	convert(std::string literal);
 };
 
 #endif /* SCALARCONVERTER_HPP */

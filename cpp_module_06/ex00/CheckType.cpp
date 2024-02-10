@@ -51,17 +51,17 @@ bool	CheckType::isInt() const {
 bool	CheckType::isChar() const {
 	if (this->_literal.length() > 1)
 		return false;
-	int	len = this->_literal.length();
-	for (int i = 0; i < len; i++) {
-		if ((this->_literal[i] >= 'a' && this->_literal[i] <= 'z') \
-			|| (this->_literal[i] >= 'A' && this->_literal[i] <= 'Z'))
-			return true;
-	}
+	if (isascii(this->_literal[0]))
+		return true;
 	return false;
 }
 
 bool	CheckType::isFloat() const {
-	std::string	floatNumbers("-+1234567890.f");
+	// check first the pseudo literals
+	std::string	pseudoLiterals[] = {"nanf", "-nanf", "inff", "-inff"};
+	for (int i = 0; i < 4; i++)
+		if (pseudoLiterals[i] == this->_literal)
+			return true;
 
 	int	len = this->_literal.length();
 	int	points = 0, fNum = 0, plusMinus = 0;
@@ -78,6 +78,8 @@ bool	CheckType::isFloat() const {
 		return false;
 	if ((points == 0 && fNum > 0) || this->_literal[len - 1] != 'f')
 		return false;
+
+	std::string	floatNumbers("-+1234567890.f");
 	if (this->_literal.find_last_not_of(floatNumbers) == std::string::npos) {
 		float	number = std::atof(this->_literal.c_str());
 		if (!errno && number > MIN_FLOAT && number < MAX_FLOAT)
@@ -101,7 +103,8 @@ bool	CheckType::isDouble() const {
 		return false;
 	if (this->_literal.find_last_not_of(doubleNumbers) == std::string::npos) {
 		double	number = std::atof(this->_literal.c_str());
-		if (!errno && number > MIN_DOUBLE && number < MAX_DOUBLE)
+		// std::cout << (number > MIN_DOUBLE) << "|" << (number < MAX_DOUBLE) << std::endl;
+		if (!errno && (number > MIN_DOUBLE && number < MAX_DOUBLE))
 			return true;
 	}
 	errno = 0;

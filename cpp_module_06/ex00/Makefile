@@ -17,7 +17,7 @@ SRC			=	ScalarConverter.cpp \
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
 CC			=	c++
-NAME		=	ScalarConverter
+NAME		=	convert
 OBJ			=	$(SRC:.cpp=.o)
 
 %.o:		%.cpp
@@ -27,10 +27,10 @@ all:		$(NAME)
 
 $(NAME) :	$(OBJ)
 			$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
-			echo "	Created " $(NAME)
+			@echo "	---Created" $(NAME)"---"
 
 clean:
-			echo "	removing files..."
+			@echo "	removing files..."
 			$(RM) $(OBJ)
 
 fclean:		clean

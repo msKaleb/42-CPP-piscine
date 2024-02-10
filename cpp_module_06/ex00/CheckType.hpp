@@ -9,12 +9,16 @@
 # include <string>
 # include "ScalarConverter.hpp"
 
-# define MIN_INT	std::numeric_limits<int>::min()
 # define MAX_INT	std::numeric_limits<int>::max()
-# define MIN_FLOAT	std::numeric_limits<float>::min()
 # define MAX_FLOAT	std::numeric_limits<float>::max()
-# define MIN_DOUBLE	std::numeric_limits<double>::min()
 # define MAX_DOUBLE	std::numeric_limits<double>::max()
+# define MIN_INT	std::numeric_limits<int>::min()
+# define MIN_FLOAT	-MAX_FLOAT
+# define MIN_DOUBLE	-MAX_DOUBLE
+
+// # define MIN_INT	std::numeric_limits<int>::min()
+// # define MIN_FLOAT	std::numeric_limits<float>::min()
+// # define MIN_DOUBLE	std::numeric_limits<double>::min()
 
 class	CheckType
 {

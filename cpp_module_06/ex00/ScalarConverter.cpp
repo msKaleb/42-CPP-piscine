@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include "colors.h"
 
 ScalarConverter::ScalarConverter() {
 	// std::cout << "ScalarConverter: Default Constructor Called" << std::endl;
@@ -25,29 +26,72 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &rhs) {
 }
 
 /* ***************************************************************************************** */
-ScalarConverter::ScalarConverter(int convertedLiteral) {
+ScalarConverter::ScalarConverter(char convertedLiteral) {
+	std::cout << std::fixed << std::setprecision(1);
 	// print char value ------------------------
-	if (!isprint(convertedLiteral) && !isascii(convertedLiteral))
-		std::cout << "char: impossible" << std::endl;
-	else if (!isprint(convertedLiteral))
-		std::cout << "char: non displayable" << std::endl;
-	else
-		std::cout << "char: '" << convertedLiteral << "'" << std::endl;
+	std::cout << "char: '" << convertedLiteral << "'" << std::endl;
 
 	// print int value ------------------------
 	std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;
 
+	// print float value ------------------------
+	std::cout << "float: " << static_cast<float>(convertedLiteral) << "f" << std::endl;
+
 	// print double value ------------------------
 	std::cout << "double: " << static_cast<double>(convertedLiteral) << std::endl;
+}
+
+/* ***************************************************************************************** */
+ScalarConverter::ScalarConverter(int convertedLiteral) {
+	std::cout << std::fixed << std::setprecision(1);
+	// print char value ------------------------
+	if (!isascii(convertedLiteral))
+		std::cout << "char: impossible" << std::endl;
+	else if (!isprint(convertedLiteral))
+		std::cout << "char: non displayable" << std::endl;
+	else
+		std::cout << "char: '" << static_cast<char>(convertedLiteral) << "'" << std::endl;
+
+	// print int value ------------------------
+	std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;
 
 	// print float value ------------------------
 	std::cout << "float: " << static_cast<float>(convertedLiteral) << "f" << std::endl;
+
+	// print double value ------------------------
+	std::cout << "double: " << static_cast<double>(convertedLiteral) << std::endl;
+}
+
+/* ***************************************************************************************** */
+ScalarConverter::ScalarConverter(float convertedLiteral) {
+	// std::cout << std::setprecision(2) << std::fixed;
+	// print char value ------------------------
+	if (!isascii(convertedLiteral))
+		std::cout << "char: impossible" << std::endl;
+	else if (!isprint(convertedLiteral))
+		std::cout << "char: non displayable" << std::endl;
+	else
+		std::cout << "char: '" << static_cast<char>(convertedLiteral) << "'" << std::endl;
+
+	// print int value ------------------------
+	if ((convertedLiteral < MIN_INT || convertedLiteral > MAX_INT)
+		|| (convertedLiteral != NAN || convertedLiteral != -NAN)
+		|| (convertedLiteral != INFINITY || convertedLiteral != -INFINITY))
+		std::cout << "int: impossible" << std::endl;
+	else
+		std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;
+
+	// print float value ------------------------
+	std::cout << "float: " << convertedLiteral << "f" << std::endl;
+
+	// print double value ------------------------
+	std::cout << "double: " << static_cast<double>(convertedLiteral) << std::endl;
 }
 
 /* ***************************************************************************************** */
 ScalarConverter::ScalarConverter(double convertedLiteral) {
 	// print char value ------------------------
-	if (!isprint(convertedLiteral) && !isascii(convertedLiteral))
+	if (!isascii(convertedLiteral))
 		std::cout << "char: impossible" << std::endl;
 	else if (!isprint(convertedLiteral))
 		std::cout << "char: non displayable" << std::endl;
@@ -60,19 +104,15 @@ ScalarConverter::ScalarConverter(double convertedLiteral) {
 	else
 		std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;
 
-	// print double value ------------------------
-	std::cout << "double: " << convertedLiteral << std::endl;
-
 	// print float value ------------------------
 	if (convertedLiteral < MIN_FLOAT || convertedLiteral > MAX_FLOAT)
 		std::cout << "float: impossible" << std::endl;
 	else
 		std::cout << "float: " << static_cast<float>(convertedLiteral) << "f" << std::endl;
+
+	// print double value ------------------------
+	std::cout << "double: " << convertedLiteral << std::endl;
 }
-
-/* ***************************************************************************************** */
-
-/* ***************************************************************************************** */
 
 /* ***************************************************************************************** */
 void	ScalarConverter::convert(std::string literal) {
@@ -80,32 +120,33 @@ void	ScalarConverter::convert(std::string literal) {
 
 	CheckType	c(literal);
 	int			type = c.getType();
-	// int			iLit;
 
 	switch (type)
 	{
 	case typeChar:
-		std::cout << "is char" << std::endl;
+		std::cout << YELLOW << "is char" << RESET << std::endl;
 		c.setChar(literal[0]);
-		// explicit constructors here... after impossible check
+		conversion = ScalarConverter(c.getChar());
 		break;
 	case typeInt:
-		// std::cout << "is int" << std::endl;
+		std::cout << YELLOW << "is int" << RESET << std::endl;
 		c.setInt(atoi(literal.c_str()));
 		// conversion = c.getInt(); // not OK, explicit constructor
 		conversion = ScalarConverter(c.getInt());
 		break;
 	case typeFloat:
-		std::cout << "is float" << std::endl;
+		std::cout << YELLOW << "is float" << RESET << std::endl;
+		c.setFloat(atof(literal.c_str()));
+		conversion = ScalarConverter(c.getFloat());
 		break;
 	case typeDouble:
-		// std::cout << "is double" << std::endl;
+		std::cout << YELLOW << "is double" << RESET << std::endl;
 		c.setDouble(atof(literal.c_str()));
 		// conversion = c.getDouble(); // not OK, explicit constructor
 		conversion = ScalarConverter(c.getDouble());
 		break;
 	default:
-		std::cout << "is none" << std::endl;
+		std::cout << RED << "is none" << RESET << std::endl;
 		break;
 	}
 	// std::cout << c.getType() << std::endl;

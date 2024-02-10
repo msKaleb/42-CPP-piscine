@@ -6,6 +6,7 @@
 # include <limits>
 # include <cstdlib>
 # include <cerrno>
+# include <string>
 
 # define MININT		std::numeric_limits<int>::min()
 # define MAXINT		std::numeric_limits<int>::max()

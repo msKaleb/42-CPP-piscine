@@ -24,15 +24,24 @@ ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &rhs) {
 	return (*this);
 }
 
+ScalarConverter::ScalarConverter(int iLit) {
+	// std::cout << "errno: " << errno << std::endl;
+	std::cout << "int: " << iLit << std::endl;
+}
+
 /* ***************************************************************************************** */
 void	ScalarConverter::convert(std::string literal) {
+	ScalarConverter conversion;
+
 	CheckType	c(literal);
 	int			type = c.getType();
+	int			iLit;
 
 	switch (type)
 	{
 	case typeChar:
 		std::cout << "is char" << std::endl;
+		c.setChar(literal[0]);
 		// explicit constructors here... after impossible check
 		break;
 	case typeInt:
@@ -43,6 +52,14 @@ void	ScalarConverter::convert(std::string literal) {
 		break;
 	case typeDouble:
 		std::cout << "is double" << std::endl;
+		c.setDouble(atof(literal.c_str()));
+
+		// put all the casts into a function (c.fromDouble())
+		if (c.getDouble() < MININT || c.getDouble() > MAXINT)
+			std::cout << "int: impossible" << std::endl;
+		else
+			conversion = ScalarConverter(static_cast<int>(c.getDouble()));
+			// conversion = c.getDouble(); // not OK, explicit constructor
 		break;
 	default:
 		std::cout << "is none" << std::endl;

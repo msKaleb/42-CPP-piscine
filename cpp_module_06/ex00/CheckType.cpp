@@ -39,7 +39,8 @@ bool	CheckType::isInt() const {
 	if (plusMinus > 1)
 		return false;
 	if (this->_literal.find_last_not_of(numbers) == std::string::npos) {
-		int	number = std::atoi(this->_literal.c_str());
+		// int	number = std::atoi(this->_literal.c_str());
+		long number = std::strtol(this->_literal.c_str(), NULL, 10);
 		if (!errno && number < MAXINT && number > MININT)
 			return true;
 	}
@@ -117,9 +118,9 @@ double	CheckType::getDouble() const { return this->_dNum; }
 
 /* ***************************************************************************************** */
 void	CheckType::setChar(char cNum) { this->_cNum = cNum; }
-void	CheckType::setInt(int iNum) { this->_cNum = iNum; }
-void	CheckType::setFloat(float fNum) { this->_cNum = fNum; }
-void	CheckType::setDouble(double dNum) { this->_cNum = dNum; }
+void	CheckType::setInt(int iNum) { this->_iNum = iNum; }
+void	CheckType::setFloat(float fNum) { this->_fNum = fNum; }
+void	CheckType::setDouble(double dNum) { this->_dNum = dNum; }
 /* ***************************************************************************************** */
 
 int	CheckType::getType() {

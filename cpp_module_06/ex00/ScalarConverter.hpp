@@ -15,6 +15,8 @@ private:
 	ScalarConverter(ScalarConverter const &copy);
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
+	explicit ScalarConverter(int iLit);
+
 public:
 	static void	convert(std::string literal);
 };

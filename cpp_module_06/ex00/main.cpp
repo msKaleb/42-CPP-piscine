@@ -2,14 +2,12 @@
 
 /**
  * @todo remove -Wno-unused
- * @todo add enum for input type
- * @todo array of pointers to functions for conversion
- * @todo make isType() functions static and remove str constructor???
+ * @todo print *.00 for double and float in int and char constructor
   */
 int main(int argc, char* argv[]) {
 	if (argc != 2) {
 		std::cerr << "One parameter is needed" << std::endl;
-		std::cout << MAXINT << std::endl;
+		std::cout << MAX_INT << std::endl;
 		return 1;
 	}
 	std::string	str(argv[1]);

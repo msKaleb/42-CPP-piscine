@@ -41,7 +41,7 @@ bool	CheckType::isInt() const {
 	if (this->_literal.find_last_not_of(numbers) == std::string::npos) {
 		// int	number = std::atoi(this->_literal.c_str());
 		long number = std::strtol(this->_literal.c_str(), NULL, 10);
-		if (!errno && number < MAXINT && number > MININT)
+		if (!errno && number < MAX_INT && number > MIN_INT)
 			return true;
 	}
 	errno = 0;
@@ -80,7 +80,7 @@ bool	CheckType::isFloat() const {
 		return false;
 	if (this->_literal.find_last_not_of(floatNumbers) == std::string::npos) {
 		float	number = std::atof(this->_literal.c_str());
-		if (!errno && number > MINFLOAT && number < MAXFLOAT)
+		if (!errno && number > MIN_FLOAT && number < MAX_FLOAT)
 			return true;
 	}
 	errno = 0;
@@ -101,7 +101,7 @@ bool	CheckType::isDouble() const {
 		return false;
 	if (this->_literal.find_last_not_of(doubleNumbers) == std::string::npos) {
 		double	number = std::atof(this->_literal.c_str());
-		if (!errno && number > MINDOUBLE && number < MAXDOUBLE)
+		if (!errno && number > MIN_DOUBLE && number < MAX_DOUBLE)
 			return true;
 	}
 	errno = 0;
@@ -121,6 +121,19 @@ void	CheckType::setChar(char cNum) { this->_cNum = cNum; }
 void	CheckType::setInt(int iNum) { this->_iNum = iNum; }
 void	CheckType::setFloat(float fNum) { this->_fNum = fNum; }
 void	CheckType::setDouble(double dNum) { this->_dNum = dNum; }
+/* ***************************************************************************************** */
+
+/* ***************************************************************************************** */
+// void	CheckType::printFromDouble(double dNum) {
+// 	ScalarConverter conversion;
+
+// 	// put all the casts into a function (c.fromDouble())
+// 	if (c.getDouble() < MIN_INT || c.getDouble() > MAX_INT)
+// 		std::cout << "int: impossible" << std::endl;
+// 	else
+// 		conversion = ScalarConverter(static_cast<int>(c.getDouble()));
+// 		// conversion = c.getDouble(); // not OK, explicit constructor
+// }
 /* ***************************************************************************************** */
 
 int	CheckType::getType() {

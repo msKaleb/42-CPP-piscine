@@ -15,7 +15,10 @@ private:
 	ScalarConverter(ScalarConverter const &copy);
 	ScalarConverter &operator=(const ScalarConverter &rhs);
 
-	explicit ScalarConverter(int iLit);
+	explicit ScalarConverter(int convertedLiteral);
+	explicit ScalarConverter(double convertedLiteral);
+	explicit ScalarConverter(float convertedLiteral);
+	explicit ScalarConverter(char convertedLiteral);
 
 public:
 	static void	convert(std::string literal);

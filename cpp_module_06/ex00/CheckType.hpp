@@ -7,13 +7,14 @@
 # include <cstdlib>
 # include <cerrno>
 # include <string>
+# include "ScalarConverter.hpp"
 
-# define MININT		std::numeric_limits<int>::min()
-# define MAXINT		std::numeric_limits<int>::max()
-# define MINFLOAT	std::numeric_limits<float>::min()
-# define MAXFLOAT	std::numeric_limits<float>::max()
-# define MINDOUBLE	std::numeric_limits<double>::min()
-# define MAXDOUBLE	std::numeric_limits<double>::max()
+# define MIN_INT	std::numeric_limits<int>::min()
+# define MAX_INT	std::numeric_limits<int>::max()
+# define MIN_FLOAT	std::numeric_limits<float>::min()
+# define MAX_FLOAT	std::numeric_limits<float>::max()
+# define MIN_DOUBLE	std::numeric_limits<double>::min()
+# define MAX_DOUBLE	std::numeric_limits<double>::max()
 
 class	CheckType
 {
@@ -46,6 +47,11 @@ public:
 	void	setInt(int iNum);
 	void	setFloat(float fNum);
 	void	setDouble(double dNum);
+
+	void	printFromChar(char cNum);
+	void	printFromInt(int iNum);
+	void	printFromFloat(float fNum);
+	void	printFromDouble(double dNum);
 
 	bool	isInt() const;
 	bool	isFloat() const;

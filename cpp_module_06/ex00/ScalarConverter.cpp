@@ -75,17 +75,24 @@ ScalarConverter::ScalarConverter(float convertedLiteral) {
 
 	// print int value ------------------------
 	if ((convertedLiteral < MIN_INT || convertedLiteral > MAX_INT)
-		|| (convertedLiteral != NAN || convertedLiteral != -NAN)
-		|| (convertedLiteral != INFINITY || convertedLiteral != -INFINITY))
+		|| isnanf(convertedLiteral) || isinff(convertedLiteral))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;
 
+	// get the suffix for floating point numbers
+	std::stringstream	ss;
+	ss << convertedLiteral;
+	std::string	strNum(ss.str());
+	std::string	suffix = "";
+	if (strNum.find('.') == std::string::npos)
+		suffix = ".0";
+
 	// print float value ------------------------
-	std::cout << "float: " << convertedLiteral << "f" << std::endl;
+	std::cout << "float: " << convertedLiteral << suffix << "f" << std::endl;
 
 	// print double value ------------------------
-	std::cout << "double: " << static_cast<double>(convertedLiteral) << std::endl;
+	std::cout << "double: " << static_cast<double>(convertedLiteral) << suffix << std::endl;
 }
 
 /* ***************************************************************************************** */
@@ -99,19 +106,29 @@ ScalarConverter::ScalarConverter(double convertedLiteral) {
 		std::cout << "char: '" << static_cast<char>(convertedLiteral) << "'" << std::endl;
 
 	// print int value ------------------------
-	if (convertedLiteral < MIN_INT || convertedLiteral > MAX_INT)
+	if (convertedLiteral < MIN_INT || convertedLiteral > MAX_INT
+		|| isnan(convertedLiteral) || isinf(convertedLiteral))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;
 
+	// get the suffix for floating point numbers
+	std::stringstream	ss;
+	ss << convertedLiteral;
+	std::string	strNum(ss.str());
+	std::string	suffix = "";
+	if (strNum.find('.') == std::string::npos)
+		suffix = ".0";
+
 	// print float value ------------------------
-	if (convertedLiteral < MIN_FLOAT || convertedLiteral > MAX_FLOAT)
+	if ((convertedLiteral < MIN_FLOAT || convertedLiteral > MAX_FLOAT)
+		&& (!isnan(convertedLiteral) && !isinf(convertedLiteral)))
 		std::cout << "float: impossible" << std::endl;
 	else
-		std::cout << "float: " << static_cast<float>(convertedLiteral) << "f" << std::endl;
+		std::cout << "float: " << static_cast<float>(convertedLiteral) << suffix << "f" << std::endl;
 
 	// print double value ------------------------
-	std::cout << "double: " << convertedLiteral << std::endl;
+	std::cout << "double: " << convertedLiteral << suffix << std::endl;
 }
 
 /* ***************************************************************************************** */

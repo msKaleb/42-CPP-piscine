@@ -2,10 +2,11 @@
 # define SCALARCONVERTER_HPP
 
 # include <iostream>
+# include <sstream>
 # include <string>
+# include <math.h>
 # include "CheckType.hpp"
 # include "types.h"
-# include <math.h>
 
 class	ScalarConverter
 {

@@ -16,10 +16,6 @@
 # define MIN_FLOAT	-MAX_FLOAT
 # define MIN_DOUBLE	-MAX_DOUBLE
 
-// # define MIN_INT	std::numeric_limits<int>::min()
-// # define MIN_FLOAT	std::numeric_limits<float>::min()
-// # define MIN_DOUBLE	std::numeric_limits<double>::min()
-
 class	CheckType
 {
 private:
@@ -38,25 +34,22 @@ public:
 	CheckType &operator=(const CheckType &rhs);
 
 	CheckType(std::string literal);
-	// explicit constructors here...
 
 	int	getType();
 
+	// getters
 	char	getChar() const;
 	int		getInt() const;
 	float	getFloat() const;
 	double	getDouble() const;
 
+	// setters
 	void	setChar(char cNum);
 	void	setInt(int iNum);
 	void	setFloat(float fNum);
 	void	setDouble(double dNum);
 
-	void	printFromChar(char cNum);
-	void	printFromInt(int iNum);
-	void	printFromFloat(float fNum);
-	void	printFromDouble(double dNum);
-
+	// check wether 
 	bool	isInt() const;
 	bool	isFloat() const;
 	bool	isDouble() const;

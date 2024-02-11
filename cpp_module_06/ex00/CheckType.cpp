@@ -27,6 +27,14 @@ CheckType	&CheckType::operator=(const CheckType &rhs) {
 CheckType::CheckType(std::string literal) : _literal(literal) { return ; }
 
 /* ***************************************************************************************** */
+bool	CheckType::isChar() const {
+	if (this->_literal.length() > 1)
+		return false;
+	if (!isdigit(this->_literal[0]) && isascii(this->_literal[0]))
+		return true;
+	return false;
+}
+
 bool	CheckType::isInt() const {
 	std::string	numbers("-+1234567890");
 	int	len = this->_literal.length();
@@ -48,14 +56,6 @@ bool	CheckType::isInt() const {
 	return false;
 }
 
-bool	CheckType::isChar() const {
-	if (this->_literal.length() > 1)
-		return false;
-	if (isascii(this->_literal[0]))
-		return true;
-	return false;
-}
-
 bool	CheckType::isFloat() const {
 	// check first the pseudo literals
 	std::string	pseudoLiterals[] = {"nanf", "-nanf", "inff", "-inff"};
@@ -65,7 +65,6 @@ bool	CheckType::isFloat() const {
 
 	int	len = this->_literal.length();
 	int	points = 0, fNum = 0, plusMinus = 0;
-
 	for (int i = 0; i < len; i++) {
 		if (this->_literal[i] == 'f')
 			fNum++;
@@ -81,7 +80,8 @@ bool	CheckType::isFloat() const {
 
 	std::string	floatNumbers("-+1234567890.f");
 	if (this->_literal.find_last_not_of(floatNumbers) == std::string::npos) {
-		float	number = std::atof(this->_literal.c_str());
+		// float	number = std::atof(this->_literal.c_str());
+		float	number = std::strtof(this->_literal.c_str(), NULL);
 		if (!errno && number > MIN_FLOAT && number < MAX_FLOAT)
 			return true;
 	}
@@ -90,9 +90,13 @@ bool	CheckType::isFloat() const {
 }
 
 bool	CheckType::isDouble() const {
-	std::string	doubleNumbers("-+1234567890.");
-	int	points = 0, plusMinus = 0;
+	// check first the pseudo literals
+	std::string	pseudoLiterals[] = {"nan", "-nan", "inf", "-inf"};
+	for (int i = 0; i < 4; i++)
+		if (pseudoLiterals[i] == this->_literal)
+			return true;
 
+	int	points = 0, plusMinus = 0;
 	for (size_t i = 0; i < this->_literal.length(); i++) {
 		if (this->_literal[i] == '.')
 			points++;
@@ -101,8 +105,11 @@ bool	CheckType::isDouble() const {
 	}
 	if (points > 1 || plusMinus > 1)
 		return false;
+
+	std::string	doubleNumbers("-+1234567890.");
 	if (this->_literal.find_last_not_of(doubleNumbers) == std::string::npos) {
-		double	number = std::atof(this->_literal.c_str());
+		// double	number = std::atof(this->_literal.c_str());
+		double	number = std::strtod(this->_literal.c_str(), NULL);
 		// std::cout << (number > MIN_DOUBLE) << "|" << (number < MAX_DOUBLE) << std::endl;
 		if (!errno && (number > MIN_DOUBLE && number < MAX_DOUBLE))
 			return true;
@@ -124,19 +131,6 @@ void	CheckType::setChar(char cNum) { this->_cNum = cNum; }
 void	CheckType::setInt(int iNum) { this->_iNum = iNum; }
 void	CheckType::setFloat(float fNum) { this->_fNum = fNum; }
 void	CheckType::setDouble(double dNum) { this->_dNum = dNum; }
-/* ***************************************************************************************** */
-
-/* ***************************************************************************************** */
-// void	CheckType::printFromDouble(double dNum) {
-// 	ScalarConverter conversion;
-
-// 	// put all the casts into a function (c.fromDouble())
-// 	if (c.getDouble() < MIN_INT || c.getDouble() > MAX_INT)
-// 		std::cout << "int: impossible" << std::endl;
-// 	else
-// 		conversion = ScalarConverter(static_cast<int>(c.getDouble()));
-// 		// conversion = c.getDouble(); // not OK, explicit constructor
-// }
 /* ***************************************************************************************** */
 
 int	CheckType::getType() {

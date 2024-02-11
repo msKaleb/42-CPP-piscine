@@ -15,6 +15,8 @@ int main(int argc, char* argv[]) {
 		// std::cout << "Min int:    " << MIN_INT << std::endl;
 		// std::cout << "Min float:  " << MIN_FLOAT << std::endl;
 		// std::cout << "Min double: " << MIN_DOUBLE << std::endl;
+		float f = 154353.546f;
+		std::cout << "f: " << f << std::endl;
 		return 1;
 	}
 	std::string	str(argv[1]);

@@ -8,20 +8,17 @@ CheckType::~CheckType() {
 	// std::cout << "CheckType: Destructor Called" << std::endl;
 }
 
-CheckType::CheckType(CheckType const &copy) {
-	// std::cout << "CheckType: Copy Constructor Called" << std::endl;
-	if (this != &copy)
-		*this = copy;
-}
+CheckType::CheckType(CheckType const &copy) :
+	_literal(copy.getLiteral()), _cNum(copy.getChar()), _iNum(copy.getInt()), _fNum(copy.getFloat()), _dNum(copy.getDouble()) {}
 
 CheckType	&CheckType::operator=(const CheckType &rhs) {
 	// std::cout << "CheckType: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs)
 	{
-		//	this->attributes = rhs.attributes;
-		//	...
+		this->~CheckType();
+		new(this) CheckType(rhs);
 	}
-	return (*this);
+	return *this;
 }
 
 CheckType::CheckType(std::string literal) : _literal(literal) { return ; }
@@ -124,6 +121,8 @@ char	CheckType::getChar() const { return this->_cNum; }
 int		CheckType::getInt() const { return this->_iNum; }
 float	CheckType::getFloat() const { return this->_fNum; }
 double	CheckType::getDouble() const { return this->_dNum; }
+
+std::string	CheckType::getLiteral() const { return this->_literal; }
 /* ***************************************************************************************** */
 
 /* ***************************************************************************************** */

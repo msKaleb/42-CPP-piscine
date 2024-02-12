@@ -1,10 +1,5 @@
 #include "ScalarConverter.hpp"
 
-/**
- * @todo remove -Wno-unused
- * @todo 123322.131 (6 digits) gives 123322f and 123322 in float and double, why?
- * @todo nan(f), inf(f), etc.
-  */
 int main(int argc, char* argv[]) {
 	if (argc != 2) {
 		std::cerr << "One parameter is needed" << std::endl;
@@ -15,8 +10,6 @@ int main(int argc, char* argv[]) {
 		// std::cout << "Min int:    " << MIN_INT << std::endl;
 		// std::cout << "Min float:  " << MIN_FLOAT << std::endl;
 		// std::cout << "Min double: " << MIN_DOUBLE << std::endl;
-		float f = 154353.546f;
-		std::cout << "f: " << f << std::endl;
 		return 1;
 	}
 	std::string	str(argv[1]);

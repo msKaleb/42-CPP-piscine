@@ -38,6 +38,8 @@ public:
 	int	getType();
 
 	// getters
+	std::string	getLiteral() const;
+	
 	char	getChar() const;
 	int		getInt() const;
 	float	getFloat() const;

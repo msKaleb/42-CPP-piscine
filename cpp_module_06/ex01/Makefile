@@ -10,14 +10,13 @@
 #                                                                              # 
 # **************************************************************************** # 
 
-SRC			=	ScalarConverter.cpp \
+SRC			=	Serializer.cpp \
 				main.cpp \
-				CheckType.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
 CC			=	c++
-NAME		=	convert
+NAME		=	Serializer
 OBJ			=	$(SRC:.cpp=.o)
 
 %.o:		%.cpp
@@ -27,7 +26,7 @@ all:		$(NAME)
 
 $(NAME) :	$(OBJ)
 			$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
-			@echo "	---Created" $(NAME)"---"
+			@echo "	Created " $(NAME)
 
 clean:
 			@echo "	removing files..."

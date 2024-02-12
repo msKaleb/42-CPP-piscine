@@ -17,11 +17,8 @@ ScalarConverter::ScalarConverter(ScalarConverter const &copy) {
 
 ScalarConverter	&ScalarConverter::operator=(const ScalarConverter &rhs) {
 	// std::cout << "ScalarConverter: Copy Assignment Operator Called" << std::endl;
-	if (this != &rhs)
-	{
-		//	this->attributes = rhs.attributes;
-		//	...
-	}
+	// no attributes to copy
+	(void)rhs;
 	return (*this);
 }
 

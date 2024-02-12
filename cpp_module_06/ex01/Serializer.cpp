@@ -16,6 +16,7 @@ Serializer::Serializer(Serializer const &copy) {
 
 Serializer	&Serializer::operator=(const Serializer &rhs) {
 	// std::cout << "Serializer: Copy Assignment Operator Called" << std::endl;
+	(void)rhs;
 	return (*this);
 }
 

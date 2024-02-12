@@ -10,13 +10,16 @@
 #                                                                              # 
 # **************************************************************************** # 
 
-SRC			=	Serializer.cpp \
-				main.cpp \
+SRC			=	main.cpp \
+				Base.cpp \
+				A.cpp \
+				B.cpp \
+				C.cpp \
 
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++
-NAME		=	Serializer
+NAME		=	identify
 OBJ			=	$(SRC:.cpp=.o)
 
 %.o:		%.cpp

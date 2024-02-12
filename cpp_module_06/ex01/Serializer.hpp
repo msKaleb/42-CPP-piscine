@@ -2,6 +2,8 @@
 # define SERIALIZER_HPP
 
 # include <iostream>
+# include <stdint.h>
+# include "Data.h"
 
 class	Serializer
 {
@@ -13,8 +15,9 @@ private:
 	Serializer &operator=(const Serializer &rhs);
 
 public:
-	/* Orthodox canonical */
 
+	static uintptr_t	serialize(Data* ptr);
+	static Data*		deserialize(uintptr_t raw);
 };
 
 #endif /* SERIALIZER_HPP */

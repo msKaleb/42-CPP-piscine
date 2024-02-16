@@ -14,7 +14,7 @@ SRC			=	main.cpp \
 CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
 CC			=	c++ 
-NAME		=	iter
+NAME		=	array
 OBJ			=	$(SRC:.cpp=.o) 
 
 %.o:		%.cpp 
@@ -24,10 +24,10 @@ all:		$(NAME)
 
 $(NAME):	$(OBJ) 
 			$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME) 
-			echo "	Created " $(NAME) 
+			@echo "	Created " $(NAME) 
 
 clean:		 
-			echo "	removing files..." 
+			@echo "	removing files..." 
 			$(RM) $(OBJ) 
 
 fclean:		clean 
@@ -37,4 +37,4 @@ re:			fclean all
 
 .PHONY:		all clean fclean re 
 
-# .SILENT: 
+#.SILENT: 

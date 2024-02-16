@@ -1,5 +1,6 @@
 #ifndef FUNCTIONS_HPP
 # define FUNCTIONS_HPP
+
 template<typename T>
 void	swap(T& a, T& b) {
 	T	tmp = a;
@@ -17,4 +18,5 @@ template<typename T>
 T&	max(T& a, T& b) {
 	return a > b ? a : b;
 }
+
 #endif /* FUNCTIONS_HPP */

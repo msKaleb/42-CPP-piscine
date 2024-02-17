@@ -17,10 +17,11 @@ int main(int argc, char* argv[]) {
 	std::strcpy(ptr->varThree, argv[3]);
 
 	serialized = Serializer::serialize(ptr);
+	// ptr->varOne++; // check if changes are kept
 	deserialized = Serializer::deserialize(serialized);
 
-	std::cout << ptr->varOne << "|" << ptr->varTwo <<"|" << ptr->varThree << std::endl;
-	std::cout << deserialized->varOne << "|" << deserialized->varTwo <<"|" << deserialized->varThree << std::endl;
+	std::cout << "Original:     " << ptr->varOne << "|" << ptr->varTwo <<"|" << ptr->varThree << std::endl;
+	std::cout << "Deserialized: " << deserialized->varOne << "|" << deserialized->varTwo <<"|" << deserialized->varThree << std::endl;
 	delete ptr;
 	return (0);
 }

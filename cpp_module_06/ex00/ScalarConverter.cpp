@@ -72,7 +72,7 @@ ScalarConverter::ScalarConverter(float convertedLiteral) {
 
 	// print int value ------------------------
 	if ((convertedLiteral < MIN_INT || convertedLiteral > MAX_INT)
-		|| isnanf(convertedLiteral) || isinff(convertedLiteral))
+		|| isnan(convertedLiteral) || isinf(convertedLiteral))
 		std::cout << "int: impossible" << std::endl;
 	else
 		std::cout << "int: " << static_cast<int>(convertedLiteral) << std::endl;

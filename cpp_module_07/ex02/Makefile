@@ -10,9 +10,10 @@
 # **************************************************************************** # 
 
 SRC			=	main.cpp \
+				Array.tpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++ 
 NAME		=	array
 OBJ			=	$(SRC:.cpp=.o) 

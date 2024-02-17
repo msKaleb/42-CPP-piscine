@@ -6,19 +6,12 @@ class Array
 {
 private:
 	/* data */
-	Array();
+	T	_array;
 public:
-	Array(int elements);
-	~Array();
+
+	Array<T>() : _array(new T[0]) {};
+	Array<T>(size_t elements) : _array(new T[elements]) {};
+	~Array<T>() { delete[] this->_array; };
 };
-
-Array::Array(/* args */)
-{
-}
-
-Array::~Array()
-{
-}
-
 
 #endif /* ARRAY_HPP */

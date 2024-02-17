@@ -15,7 +15,17 @@ public:
 	Array<T>() : _nElems(0), _array(new T[0]) {};
 	Array<T>(unsigned int elements) : _nElems(elements), _array(new T[elements]) {};
 	~Array<T>() { delete[] this->_array; };
-	Array<T>(Array<T> const& copy);
+	Array<T>(Array<T> const& copy) : _nElems(copy._nElems), _array(new T[copy._nElems]) {
+		for (unsigned int i = 0; i < _nElems; i++) {
+			_array[i] = copy._array[i];
+		}
+	};
+	Array<T>	&operator=(const Array& rhs) {
+		if (this != &rhs) {
+			this->~Array();
+			new(this) Array<T>(rhs);
+		}
+	}
 	class	OutOfBoundsException : public std::exception {
 		public: virtual const char* what() const throw() { return "Out of bounds!"; };
 	};

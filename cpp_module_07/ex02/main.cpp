@@ -12,12 +12,14 @@ int main(int, char**)
         const int value = rand();
         numbers[i] = value;
         mirror[i] = value;
-        // std::cout << numbers[i] << std::endl;
+        std::cout << numbers[i] << std::endl;
     }
+        std::cout << std::endl;
     //SCOPE
     {
         Array<int> tmp = numbers;
-        // Array<int> test(tmp);
+        Array<int> test(tmp);
+        // Array<int> test(numbers);
     }
 
     for (int i = 0; i < MAX_VAL; i++)
@@ -48,6 +50,7 @@ int main(int, char**)
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
+        std::cout << numbers[i] << std::endl;
     }
     delete [] mirror;//
     return 0;

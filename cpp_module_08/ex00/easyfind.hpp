@@ -12,13 +12,21 @@ class NotFound : public std::exception {
 
 template<typename T>
 void	easyfind(T& c, int o) {
-	typename T::const_iterator pos, dis;
+	typename T::iterator it;
+	int	pos;
 
-	pos = std::find(c.begin(), c.end(), o);
-	if (pos == c.end())
+	it = std::find(c.begin(), c.end(), o);
+	pos = std::distance(c.begin(), it);
+	
+	if (it == c.end()) {
+		std::cout << "Number " << o << " ";
 		throw NotFound();
-	else
-		std::cout << *pos << std::endl;
+	}
+	else{
+		std::cout <<"Number " << *it;
+		std::cout <<" found at position " << pos << std::endl;
+
+	}
 }
 
 #endif /* EASYFIND_HPP */

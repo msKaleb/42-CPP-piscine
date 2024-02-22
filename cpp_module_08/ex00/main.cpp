@@ -5,9 +5,9 @@
 int	main() {
 	std::list<int>		lst;
 	std::vector<int> 	vec;
-
+	
+	// std::cout <<"pos " << pos << std::endl;
 	for (int i = 0; i < 60; i++) {
-		// std::cout << i << std::endl;
 		lst.push_front(i);
 		vec.push_back(i + 2);
 	}
@@ -19,6 +19,7 @@ int	main() {
 	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
+
 	try {
 		easyfind(vec, 20);
 		easyfind(vec, 50);

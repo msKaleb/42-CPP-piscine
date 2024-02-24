@@ -26,6 +26,7 @@ Span	&Span::operator=(const Span &rhs) {
 	return (*this);
 }
 
+/* ***** parametrized constructor ***** */
 Span::Span(unsigned int	N) : _nMax(N), _nCurr(0) {}
 
 void	Span::addNumber(int num) {
@@ -33,9 +34,9 @@ void	Span::addNumber(int num) {
 		throw MaxNumbers();
 	_lInts.push_front(num);
 	_nCurr++;
-	// std::cout << "Size: " << _lInts.size() << std::endl;
 }
 
+/* ***** member functions ***** */
 unsigned int	Span::shortestSpan() {
 	// first check if we can get a span (2 or more elements)
 	if (_lInts.size() < 2)
@@ -63,4 +64,13 @@ unsigned int	Span::longestSpan() {
 	std::adjacent_difference(maxMin.begin(), maxMin.end(), tmp.begin());
 
 	return tmp.back();
+}
+
+/* ***** exceptions ***** */
+const char*	Span::MaxNumbers::what() const throw() {
+	return "Couldn't add number. Maximum number of elements reached";
+}
+
+const char*	Span::NotEnoughElements::what() const throw() {
+	return "Not enough elements. Add at least two elements to the list";
 }

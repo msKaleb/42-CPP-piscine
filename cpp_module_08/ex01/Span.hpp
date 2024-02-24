@@ -26,14 +26,10 @@ public:
 
 	/* exception classes */
 	class MaxNumbers : public std::exception {
-		public: virtual const char* what() const throw() {
-			return "Couldn't add number. Maximum number of elements reached"; // in cpp??
-		};
+		public: virtual const char* what() const throw();
 	};
 	class NotEnoughElements : public std::exception {
-		public: virtual const char* what() const throw() {
-			return "Not enough elements. Add at least two elements to the list"; // in cpp??
-		};
+		public: virtual const char* what() const throw();
 	};
 
 	/* parametrized constructor */
@@ -44,6 +40,7 @@ public:
 	unsigned int	shortestSpan();
 	unsigned int	longestSpan();
 
+	/* addNumber with a range of iterators */
 	template <class InputIt>
 	void addNumber(InputIt first, InputIt last) {
 		while (first != last) {

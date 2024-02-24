@@ -1,11 +1,12 @@
 #include <vector>
 #include <list>
+#include <map>
 #include "easyfind.hpp"
 
 int	main() {
 	std::list<int>		lst;
 	std::vector<int> 	vec;
-	
+
 	// std::cout <<"pos " << pos << std::endl;
 	for (int i = 0; i < 60; i++) {
 		lst.push_front(i);

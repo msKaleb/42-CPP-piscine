@@ -7,16 +7,17 @@
 
 class NotFound : public std::exception { 
 	public: 
-		virtual const char* what() const throw() { return "Not found"; };
+		virtual const char* what() const throw() { return "not found"; };
 		};
 
 template<typename T>
 void	easyfind(T& c, int o) {
-	typename T::iterator it;
+	typename T::const_iterator it;
 	int	pos;
 
 	it = std::find(c.begin(), c.end(), o);
-	pos = std::distance(c.begin(), it);
+	// c.begin() returns an iterator, so cast it to const_iterator (cbegin() since c++11)
+	pos = std::distance<typename T::const_iterator>(c.begin(), it);
 	
 	if (it == c.end()) {
 		std::cout << "Number " << o << " ";

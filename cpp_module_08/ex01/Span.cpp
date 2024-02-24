@@ -6,6 +6,7 @@ Span::Span() {
 
 Span::~Span() {
 	// std::cout << "Span: Destructor Called" << std::endl;
+	// _lInts.clear();
 }
 
 Span::Span(Span const &copy) {
@@ -18,8 +19,9 @@ Span	&Span::operator=(const Span &rhs) {
 	// std::cout << "Span: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs)
 	{
-		//	this->attributes = rhs.attributes;
-		//	...
+		this->_lInts = std::list<int>(rhs._lInts);
+		this->_nCurr = rhs._nCurr;
+		this->_nMax = rhs._nMax;
 	}
 	return (*this);
 }
@@ -34,7 +36,7 @@ void	Span::addNumber(int num) {
 	// std::cout << "Size: " << _lInts.size() << std::endl;
 }
 
-std::list<int>	Span::getSpan() {
+unsigned int	Span::shortestSpan() {
 	// first check if we can get a span (2 or more elements)
 	if (_lInts.size() < 2)
 		throw NotEnoughElements();
@@ -45,9 +47,20 @@ std::list<int>	Span::getSpan() {
 	tmp.pop_front();
 	tmp.sort();
 
-	return tmp;
+	return tmp.front();
 }
 
-unsigned int	Span::shortestSpan() { return getSpan().front(); }
+unsigned int	Span::longestSpan() {
+	// first check if we can get a span (2 or more elements)
+	if (_lInts.size() < 2)
+		throw NotEnoughElements();
+	std::list<int>	maxMin;
+	std::list<int>	tmp(2);
 
-unsigned int	Span::longestSpan() { return getSpan().back(); }
+	_lInts.sort();
+	maxMin.push_back(_lInts.front());
+	maxMin.push_back(_lInts.back());
+	std::adjacent_difference(maxMin.begin(), maxMin.end(), tmp.begin());
+
+	return tmp.back();
+}

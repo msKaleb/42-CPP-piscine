@@ -34,6 +34,7 @@ int main() {
 	std::stack<int> s(mstack);
 	return 0;
 } */
+/* { // second test
 	MutantStack<int>	mStack;
 	std::list<int>		lst;
 	std::deque<int>		dc;
@@ -52,13 +53,6 @@ int main() {
 	std::deque<int>::iterator	dIt = dc.begin();
 	std::deque<int>::iterator	dIte = dc.end();
 
-	/* std::cout << "mIt: " << *mIt << std::endl;
-	std::cout << "mIte: " << *mIte << std::endl;
-	std::cout << "dIt: " << *dIt << std::endl;
-	std::cout << "dIte: " << *dIte << std::endl;
-	std::cout << "lIt: " << *lIt << std::endl;
-	std::cout << "lite: " << *lite << std::endl; */
-
  // loop over to compare *******************************************************
 	while (mIt != mIte)
 		std::cout << "MutantStack: " << *mIt++ << std::endl;
@@ -75,7 +69,7 @@ int main() {
 	while (cIt != cIte)
 		std::cout << "copy: " << *cIt++ << std::endl;
 
- // testing assignation operator ***********************************************
+	testing assignation operator
  	MutantStack<int>	eq;
 
 	eq = copy;
@@ -85,4 +79,34 @@ int main() {
 		std::cout << "eq: " << *eIt++ << std::endl;
 
 	return (0);
+} */
+{ // third test
+	MutantStack<std::string>	mStack;
+
+    mStack.push("1. Consectetur eiusmod elit est sunt culpa laboris cillum labore id deserunt");
+    mStack.push("2. cupidatat culpa velit id. Duis excepteur consequat proident");
+    mStack.push("3. incididunt et elit duis irure. Fugiat enim velit cillum labore");
+    mStack.push("4. reprehenderit ea cillum id. Irure non fugiat eu occaecat");
+    mStack.push("5. commodo sit commodo tempor. Mollit dolor reprehenderit nisi voluptate incididunt.");
+
+	mStack.pop();
+
+	// MutantStack<std::string>::const_reverse_iterator	it = mStack.crbegin();
+	// MutantStack<std::string>::const_reverse_iterator	itEnd = mStack.crend();
+
+	// MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
+	// MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
+
+	// MutantStack<std::string>::const_iterator	it = mStack.cbegin();
+	// MutantStack<std::string>::const_iterator	itEnd = mStack.cend();
+
+	MutantStack<std::string>::iterator	it = mStack.begin();
+	MutantStack<std::string>::iterator	itEnd = mStack.end();
+
+	++it;
+	++it;
+
+	while (it != itEnd)
+		std::cout << *it++ << std::endl;
+}
 }

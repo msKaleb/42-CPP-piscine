@@ -36,8 +36,8 @@ public:
 	const_iterator			cend() const 	{ return this->c.end(); }
 	reverse_iterator		rbegin() 		{ return this->c.rbegin(); }
 	reverse_iterator		rend() 			{ return this->c.rend(); }
-	const_reverse_iterator	rbegin() const	{ return this->c.rbegin(); }
-	const_reverse_iterator	rend() const	{ return this->c.rend(); }
+	const_reverse_iterator	crbegin() const	{ return this->c.rbegin(); }
+	const_reverse_iterator	crend() const	{ return this->c.rend(); }
 };
 
 #endif /* MUTANTSTACK_HPP */

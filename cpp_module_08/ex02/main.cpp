@@ -94,17 +94,17 @@ int main() {
 	// MutantStack<std::string>::const_reverse_iterator	it = mStack.crbegin();
 	// MutantStack<std::string>::const_reverse_iterator	itEnd = mStack.crend();
 
-	// MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
-	// MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
+	MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
+	MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
 
 	// MutantStack<std::string>::const_iterator	it = mStack.cbegin();
 	// MutantStack<std::string>::const_iterator	itEnd = mStack.cend();
 
-	MutantStack<std::string>::iterator	it = mStack.begin();
-	MutantStack<std::string>::iterator	itEnd = mStack.end();
+	// MutantStack<std::string>::iterator	it = mStack.begin();
+	// MutantStack<std::string>::iterator	itEnd = mStack.end();
 
 	++it;
-	++it;
+	--itEnd;
 
 	while (it != itEnd)
 		std::cout << *it++ << std::endl;

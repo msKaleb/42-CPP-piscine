@@ -1,5 +1,6 @@
 #include <list>
 #include <cstdlib>
+#include <iomanip>
 #include "MutantStack.hpp"
 
 int main() {
@@ -34,6 +35,7 @@ int main() {
 	std::stack<int> s(mstack);
 	return 0;
 } */
+
 /* { // second test
 	MutantStack<int>	mStack;
 	std::list<int>		lst;
@@ -54,6 +56,7 @@ int main() {
 	std::deque<int>::iterator	dIte = dc.end();
 
  // loop over to compare *******************************************************
+	std::cout << "loop over to compare: " << std::endl;
 	while (mIt != mIte)
 		std::cout << "MutantStack: " << *mIt++ << std::endl;
 	while (lIt != lite)
@@ -62,6 +65,7 @@ int main() {
 		std::cout << "deque: " << *dIt++ << std::endl;
 
  // testing copy constructor ***************************************************
+	std::cout << "testing copy constructor: " << std::endl;
 	MutantStack<int>	copy(mStack);
 
 	MutantStack<int>::const_iterator	cIt = copy.cbegin();
@@ -69,10 +73,16 @@ int main() {
 	while (cIt != cIte)
 		std::cout << "copy: " << *cIt++ << std::endl;
 
-	testing assignation operator
+ // testing assignation operator ***********************************************
+	std::cout << "testing assignation operator: " << std::endl;
  	MutantStack<int>	eq;
 
 	eq = copy;
+
+	std::cout << "Size: " << eq.size() << std::endl;
+	eq.pop();
+	std::cout << "Size: " << eq.size() << std::endl;
+
 	MutantStack<int>::reverse_iterator	eIt = eq.rbegin();
 	MutantStack<int>::reverse_iterator	eIte = eq.rend();
 	while (eIt != eIte)
@@ -80,22 +90,40 @@ int main() {
 
 	return (0);
 } */
+
 { // third test
 	MutantStack<std::string>	mStack;
+	MutantStack<float> 			mFloat;
 
+ // push float numbers *********************************************************
+	mFloat.push(34.5f);
+	mFloat.push(65.8f);
+	mFloat.push(16.1f);
+	mFloat.push(98.54);
+
+	MutantStack<float>::iterator	fit = mFloat.begin();
+	MutantStack<float>::iterator	fite = mFloat.end();
+
+	while (fit != fite)
+		std::cout << *fit++ << std::endl;
+
+	std::cout << std::setw(80) << std::setfill('-') << "" << std::endl;
+
+ // push strings ***************************************************************
     mStack.push("1. Consectetur eiusmod elit est sunt culpa laboris cillum labore id deserunt");
     mStack.push("2. cupidatat culpa velit id. Duis excepteur consequat proident");
     mStack.push("3. incididunt et elit duis irure. Fugiat enim velit cillum labore");
     mStack.push("4. reprehenderit ea cillum id. Irure non fugiat eu occaecat");
     mStack.push("5. commodo sit commodo tempor. Mollit dolor reprehenderit nisi voluptate incididunt.");
 
-	mStack.pop();
+	mStack.pop(); // remove the last element
 
-	// MutantStack<std::string>::const_reverse_iterator	it = mStack.crbegin();
-	// MutantStack<std::string>::const_reverse_iterator	itEnd = mStack.crend();
+ // different iterator types ************************************************
+	MutantStack<std::string>::const_reverse_iterator	it = mStack.crbegin();
+	MutantStack<std::string>::const_reverse_iterator	itEnd = mStack.crend();
 
-	MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
-	MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
+	// MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
+	// MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
 
 	// MutantStack<std::string>::const_iterator	it = mStack.cbegin();
 	// MutantStack<std::string>::const_iterator	itEnd = mStack.cend();
@@ -103,8 +131,8 @@ int main() {
 	// MutantStack<std::string>::iterator	it = mStack.begin();
 	// MutantStack<std::string>::iterator	itEnd = mStack.end();
 
-	++it;
-	--itEnd;
+	// ++it;
+	// --itEnd;
 
 	while (it != itEnd)
 		std::cout << *it++ << std::endl;

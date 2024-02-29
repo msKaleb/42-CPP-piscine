@@ -5,25 +5,22 @@
 # include <deque>
 # include <stack>
 
-template<
-	class T/* ,
-	class Container = std::deque<T> */
->
+template<class T>
 class MutantStack : public std::stack<T>
 {
-private:
-	/* data */
 public:
 	/* orthodox canonical */
-	MutantStack<T/* , Container */>() : std::stack<T>() {}
-	~MutantStack<T/* , Container */>() {};
-	MutantStack<T/* , Container */>(MutantStack<T/* , Container */> const& copy) : std::stack<T>(copy) {/*  *this = copy;  */}
-	MutantStack<T/* , Container */> &operator=(const MutantStack<T/* , Container */> &rhs) {
+	MutantStack<T>() : std::stack<T>() {}
+	~MutantStack<T>() {};
+	MutantStack<T>(MutantStack<T> const& copy) : std::stack<T>(copy) {}
+	MutantStack<T> &operator=(const MutantStack<T> &rhs) {
+		// c is a stack member object, which is the underlying container (deque by default)
 		if (this != &rhs)
 			this->c = rhs.c;
 		return *this;
 	}
 
+ // iterators from deque, the default Containter for a stack *******************
 	typedef typename std::deque<T>::const_reverse_iterator	const_reverse_iterator;
 	typedef typename std::deque<T>::reverse_iterator		reverse_iterator;
 	typedef typename std::deque<T>::const_iterator			const_iterator;

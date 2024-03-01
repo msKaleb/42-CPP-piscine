@@ -41,7 +41,7 @@ public:
 	unsigned int	longestSpan();
 
 	/* addNumber with a range of iterators */
-	template <class InputIt>
+	template <typename InputIt>
 	void addNumber(InputIt first, InputIt last) {
 		while (first != last) {
 			addNumber(*first++);

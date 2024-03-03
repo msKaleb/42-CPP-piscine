@@ -44,11 +44,12 @@ int	main() {
 	// create a vector container and call its constructor with the array data:
 	// vector(InputIt first, InputIt last, const Allocator& alloc = Allocator());
 	std::vector<int>	vec(array, array + sizeof(array) / sizeof(array[0]));
-
+	std::cout << "Number of items in vector: " <<vec.size() << std::endl;
 
 	try {
 		// use the overridden version of addNumber() using a range of iterators
 		sp.addNumber(vec.begin(), vec.end());
+		// sp.addNumber(array + 50, array + 4000);
 	} catch (Span::MaxNumbers& e) {
 		std::cout << "Couldn't add more numbers. ";
 		std::cout << e.what() << std::endl;
@@ -57,8 +58,8 @@ int	main() {
 		std::cout << e.what() << std::endl;
 	}
 	try {
-		std::cout << sp.shortestSpan() << std::endl;
-		std::cout << sp.longestSpan() << std::endl;
+		std::cout << "Min span: " << sp.shortestSpan() << std::endl;
+		std::cout << "Max span: " << sp.longestSpan() << std::endl;
 	} catch (Span::NotEnoughElements& e) {
 		std::cout << "Couldn't find the span. ";
 		std::cout << e.what() << std::endl;

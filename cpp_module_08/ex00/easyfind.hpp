@@ -12,7 +12,7 @@ class NotFound : public std::exception {
 
 template<typename T>
 void	easyfind(T& c, int o) {
-	typename T::const_iterator it;
+	typename T::const_iterator it; // const_iterator chosen
 	int	pos;
 
 	it = std::find(c.begin(), c.end(), o);

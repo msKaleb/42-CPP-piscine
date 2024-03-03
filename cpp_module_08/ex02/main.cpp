@@ -68,6 +68,9 @@ int main() {
 	std::cout << "testing copy constructor: " << std::endl;
 	MutantStack<int>	copy(mStack);
 
+	copy.pop();
+	std::cout << "Removed an item from copy" << std::endl;
+
 	MutantStack<int>::const_iterator	cIt = copy.cbegin();
 	MutantStack<int>::const_iterator	cIte = copy.cend();
 	while (cIt != cIte)
@@ -81,6 +84,7 @@ int main() {
 
 	std::cout << "Size: " << eq.size() << std::endl;
 	eq.pop();
+	std::cout << "Removed an item from eq" << std::endl;
 	std::cout << "Size: " << eq.size() << std::endl;
 
 	MutantStack<int>::reverse_iterator	eIt = eq.rbegin();
@@ -101,8 +105,17 @@ int main() {
 	mFloat.push(16.1f);
 	mFloat.push(98.54);
 
-	MutantStack<float>::iterator	fit = mFloat.begin();
-	MutantStack<float>::iterator	fite = mFloat.end();
+	// MutantStack<float>::iterator	fit = mFloat.begin();
+	// MutantStack<float>::iterator	fite = mFloat.end();
+
+	MutantStack<float>::const_iterator	fit = mFloat.cbegin();
+	MutantStack<float>::const_iterator	fite = mFloat.cend();
+
+	// MutantStack<float>::reverse_iterator	fit = mFloat.rbegin();
+	// MutantStack<float>::reverse_iterator	fite = mFloat.rend();
+
+	// MutantStack<float>::const_reverse_iterator	fit = mFloat.crbegin();
+	// MutantStack<float>::const_reverse_iterator	fite = mFloat.crend();
 
 	while (fit != fite)
 		std::cout << *fit++ << std::endl;
@@ -119,11 +132,11 @@ int main() {
 	mStack.pop(); // remove the last element
 
  // different iterator types ************************************************
-	MutantStack<std::string>::const_reverse_iterator	it = mStack.crbegin();
-	MutantStack<std::string>::const_reverse_iterator	itEnd = mStack.crend();
+	// MutantStack<std::string>::const_reverse_iterator	it = mStack.crbegin();
+	// MutantStack<std::string>::const_reverse_iterator	itEnd = mStack.crend();
 
-	// MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
-	// MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
+	MutantStack<std::string>::reverse_iterator	it = mStack.rbegin();
+	MutantStack<std::string>::reverse_iterator	itEnd = mStack.rend();
 
 	// MutantStack<std::string>::const_iterator	it = mStack.cbegin();
 	// MutantStack<std::string>::const_iterator	itEnd = mStack.cend();

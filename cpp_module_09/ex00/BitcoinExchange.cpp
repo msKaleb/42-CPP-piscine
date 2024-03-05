@@ -30,8 +30,33 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &rhs) {
 // parametrized constructor ****************************************************
 BitcoinExchange::BitcoinExchange(std::string const& input) : _input(input) {
 	this->readCSV();
+	this->readInput();
 }
 
+void	BitcoinExchange::readInput() {
+	std::fstream	fin;
+	std::string		row, date, value;
+
+	fin.open(_input.c_str(), std::ios::in);
+	if (!fin)
+		std::cout << "Couldn't open " << _input << std::endl;
+	
+	while (!fin.eof()) {
+		std::getline(fin, row);
+
+		std::stringstream	tmpRow(row);
+		std::getline(tmpRow, date, '|');
+		std::getline(tmpRow, value, '|');
+
+		// todo: ignore newlines, add bad input for inexistent dates, etc
+		if (this->parseDate(date.c_str()) != -1)
+			std::cout << date << std::endl;
+		else
+			std::cout << "not a date" << std::endl;
+	}
+}
+
+// discard lines without date ***********************************************
 time_t	BitcoinExchange::parseDate(const char* dateString) const {
 	struct tm	tmStruct;
 
@@ -40,8 +65,9 @@ time_t	BitcoinExchange::parseDate(const char* dateString) const {
 	return mktime(&tmStruct);
 }
 
-void	BitcoinExchange::readCSV() const {
-	std::map<std::string, float>	date;
+// read the database and store it into a map container **********************
+void	BitcoinExchange::readCSV() {
+	// std::map<std::string, float>	date;
 
 	std::fstream		fin;
 	std::string			row, key, value;
@@ -56,15 +82,15 @@ void	BitcoinExchange::readCSV() const {
 		std::getline(tmpRow, key, ',');
 		std::getline(tmpRow, value, ',');
 		if (parseDate(key.c_str()) != -1)
-			date[key] = std::strtof(value.c_str(), NULL);
+			_date[key] = std::strtof(value.c_str(), NULL);
 	}
  // loop over to check *********************************************************
-	std::map<std::string, float>::iterator	it = date.begin();
-	std::map<std::string, float>::iterator	ite = date.end();
+	/* std::map<std::string, float>::iterator	it = _date.begin();
+	std::map<std::string, float>::iterator	ite = _date.end();
 	while (it != ite) {
 		std::cout << "key: " << it->first << " | value: " << it->second << std::endl;
 		it++;
-	}
+	} */
 
 	// close the file
 	fin.close();

@@ -12,14 +12,17 @@ class	BitcoinExchange
 {
 private:
 	/* data */
-	std::string const	_input;
+	BitcoinExchange();
+	std::string const				_input;
+	std::map<std::string, float>	_date;
 
-	void	readCSV() const;
 	time_t	parseDate(const char* dateString) const;
+
+	void	readCSV();
+	void	readInput();
 
 public:
 	/* Orthodox canonical */
-	BitcoinExchange();
 	~BitcoinExchange();
 	BitcoinExchange(BitcoinExchange const &copy);
 	BitcoinExchange &operator=(const BitcoinExchange &rhs);

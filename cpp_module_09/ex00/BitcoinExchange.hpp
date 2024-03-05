@@ -2,6 +2,7 @@
 # define BITCOINEXCHANGE_HPP
 
 # include <iostream>
+# include <algorithm>
 # include <fstream>
 # include <sstream>
 # include <cstdlib>
@@ -17,9 +18,10 @@ private:
 	std::map<std::string, float>	_date;
 
 	time_t	parseDate(const char* dateString) const;
-
 	void	readCSV();
 	void	readInput();
+	void	trimString(std::string& str);
+	
 
 public:
 	/* Orthodox canonical */

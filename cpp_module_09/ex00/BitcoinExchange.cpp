@@ -33,9 +33,17 @@ BitcoinExchange::BitcoinExchange(std::string const& input) : _input(input) {
 	this->readInput();
 }
 
+void	BitcoinExchange::trimString(std::string& str) {
+	std::string		whiteSpaces = " \f\n\r\t\v";
+
+	str.erase(0, str.find_first_not_of(whiteSpaces));
+	str.erase(str.find_last_not_of(whiteSpaces) + 1);
+}
 void	BitcoinExchange::readInput() {
+	float			fValue = 0.0f, product = 0.0f;
 	std::fstream	fin;
-	std::string		row, date, value;
+	std::string		row, inputDate, value;
+	std::string		whiteSpaces = " \f\n\r\t\v";
 
 	fin.open(_input.c_str(), std::ios::in);
 	if (!fin)
@@ -44,15 +52,28 @@ void	BitcoinExchange::readInput() {
 	while (!fin.eof()) {
 		std::getline(fin, row);
 
-		std::stringstream	tmpRow(row);
-		std::getline(tmpRow, date, '|');
-		std::getline(tmpRow, value, '|');
+		/* std::stringstream	tmpRow(row); // move it out of loop?
+		std::getline(tmpRow, inputDate, '|');
+		std::getline(tmpRow, value, '|'); */
+		inputDate = row.substr(0, row.find_first_of("|"));
+		value = row.substr(row.find_first_of("|") + 1);
+		trimString(inputDate);
+		trimString(value);
+		fValue = std::strtof(value.c_str(), NULL);
+		// if the line contains only whitespaces, do nothing, skip <date | value> line
+		if (inputDate == "date" || inputDate.find_first_not_of(whiteSpaces) == std::string::npos)
+			continue ;
 
 		// todo: ignore newlines, add bad input for inexistent dates, etc
-		if (this->parseDate(date.c_str()) != -1)
-			std::cout << date << std::endl;
-		else
-			std::cout << "not a date" << std::endl;
+		if (this->parseDate(inputDate.c_str()) == -1)
+			std::cout << "Error: bad input => " << row << std::endl; // throw exception?
+		else if (fValue < 0 || fValue > 1000)
+			std::cout << "Error: too large a number." << std::endl; // throw exception?
+		else {
+			
+			product = _date[inputDate] * fValue;
+			std::cout << inputDate << " => " << value << " = " << (product * fValue) /* get product from map */ << std::endl;
+		}
 	}
 }
 

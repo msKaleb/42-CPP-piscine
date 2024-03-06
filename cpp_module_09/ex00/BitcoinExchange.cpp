@@ -28,10 +28,7 @@ BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &rhs) {
 }
 
 // parametrized constructor ****************************************************
-BitcoinExchange::BitcoinExchange(std::string const& input) : _input(input) {
-	this->readCSV();
-	this->readInput();
-}
+BitcoinExchange::BitcoinExchange(std::string const& input) : _input(input) {}
 
 // trim strings ****************************************************************
 void	BitcoinExchange::trimString(std::string& str) {
@@ -56,12 +53,31 @@ float	BitcoinExchange::checkValue(const char* value) const {
 	return fValue;
 }
 
+// search the input date in the map container **********************************
+float	BitcoinExchange::getExchangeRate(std::string const& inputDate, 
+									std::string const& value) {
+	float	fValue = checkValue(value.c_str());
+	float	product = 0.0f;
+
+	if (_date.find(inputDate) != _date.end())
+		product = _date[inputDate] * fValue;
+	else {
+		myMap::iterator	it;
+		// get first element greater or equal than inputDate
+		it = _date.lower_bound(inputDate);
+		--it; // go one step backward
+		// it->first => key | it->second => value
+		product = it->second * fValue;
+	}
+	return product;
+}
+
 // read the input file passed as parameter *************************************
 void	BitcoinExchange::readInput() {
-	float			fValue = 0.0f, product = 0.0f;
 	std::fstream	fin;
 	std::string		row, inputDate, value;
 	std::string		whiteSpaces = " \f\n\r\t\v";
+	float			product = 0.0f;
 
 	fin.open(_input.c_str(), std::ios::in);
 	if (!fin) {
@@ -84,19 +100,10 @@ void	BitcoinExchange::readInput() {
 
 		try {
 			parseDate(inputDate.c_str());
-			fValue = checkValue(value.c_str());
-			if (_date.find(inputDate) != _date.end())
-				product = _date[inputDate] * fValue;
-			else {
-				myMap::iterator	it;
-				it = _date.lower_bound(inputDate);
-				--it;
-				product = it->second * fValue;
-			}
+			product = getExchangeRate(inputDate, value);
 			std::cout << inputDate << " => " << value << " = " << product << std::endl;
 		} catch (BadInput& e) {
 			std::cout << e.what() << row << std::endl;
-			// continue ;
 		} catch (OutOfBounds& e) {
 			std::cout << e.what() << std::endl;
 		}
@@ -133,17 +140,20 @@ void	BitcoinExchange::readCSV() {
 			parseDate(key.c_str());
 			_date[key] = std::strtof(value.c_str(), NULL);
 		} catch (std::exception& e) {
-
+			// std::cout << e.what() << std::endl;
 		}
 	}
- // loop over to check *********************************************************
-	/* myMap::iterator	it = _date.begin();
+	// close the file
+	fin.close();
+}
+
+// loop over to check *********************************************************
+void	BitcoinExchange::printMap() {
+	myMap::iterator	it = _date.begin();
 	myMap::iterator	ite = _date.end();
 	while (it != ite) {
 		std::cout << "key: " << it->first << " | value: " << it->second << std::endl;
 		it++;
-	} */
+	}
 
-	// close the file
-	fin.close();
 }

@@ -21,11 +21,11 @@ private:
 
   // private methods, called after construction ********************************
 	void	parseDate(const char* dateString) const;
-	float	checkValue(const char* value) const;
-	void	readCSV();
-	void	readInput();
 	void	trimString(std::string& str);
 
+	float	checkValue(const char* value) const;
+	float	getExchangeRate(std::string const& inputDate, 
+							std::string const& value);
 public:
   // exception classes *********************************************************
 	class OutOfBounds : public std::exception {};
@@ -45,6 +45,10 @@ public:
 	BitcoinExchange &operator=(const BitcoinExchange &rhs);
 
 	BitcoinExchange(std::string const& input);
+
+	void	readInput();
+	void	printMap();
+	void	readCSV();
 };
 
 #endif /* BITCOINEXCHANGE_HPP */

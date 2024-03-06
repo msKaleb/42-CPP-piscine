@@ -33,12 +33,30 @@ BitcoinExchange::BitcoinExchange(std::string const& input) : _input(input) {
 	this->readInput();
 }
 
+// trim strings ****************************************************************
 void	BitcoinExchange::trimString(std::string& str) {
 	std::string		whiteSpaces = " \f\n\r\t\v";
 
 	str.erase(0, str.find_first_not_of(whiteSpaces));
 	str.erase(str.find_last_not_of(whiteSpaces) + 1);
+	return ;
 }
+
+// check if the value is out of bounds *****************************************
+float	BitcoinExchange::checkValue(const char* value) const {
+	char*	ending ;
+	float	fValue = std::strtof(value, &ending);
+
+	if (*ending != 0)
+		throw BadInput();
+	if (fValue > 1000.0f)
+		throw LargeNumber();
+	else if (fValue < 0.0f)
+		throw NegativeNumber();
+	return fValue;
+}
+
+// read the input file passed as parameter *************************************
 void	BitcoinExchange::readInput() {
 	float			fValue = 0.0f, product = 0.0f;
 	std::fstream	fin;
@@ -46,68 +64,81 @@ void	BitcoinExchange::readInput() {
 	std::string		whiteSpaces = " \f\n\r\t\v";
 
 	fin.open(_input.c_str(), std::ios::in);
-	if (!fin)
+	if (!fin) {
 		std::cout << "Couldn't open " << _input << std::endl;
+		return ;
+	}
 	
 	while (!fin.eof()) {
 		std::getline(fin, row);
 
-		/* std::stringstream	tmpRow(row); // move it out of loop?
-		std::getline(tmpRow, inputDate, '|');
-		std::getline(tmpRow, value, '|'); */
 		inputDate = row.substr(0, row.find_first_of("|"));
 		value = row.substr(row.find_first_of("|") + 1);
 		trimString(inputDate);
 		trimString(value);
-		fValue = std::strtof(value.c_str(), NULL);
-		// if the line contains only whitespaces, do nothing, skip <date | value> line
-		if (inputDate == "date" || inputDate.find_first_not_of(whiteSpaces) == std::string::npos)
+
+		// skip <date | value> and empty lines
+		if ((inputDate == "date" && value == "value")
+			|| (inputDate.find_first_not_of(whiteSpaces) == std::string::npos))
 			continue ;
 
-		// todo: ignore newlines, add bad input for inexistent dates, etc
-		if (this->parseDate(inputDate.c_str()) == -1)
-			std::cout << "Error: bad input => " << row << std::endl; // throw exception?
-		else if (fValue < 0 || fValue > 1000)
-			std::cout << "Error: too large a number." << std::endl; // throw exception?
-		else {
-			
-			product = _date[inputDate] * fValue;
-			std::cout << inputDate << " => " << value << " = " << (product * fValue) /* get product from map */ << std::endl;
+		try {
+			parseDate(inputDate.c_str());
+			fValue = checkValue(value.c_str());
+			if (_date.find(inputDate) != _date.end())
+				product = _date[inputDate] * fValue;
+			else {
+				myMap::iterator	it;
+				it = _date.lower_bound(inputDate);
+				--it;
+				product = it->second * fValue;
+			}
+			std::cout << inputDate << " => " << value << " = " << product << std::endl;
+		} catch (BadInput& e) {
+			std::cout << e.what() << row << std::endl;
+			// continue ;
+		} catch (OutOfBounds& e) {
+			std::cout << e.what() << std::endl;
 		}
 	}
 }
 
 // discard lines without date ***********************************************
-time_t	BitcoinExchange::parseDate(const char* dateString) const {
+void	BitcoinExchange::parseDate(const char* dateString) const {
 	struct tm	tmStruct;
 
 	if (strptime(dateString, "%Y-%m-%d", &tmStruct) == NULL)
-		return -1;
-	return mktime(&tmStruct);
+		throw BadInput();
+	if (mktime(&tmStruct) == -1)
+		throw BadInput();
 }
 
 // read the database and store it into a map container **********************
 void	BitcoinExchange::readCSV() {
-	// std::map<std::string, float>	date;
-
 	std::fstream		fin;
 	std::string			row, key, value;
 
 	fin.open("./data.csv", std::ios::in);
-	if (!fin)
+	if (!fin) {
 		std::cout << "Couldn't open [data.csv] file" << std::endl;
+		return ;
+	}
 
 	while (!fin.eof()) {
 		std::getline(fin, row);
 		std::stringstream	tmpRow(row);
 		std::getline(tmpRow, key, ',');
 		std::getline(tmpRow, value, ',');
-		if (parseDate(key.c_str()) != -1)
+		try {
+			parseDate(key.c_str());
 			_date[key] = std::strtof(value.c_str(), NULL);
+		} catch (std::exception& e) {
+
+		}
 	}
  // loop over to check *********************************************************
-	/* std::map<std::string, float>::iterator	it = _date.begin();
-	std::map<std::string, float>::iterator	ite = _date.end();
+	/* myMap::iterator	it = _date.begin();
+	myMap::iterator	ite = _date.end();
 	while (it != ite) {
 		std::cout << "key: " << it->first << " | value: " << it->second << std::endl;
 		it++;

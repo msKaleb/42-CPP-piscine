@@ -14,6 +14,8 @@ int main(int argc, char* argv[]) {
 	be.readCSV();
 	// input file to calculate the exchange rate
 	be.readInput();
-	// be.printMap();
+
+	BitcoinExchange	copy = be;
+	copy.printMap();
 	return (0);
 }

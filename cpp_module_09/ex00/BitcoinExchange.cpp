@@ -11,18 +11,18 @@ BitcoinExchange::~BitcoinExchange() {
 	// std::cout << "BitcoinExchange: Destructor Called" << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(BitcoinExchange const &copy) {
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &copy) : _input(copy._input), _date(copy._date) {
 	// std::cout << "BitcoinExchange: Copy Constructor Called" << std::endl;
-	if (this != &copy)
-		*this = copy;
+	/* if (this != &copy)
+		*this = copy; */
 }
 
 BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &rhs) {
 	// std::cout << "BitcoinExchange: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs)
 	{
-		//	this->attributes = rhs.attributes;
-		//	...
+		this->~BitcoinExchange();
+		new(this) BitcoinExchange(rhs);
 	}
 	return (*this);
 }

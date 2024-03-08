@@ -16,6 +16,6 @@ int main(int argc, char* argv[]) {
 	be.readInput();
 
 	BitcoinExchange	copy = be;
-	copy.printMap();
+	// copy.printMap();
 	return (0);
 }

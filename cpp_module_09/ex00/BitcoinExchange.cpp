@@ -81,7 +81,7 @@ void	BitcoinExchange::readInput() {
 
 	fin.open(_input.c_str(), std::ios::in);
 	if (!fin) {
-		std::cout << "Couldn't open " << _input << std::endl;
+		std::cerr << "Couldn't open " << _input << std::endl;
 		return ;
 	}
 	
@@ -92,6 +92,10 @@ void	BitcoinExchange::readInput() {
 		value = row.substr(row.find_first_of("|") + 1);
 		trimString(inputDate);
 		trimString(value);
+
+		// 1,2 -> 1.2, etc
+		if (value.find(',') != value.npos)
+			value.replace(value.find(','), 1, ".");
 
 		// skip <date | value> and empty lines
 		if ((inputDate == "date" && value == "value")
@@ -127,7 +131,7 @@ void	BitcoinExchange::readCSV() {
 
 	fin.open("./data.csv", std::ios::in);
 	if (!fin) {
-		std::cout << "Couldn't open [data.csv] file" << std::endl;
+		std::cerr << "Couldn't open [data.csv] file" << std::endl;
 		return ;
 	}
 
@@ -139,8 +143,10 @@ void	BitcoinExchange::readCSV() {
 		try {
 			parseDate(key.c_str());
 			_date[key] = std::strtof(value.c_str(), NULL);
+		} catch (BadInput& e) {
+			continue ; // don't show BadInput messages on database load
 		} catch (std::exception& e) {
-			// std::cout << e.what() << std::endl;
+			std::cout << e.what() << std::endl;
 		}
 	}
 	// close the file

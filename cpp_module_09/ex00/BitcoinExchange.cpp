@@ -104,6 +104,8 @@ void	BitcoinExchange::readInput() {
 
 		try {
 			parseDate(inputDate.c_str());
+			if (inputDate.empty() || value.empty())
+				throw BadInput();
 			product = getExchangeRate(inputDate, value);
 			std::cout << inputDate << " => " << value << " = " << product << std::endl;
 		} catch (BadInput& e) {
@@ -117,6 +119,9 @@ void	BitcoinExchange::readInput() {
 // discard lines without date ***********************************************
 void	BitcoinExchange::parseDate(const char* dateString) const {
 	struct tm	tmStruct;
+
+	// initialize all fields to 0
+	std::memset(&tmStruct, 0, sizeof(struct tm));
 
 	if (strptime(dateString, "%Y-%m-%d", &tmStruct) == NULL)
 		throw BadInput();

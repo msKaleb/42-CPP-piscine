@@ -10,7 +10,7 @@ int main(int argc, char* argv[]) {
 	// std::cout << exp << std::endl;
 	try {
 		rpn.parseExpresion(exp);
-		// rpn.compute(exp);
+		std::cout << "RPN: " << rpn.compute(exp) << std::endl;
 	} catch (RPN::NotAccepted& e) {
 		std::cout << e.what() << std::endl;
 	}

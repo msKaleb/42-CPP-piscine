@@ -18,22 +18,11 @@ RPN	&RPN::operator=(const RPN &rhs) {
 	// std::cout << "RPN: Copy Assignment Operator Called" << std::endl;
 	if (this != &rhs)
 	{
-		//	this->attributes = rhs.attributes;
-		//	...
+		this->_rpn = rhs._rpn;
+		this->_pExp = rhs._pExp;
 	}
 	return (*this);
 }
-
-void TraverseString(std::string const &str, int N) 
-{  
-    // Traverse the string 
-    for (int i = 0; i < N; i++) { 
-  
-        // Print current character 
-        std::cout<< str[i]<< " "; 
-    } 
-      
-} 
 
 void	RPN::parseExpresion(std::string const& exp) {
 	std::string	accepted = ".0123456789+-/* ";
@@ -51,14 +40,14 @@ void	RPN::parseExpresion(std::string const& exp) {
 	std::cout << "_pExp: [" << _pExp << "]" << std::endl;
 }
 
-float	RPN::compute(std::string const& exp) {
-	std::stringstream	ss(exp);
+float	RPN::compute(/* std::string const& exp */) {
+	std::stringstream	ss(_pExp);
 	std::string			item, operators = "+-*/";
 	float				n1, n2;
 
 	while (ss >> item) {
 		// if (operators.find(item) != std::string::npos) {
-		if (item.find_first_of(operators) != std::string::npos) {
+		if (item.find_first_not_of("+-*/") == std::string::npos) {
 			size_t pos = operators.find(item);
 			if (_rpn.size() < 2 || item.length() != 1)
 				throw NotAccepted();

@@ -7,10 +7,13 @@ int main(int argc, char* argv[]) {
 	std::string	exp(argv[1]);
 	RPN			rpn;
 
-	// std::cout << exp << std::endl;
 	try {
 		rpn.parseExpresion(exp);
-		std::cout << "RPN: " << rpn.compute(exp) << std::endl;
+		std::cout << "RPN: " << rpn.compute() << std::endl;
+
+		RPN	rpnCopy(rpn);
+
+		std::cout << "RPN Copy: " << rpnCopy.compute() << std::endl;
 	} catch (RPN::NotAccepted& e) {
 		std::cout << e.what() << std::endl;
 	}

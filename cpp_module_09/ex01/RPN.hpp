@@ -25,7 +25,7 @@ public:
 	};
 
 	void	parseExpresion(std::string const& exp);
-	float	compute(std::string const& exp);
+	float	compute(/* std::string const& exp */);
 
 };
 

@@ -12,8 +12,8 @@
 SRC			=	PmergeMe.cpp \
 				main.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
 CC			=	c++
 NAME		=	PmergeMe
 OBJ			=	$(SRC:.cpp=.o)

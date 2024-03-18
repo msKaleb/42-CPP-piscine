@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 #include <cstdlib>
-#include <sstream>
 
 size_t	jacobsthal(size_t n) {
 	if (n == 0)
@@ -10,6 +9,11 @@ size_t	jacobsthal(size_t n) {
 	return jacobsthal(n - 1) + 2 * (jacobsthal(n - 2));
 }
 int main(int argc, char* argv[]) {
+	if (argc < 2) {
+		std::cout << "Series of numbers needed" << std::endl;
+		return 1;
+	}
+
 	std::string	numbers = "";
 	std::string	item;
 	size_t		size = 0;
@@ -23,12 +27,33 @@ int main(int argc, char* argv[]) {
 		numbers += " ";
 		size++;
 	}
-	std::stringstream	ss(numbers);
-	// int*	chain = new int[size / 2];
+	PmergeMe	p(numbers, size);
+	/* std::stringstream	ss(numbers);
+	int*	intNumbers = new int[size];
+	size = 0;
 	while (ss >> item) {
-		std::cout << item << std::endl;
-		
+		intNumbers[size++] = std::strtol(item.c_str(), NULL, 10);
+		std::cout << "Position " << size - 1 << ": " << intNumbers[size - 1] << std::endl;
+	} */
+
+ // create double pointer array (in constructor?) ******************************
+	/* int**	chain = new int*[size / 2];
+	for (size_t i = 0; i < (size - 1); i += 2) {
+		chain[i] = new int[2];
+		chain[i][0] = std::min(intNumbers[i], intNumbers[i + 1]);
+		chain[i][1] = std::max(intNumbers[i], intNumbers[i + 1]);
+		std::cout << "chain a " << size - 1 << ":  " << chain[i][1] << std::endl;
+		std::cout << "chain b " << size - 1 << ": " << chain[i][0] << std::endl;
+	} */
+ // ****************************************************************************
+
+ // delete chain ***************************************************************
+	/* delete[]intNumbers;
+	for (size_t i = 0; i < (size / 2); i++) {
+		delete[]chain[i];
 	}
+	delete[]chain; */
+ // ****************************************************************************
 
 	return (0);
 }

@@ -6,12 +6,17 @@
 # include <sstream>
 # include <vector>
 # include <list>
+# include <set>
 
 class	PmergeMe
 {
 private:
 	/* data */
 	int**	_chain;
+	int		_straggler;
+	size_t	_size;
+	bool	_hasStraggler;
+	std::multiset<int>	_mSet;
 
 public:
 	/* Orthodox canonical */

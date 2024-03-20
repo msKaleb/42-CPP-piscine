@@ -6,10 +6,11 @@ PmergeMe::PmergeMe() {
 
 PmergeMe::~PmergeMe() {
 	// std::cout << "PmergeMe: Destructor Called" << std::endl;
-	for (size_t i = 0; i < (_size / 2); i++) {
+	/* for (size_t i = 0; i < (_size / 2); i++) {
 		delete[]_chain[i];
 	}
-	delete[]_chain;
+	delete[]_chain; */
+	delete[]_tChain;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &copy) {
@@ -28,7 +29,7 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 	return (*this);
 }
 
-PmergeMe::PmergeMe(std::string const& numbers, size_t size) : _size(size) {
+PmergeMe::PmergeMe(std::string const& numbers, size_t size) : _size(size) { // get size with stringstream
 	std::stringstream	ss(numbers);
 	std::string			item;
 
@@ -43,8 +44,25 @@ PmergeMe::PmergeMe(std::string const& numbers, size_t size) : _size(size) {
 		size++;
 	}
 
+ // create double pointer array (struct) ***************************************
+	int	j = 0;
+	_tChain = new t_pair[size / 2];
+	std::memset(_tChain, 0, sizeof(t_pair));
+	for (size_t i = 0; i < (size - 1); i += 2) {
+		_tChain[j].min = std::min(intNumbers[i], intNumbers[i + 1]);
+		_tChain[j].max = std::max(intNumbers[i], intNumbers[i + 1]);
+		std::cout << "t_chain a " << i << ":  " << _tChain[j].max << std::endl;
+		std::cout << "t_chain b " << i + 1 << ": " << _tChain[j].min << std::endl;
+		j++;
+	}
+	if (_hasStraggler) {
+		_straggler = intNumbers[size - 1];
+		std::cout << "straggler: " << _straggler << std::endl;
+	}
+ // ****************************************************************************
+
  // create double pointer array (in constructor?) ******************************
-	_chain = new int*[size / 2]; // error when size = 0
+	/* _chain = new int*[size / 2]; // error when size = 0
 	for (size_t i = 0; i < (size - 1); i += 2) {
 		_chain[i] = new int[2];
 		_chain[i][0] = std::min(intNumbers[i], intNumbers[i + 1]);
@@ -55,7 +73,11 @@ PmergeMe::PmergeMe(std::string const& numbers, size_t size) : _size(size) {
 	if (_hasStraggler) {
 		_straggler = intNumbers[size - 1];
 		std::cout << "straggler: " << _straggler << std::endl;
-	}
+	} */
  // ****************************************************************************
 	delete[]intNumbers;
+}
+
+void	PmergeMe::mergeSort(int** inputArray) {
+	std::cout << "straggler: " << _straggler << std::endl;
 }

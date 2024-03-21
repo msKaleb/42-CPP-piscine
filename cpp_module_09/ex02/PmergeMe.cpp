@@ -10,7 +10,7 @@ PmergeMe::~PmergeMe() {
 		delete[]_chain[i];
 	}
 	delete[]_chain; */
-	delete[]_tChain;
+	// delete[]_tChain;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &copy) {
@@ -29,53 +29,44 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 	return (*this);
 }
 
-PmergeMe::PmergeMe(std::string const& numbers, size_t size) : _size(size) { // get size with stringstream
+PmergeMe::PmergeMe(std::string const& numbers) { // get size with stringstream
 	std::stringstream	ss(numbers);
 	std::string			item;
+	unsigned int		size = 0;
 
-	_hasStraggler = size % 2 == 0 ? false : true;
-
-	int*	intNumbers = new int[size];
-	size = 0;
+	/* int*	intNumbers = new int[size];
 	while (ss >> item) {
 		intNumbers[size] = std::strtol(item.c_str(), NULL, 10);
 		_mSet.insert(intNumbers[size]); // nope
 		// std::cout << "Position " << size << ": " << intNumbers[size] << std::endl;
 		size++;
+	} */
+	std::vector<int>	intNumbers;
+	while (ss >> item) {
+		intNumbers.push_back(std::strtol(item.c_str(), NULL, 10));
 	}
+	size = intNumbers.size(); // needed?
+	_hasStraggler = size % 2 == 0 ? false : true;
+
+	std::vector<t_pair>	vChain;
+	t_pair				tChain;
 
  // create double pointer array (struct) ***************************************
-	int	j = 0;
-	_tChain = new t_pair[size / 2];
-	std::memset(_tChain, 0, sizeof(t_pair));
 	for (size_t i = 0; i < (size - 1); i += 2) {
-		_tChain[j].min = std::min(intNumbers[i], intNumbers[i + 1]);
-		_tChain[j].max = std::max(intNumbers[i], intNumbers[i + 1]);
-		std::cout << "t_chain a " << i << ":  " << _tChain[j].max << std::endl;
-		std::cout << "t_chain b " << i + 1 << ": " << _tChain[j].min << std::endl;
-		j++;
-	}
-	if (_hasStraggler) {
-		_straggler = intNumbers[size - 1];
-		std::cout << "straggler: " << _straggler << std::endl;
-	}
- // ****************************************************************************
+		tChain.min = std::min(intNumbers[i], intNumbers[i + 1]);
+		tChain.max = std::max(intNumbers[i], intNumbers[i + 1]);
+		vChain.push_back(tChain);
 
- // create double pointer array (in constructor?) ******************************
-	/* _chain = new int*[size / 2]; // error when size = 0
-	for (size_t i = 0; i < (size - 1); i += 2) {
-		_chain[i] = new int[2];
-		_chain[i][0] = std::min(intNumbers[i], intNumbers[i + 1]);
-		_chain[i][1] = std::max(intNumbers[i], intNumbers[i + 1]);
-		std::cout << "chain a " << i << ":  " << _chain[i][1] << std::endl;
-		std::cout << "chain b " << i + 1 << ": " << _chain[i][0] << std::endl;
+		std::cout << "vChain max:  " << vChain.back().max << std::endl;
+		std::cout << "vChain min: " << vChain.back().min << std::endl;
 	}
+	std::cout << "Elements: " << vChain.size() << std::endl;
 	if (_hasStraggler) {
 		_straggler = intNumbers[size - 1];
 		std::cout << "straggler: " << _straggler << std::endl;
-	} */
+	}
  // ****************************************************************************
-	delete[]intNumbers;
+	// delete[]intNumbers;
 }
 
 void	PmergeMe::mergeSort(int** inputArray) {

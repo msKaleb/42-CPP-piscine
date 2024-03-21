@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 		numbers += " ";
 		size++;
 	}
-	PmergeMe	p(numbers, size); // get size wit stringstream
+	PmergeMe	p(numbers); // get size wit stringstream
 	/* std::stringstream	ss(numbers);
 	int*	intNumbers = new int[size];
 	size = 0;

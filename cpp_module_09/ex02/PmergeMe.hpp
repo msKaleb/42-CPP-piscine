@@ -20,7 +20,6 @@ class	PmergeMe
 private:
 	/* data */
 	int**	_chain;
-	t_pair	*_tChain;
 	int		_straggler;
 	size_t	_size;
 	bool	_hasStraggler;
@@ -33,7 +32,7 @@ public:
 	PmergeMe(PmergeMe const &copy);
 	PmergeMe &operator=(const PmergeMe &rhs);
 
-	PmergeMe(std::string const& numbers, size_t size);
+	PmergeMe(std::string const& numbers);
 	void	mergeSort(int** inputArray);
 
 };

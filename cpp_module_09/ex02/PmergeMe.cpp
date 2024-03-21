@@ -29,46 +29,97 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 	return (*this);
 }
 
-PmergeMe::PmergeMe(std::string const& numbers) { // get size with stringstream
+PmergeMe::PmergeMe(std::string const& numbers) {
 	std::stringstream	ss(numbers);
 	std::string			item;
+	std::vector<int>	intNumbers;
+	std::vector<t_pair>	vChain;
 	unsigned int		size = 0;
 
-	/* int*	intNumbers = new int[size];
-	while (ss >> item) {
-		intNumbers[size] = std::strtol(item.c_str(), NULL, 10);
-		_mSet.insert(intNumbers[size]); // nope
-		// std::cout << "Position " << size << ": " << intNumbers[size] << std::endl;
-		size++;
-	} */
-	std::vector<int>	intNumbers;
 	while (ss >> item) {
 		intNumbers.push_back(std::strtol(item.c_str(), NULL, 10));
 	}
-	size = intNumbers.size(); // needed?
-	_hasStraggler = size % 2 == 0 ? false : true;
 
-	std::vector<t_pair>	vChain;
-	t_pair				tChain;
+	size = intNumbers.size(); // needed?
+	_hasStraggler = intNumbers.size() % 2 == 0 ? false : true;
+
 
  // create double pointer array (struct) ***************************************
 	for (size_t i = 0; i < (size - 1); i += 2) {
+		t_pair	tChain;
 		tChain.min = std::min(intNumbers[i], intNumbers[i + 1]);
 		tChain.max = std::max(intNumbers[i], intNumbers[i + 1]);
 		vChain.push_back(tChain);
-
-		std::cout << "vChain max:  " << vChain.back().max << std::endl;
-		std::cout << "vChain min: " << vChain.back().min << std::endl;
 	}
-	std::cout << "Elements: " << vChain.size() << std::endl;
 	if (_hasStraggler) {
 		_straggler = intNumbers[size - 1];
 		std::cout << "straggler: " << _straggler << std::endl;
 	}
- // ****************************************************************************
-	// delete[]intNumbers;
+
+	std::cout << vChain << std::endl;
+	vecMergeSort(vChain);
+	std::cout << vChain << std::endl;
 }
 
-void	PmergeMe::mergeSort(int** inputArray) {
-	std::cout << "straggler: " << _straggler << std::endl;
+void	PmergeMe::vecMergeSort(std::vector<t_pair>& inputVector) {
+	int	iLen = inputVector.size();
+	if (iLen < 2)
+		return ;
+
+	int	iMid = iLen / 2;
+	std::vector<t_pair>	left;
+	std::vector<t_pair>	right;
+
+ 	for (int i = 0; i < iMid; i++)
+		left.push_back(inputVector.at(i));
+	for (int i = iMid; i < iLen; i++)
+		right.push_back(inputVector.at(i));
+
+	vecMergeSort(left);
+	vecMergeSort(right);
+
+	// std::cout << left << std::endl;
+	// std::cout << right << std::endl;
+	// std::cout << inputVector << std::endl;
+	vecMerge(inputVector, left, right);
+	// std::cout << inputVector << std::endl;
 }
+
+void	PmergeMe::vecMerge(std::vector<t_pair>& inputVector,
+					std::vector<t_pair>& left,
+					std::vector<t_pair>& right) {
+
+	inputVector.clear();
+	vIterator	lIt = left.begin(), lIte = left.end();
+	vIterator	rIt = right.begin(), rIte = right.end();
+
+	while (lIt != lIte && rIt != rIte) {
+		if (lIt->max <= rIt->max) {
+			inputVector.push_back(*lIt);
+			lIt++;
+		}
+		else {
+			inputVector.push_back(*rIt);
+			rIt++;
+		}
+	}
+	while (lIt != lIte)
+		inputVector.push_back(*lIt++);
+	while (rIt != rIte)
+		inputVector.push_back(*rIt++);
+}
+
+std::ostream&	operator<<(std::ostream& os, std::vector<t_pair>& elem) {
+	vIterator	it = elem.begin();
+	vIterator	ite = elem.end();
+
+	std::cout << "Elements: " << elem.size() << std::endl;
+	std::cout << "-------------" << std::endl;
+	while (it != ite) {
+		os << "elem max:  " << it->max << std::endl;
+		os << "elem min: " << it->min << std::endl;
+		it++;
+	}
+	return os;
+}
+

@@ -15,6 +15,8 @@ typedef struct s_pair
 	int	min;
 }			t_pair;
 
+typedef std::vector<t_pair>::iterator vIterator;
+
 class	PmergeMe
 {
 private:
@@ -33,8 +35,12 @@ public:
 	PmergeMe &operator=(const PmergeMe &rhs);
 
 	PmergeMe(std::string const& numbers);
-	void	mergeSort(int** inputArray);
+	void	vecMergeSort(std::vector<t_pair>& inputVector);
+	void	vecMerge(std::vector<t_pair>& inputVector,
+					std::vector<t_pair>& left,
+					std::vector<t_pair>& right);
 
 };
 
+std::ostream&	operator<<(std::ostream& os, std::vector<t_pair>& elem);
 #endif /* PMERGEME_HPP */

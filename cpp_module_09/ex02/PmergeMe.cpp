@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() {
+PmergeMe::PmergeMe() : _straggler(-1) {
 	// std::cout << "PmergeMe: Default Constructor Called" << std::endl;
 }
 
@@ -32,16 +32,30 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 PmergeMe::PmergeMe(std::string const& numbers) {
 	std::stringstream	ss(numbers);
 	std::string			item;
-	std::vector<int>	intNumbers;
+	std::vector<int>	intNumbers;	// make it member?
 	std::vector<t_pair>	vChain;
 	unsigned int		size = 0;
 
+ // put into function **********************************************************
 	while (ss >> item) {
-		intNumbers.push_back(std::strtol(item.c_str(), NULL, 10));
+		// todo: add a throw()
+		char*	ending;
+		long	lItem = std::strtol(item.c_str(), &ending, 10);
+		if (*ending != 0) {
+			std::cout << "ONLY NUMBERS!" << std::endl;
+			return ;
+		}
+		else
+			intNumbers.push_back(lItem);
 	}
 
 	size = intNumbers.size(); // needed?
-	_hasStraggler = intNumbers.size() % 2 == 0 ? false : true;
+	bool	hasStraggler = intNumbers.size() % 2 == 0 ? false : true;
+	if (hasStraggler) {
+		_straggler = intNumbers[size - 1];
+		std::cout << "straggler: " << _straggler << std::endl;
+	}
+// *****************************************************************************
 
 
  // create double pointer array (struct) ***************************************
@@ -50,10 +64,6 @@ PmergeMe::PmergeMe(std::string const& numbers) {
 		tChain.min = std::min(intNumbers[i], intNumbers[i + 1]);
 		tChain.max = std::max(intNumbers[i], intNumbers[i + 1]);
 		vChain.push_back(tChain);
-	}
-	if (_hasStraggler) {
-		_straggler = intNumbers[size - 1];
-		std::cout << "straggler: " << _straggler << std::endl;
 	}
 
 	std::cout << vChain << std::endl;
@@ -113,8 +123,8 @@ std::ostream&	operator<<(std::ostream& os, std::vector<t_pair>& elem) {
 	vIterator	it = elem.begin();
 	vIterator	ite = elem.end();
 
-	std::cout << "Elements: " << elem.size() << std::endl;
-	std::cout << "-------------" << std::endl;
+	os << "Elements: " << elem.size() << std::endl;
+	os << "-------------" << std::endl;
 	while (it != ite) {
 		os << "elem max:  " << it->max << std::endl;
 		os << "elem min: " << it->min << std::endl;

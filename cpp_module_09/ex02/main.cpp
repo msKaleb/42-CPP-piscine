@@ -8,6 +8,10 @@ size_t	jacobsthal(size_t n) {
 		return 1;
 	return jacobsthal(n - 1) + 2 * (jacobsthal(n - 2));
 }
+
+/**
+ * @todo check all parameters are digits
+  */
 int main(int argc, char* argv[]) {
 	if (argc < 2) {
 		std::cout << "Series of numbers needed" << std::endl;
@@ -27,6 +31,7 @@ int main(int argc, char* argv[]) {
 		numbers += " ";
 		size++;
 	}
+	std::cout << "Original chain: " << numbers << std::endl;
 	PmergeMe	p(numbers); // get size wit stringstream
 	/* std::stringstream	ss(numbers);
 	int*	intNumbers = new int[size];

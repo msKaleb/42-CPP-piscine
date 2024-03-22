@@ -9,23 +9,26 @@
 # include <list>
 # include <set>
 
-typedef struct s_pair
-{
+typedef struct s_pair {
 	int	max;
 	int	min;
-}			t_pair;
+} t_pair;
 
 typedef std::vector<t_pair>::iterator vIterator;
-
+typedef std::vector<int> intVec;
+typedef std::list<int> intList;
 class	PmergeMe
 {
 private:
 	/* data */
-	int**	_chain;
 	int		_straggler;
-	size_t	_size;
-	bool	_hasStraggler;
-	std::multiset<int>	_mSet;
+	intVec	_sortedVector;
+	intList	_sortedList;
+
+	// int**	_chain;
+	// size_t	_size;
+	// bool	_hasStraggler;
+	// std::multiset<int>	_mSet;
 
 public:
 	/* Orthodox canonical */
@@ -43,4 +46,5 @@ public:
 };
 
 std::ostream&	operator<<(std::ostream& os, std::vector<t_pair>& elem);
+
 #endif /* PMERGEME_HPP */

@@ -29,21 +29,21 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 	return (*this);
 }
 
-PmergeMe::PmergeMe(std::string const& numbers) {
+// get the list of numbers from argv *******************************************
+intVec	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 	std::stringstream	ss(numbers);
 	std::string			item;
-	std::vector<int>	intNumbers;	// make it member?
-	std::vector<t_pair>	vChain;
-	unsigned int		size = 0;
+	intVec				intNumbers;
+	size_t				size;
 
- // put into function **********************************************************
 	while (ss >> item) {
 		// todo: add a throw()
 		char*	ending;
 		long	lItem = std::strtol(item.c_str(), &ending, 10);
-		if (*ending != 0) {
-			std::cout << "ONLY NUMBERS!" << std::endl;
-			return ;
+		if (*ending != 0 || lItem > INTMAX) {
+			std::cout << "ONLY INT NUMBERS!" << std::endl;
+			intNumbers.clear(); // change with exception
+			return intNumbers;  // change with exception
 		}
 		else
 			intNumbers.push_back(lItem);
@@ -55,49 +55,73 @@ PmergeMe::PmergeMe(std::string const& numbers) {
 		_straggler = intNumbers[size - 1];
 		std::cout << "straggler: " << _straggler << std::endl;
 	}
-// *****************************************************************************
+	return intNumbers;
+}
 
+// create vector<t_pair> *******************************************************
+pairVec	PmergeMe::getPairedVector(intVec intNumbers) {
+	pairVec	vChain;
+	size_t	size = intNumbers.size();
+	t_pair	tChain;
 
- // create double pointer array (struct) ***************************************
 	for (size_t i = 0; i < (size - 1); i += 2) {
-		t_pair	tChain;
 		tChain.min = std::min(intNumbers[i], intNumbers[i + 1]);
 		tChain.max = std::max(intNumbers[i], intNumbers[i + 1]);
 		vChain.push_back(tChain);
 	}
+	return vChain;
+}
+
+// Ford-Johnson algorithm - insertion process **********************************
+void	PmergeMe::getSortedVector(pairVec vChain) {
+	vIterator	it = vChain.begin();
+	vIterator	ite = vChain.end();
+
+	_sortedVector.push_back(it->min);
+	while (it != ite) {
+		_sortedVector.push_back(it->max);
+		it++;
+	}
+	std::cout << _sortedVector << std::endl;
+}
+
+// parametrized constructor ****************************************************
+PmergeMe::PmergeMe(std::string const& numbers) {
+	intVec	intNumbers = getUnsortedNumbers(numbers);
+	pairVec	vChain = getPairedVector(intNumbers);
 
 	std::cout << vChain << std::endl;
 	vecMergeSort(vChain);
 	std::cout << vChain << std::endl;
+	getSortedVector(vChain);
 }
 
-void	PmergeMe::vecMergeSort(std::vector<t_pair>& inputVector) {
+// merge-sort algorithm for larger elements (vector) ***************************
+void	PmergeMe::vecMergeSort(pairVec& inputVector) {
 	int	iLen = inputVector.size();
 	if (iLen < 2)
 		return ;
 
 	int	iMid = iLen / 2;
-	std::vector<t_pair>	left;
-	std::vector<t_pair>	right;
+	pairVec	left;
+	pairVec	right;
 
  	for (int i = 0; i < iMid; i++)
 		left.push_back(inputVector.at(i));
 	for (int i = iMid; i < iLen; i++)
 		right.push_back(inputVector.at(i));
 
+	// split in halves until one element is left
 	vecMergeSort(left);
 	vecMergeSort(right);
 
-	// std::cout << left << std::endl;
-	// std::cout << right << std::endl;
-	// std::cout << inputVector << std::endl;
+	// merge the halves and sort
 	vecMerge(inputVector, left, right);
-	// std::cout << inputVector << std::endl;
 }
 
-void	PmergeMe::vecMerge(std::vector<t_pair>& inputVector,
-					std::vector<t_pair>& left,
-					std::vector<t_pair>& right) {
+void	PmergeMe::vecMerge(pairVec& inputVector,
+					pairVec& left,
+					pairVec& right) {
 
 	inputVector.clear();
 	vIterator	lIt = left.begin(), lIte = left.end();
@@ -118,8 +142,10 @@ void	PmergeMe::vecMerge(std::vector<t_pair>& inputVector,
 	while (rIt != rIte)
 		inputVector.push_back(*rIt++);
 }
+// *****************************************************************************
 
-std::ostream&	operator<<(std::ostream& os, std::vector<t_pair>& elem) {
+// operator<< overload for vector<t_pair> **************************************
+std::ostream&	operator<<(std::ostream& os, pairVec& elem) {
 	vIterator	it = elem.begin();
 	vIterator	ite = elem.end();
 
@@ -133,3 +159,31 @@ std::ostream&	operator<<(std::ostream& os, std::vector<t_pair>& elem) {
 	return os;
 }
 
+// operator<< overload for list<t_pair> ****************************************
+std::ostream&	operator<<(std::ostream& os, pairList& elem) {
+	lIterator	it = elem.begin();
+	lIterator	ite = elem.end();
+
+	os << "Elements: " << elem.size() << std::endl;
+	os << "-------------" << std::endl;
+	while (it != ite) {
+		os << "elem max:  " << it->max << std::endl;
+		os << "elem min: " << it->min << std::endl;
+		it++;
+	}
+	return os;
+}
+
+// operator<< overload for vector<int> *****************************************
+std::ostream&	operator<<(std::ostream& os, intVec& elem) {
+	std::vector<int>::iterator	it = elem.begin();
+	std::vector<int>::iterator	ite = elem.end();
+
+	os << "Elements: " << elem.size() << std::endl;
+	os << "-------------" << std::endl;
+	while (it != ite) {
+		os << *it++ << " ";
+	}
+	os << std::endl;
+	return os;
+}

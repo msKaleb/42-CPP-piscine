@@ -35,7 +35,7 @@ private:
 	intVec	getUnsortedNumbers(std::string const& numbers);
 	pairVec	getPairedVector(intVec intN);
 	void	getSortedVector(pairVec vChain);
-
+	size_t	jacobsthal(size_t n);
 public:
 	/* Orthodox canonical */
 	PmergeMe();

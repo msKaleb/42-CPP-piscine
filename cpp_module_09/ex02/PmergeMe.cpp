@@ -29,6 +29,15 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 	return (*this);
 }
 
+// get jacobsthal sequence *****************************************************
+size_t	PmergeMe::jacobsthal(size_t n) {
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 1;
+	return jacobsthal(n - 1) + 2 * (jacobsthal(n - 2));
+}
+
 // get the list of numbers from argv *******************************************
 intVec	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 	std::stringstream	ss(numbers);
@@ -82,6 +91,25 @@ void	PmergeMe::getSortedVector(pairVec vChain) {
 		_sortedVector.push_back(it->max);
 		it++;
 	}
+
+	int		jacobIndex = 3;
+	int		jacobPos = 1;
+	bool	loop = true;
+	while (loop) {
+		size_t	jacobNumber = jacobsthal(jacobIndex);
+		if (jacobNumber >= vChain.size()) {
+			jacobNumber = vChain.size();
+			loop = false;
+		}
+
+		for (int i = jacobNumber - 1; i >= jacobPos; i--) {
+			std::cout << vChain.at(i).min << " ";
+		}
+		jacobPos = jacobIndex;
+		jacobIndex++;
+		jacobNumber = jacobsthal(jacobIndex);
+	}
+	std::cout << std::endl;
 	std::cout << _sortedVector << std::endl;
 }
 

@@ -96,7 +96,8 @@ void	PmergeMe::listBinarySearch(int n, int T) {
 		}
 	}
 	intList::iterator	it = _sortedList.begin();
-	while (int i = 0 != L) {
+	int i = 0;
+	while (i != L) {
 		it++;
 		i++;
 	}
@@ -285,7 +286,8 @@ int	PmergeMe::at(intList& inputList, int& index) {
 
 	if (index > static_cast<int>(inputList.size()))	
 		throw std::exception();
-	while (int i = 0 != index) {
+	int	i = 0;
+	while (i != index) {
 		it++;
 		i++;
 	}
@@ -298,7 +300,8 @@ t_pair	PmergeMe::at(pairList& inputList, int& index){
 
 	if (index > static_cast<int>(inputList.size()))	
 		throw std::exception();
-	while (int i = 0 != index) {
+	int i = 0;
+	while (i != index) {
 		it++;
 		i++;
 	}

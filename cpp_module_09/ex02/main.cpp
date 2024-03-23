@@ -18,9 +18,12 @@ int main(int argc, char* argv[]) {
 	try {
 		PmergeMe	p(numbers);
 
-		std::cout << "Before: " << numbers << std::endl;
-		std::cout << "After:  " << p.getSortedVector() << std::endl;
+		std::cout << "Before:           " << numbers << std::endl;
+		std::cout << "After <vector>:   " << p.getSortedVector() << std::endl;
+		std::cout << "After <list>:     " << p.getSortedList() << std::endl;
 	} catch (PmergeMe::NotInt& e) {
+		std::cout << e.what() << std::endl;
+	} catch (std::exception& e) {
 		std::cout << e.what() << std::endl;
 	}
 	return (0);

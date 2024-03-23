@@ -1,6 +1,6 @@
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() : _straggler(-1), _inserted(0) {
+PmergeMe::PmergeMe() : _straggler(-1) {
 	// std::cout << "PmergeMe: Default Constructor Called" << std::endl;
 }
 
@@ -19,7 +19,6 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 	if (this != &rhs)
 	{
 		this->_straggler = rhs._straggler;
-		this->_inserted = rhs._inserted;
 		this->_sortedVector = rhs._sortedVector;
 		this->_sortedList = rhs._sortedList;
 	}
@@ -36,10 +35,10 @@ size_t	PmergeMe::jacobsthal(size_t n) {
 }
 
 // get the list of numbers from argv *******************************************
-intVec	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
+std::deque<int>	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 	std::stringstream	ss(numbers);
 	std::string			item;
-	intVec				intNumbers; // use deque??
+	std::deque<int>		intNumbers; // use deque??
 
 	while (ss >> item) {
 		char*	ending;
@@ -58,9 +57,86 @@ intVec	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 }
 
 intVec	PmergeMe::getSortedVector() const { return this->_sortedVector; }
+intList	PmergeMe::getSortedList() const { return this->_sortedList; }
+
+// create list<t_pair> *********************************************************
+pairList	PmergeMe::makePairedList(std::deque<int> intNumbers) {
+	pairList	lChain;
+	size_t		size = intNumbers.size();
+	t_pair		tChain;
+
+	for (size_t i = 0; i < (size - 1); i += 2) {
+		tChain.min = std::min(intNumbers[i], intNumbers[i + 1]);
+		tChain.max = std::max(intNumbers[i], intNumbers[i + 1]);
+		lChain.push_back(tChain);
+	}
+	return lChain;
+}
+
+void	PmergeMe::listBinarySearch(int n, int T) {
+	int	size = static_cast<int>(_sortedList.size());
+	int	L = 0;
+	int R = n;
+	int	m;
+	int	elem;
+
+	if (R > size)
+		R = size;
+
+	while (L <= R) {
+		m = (L + R) / 2;
+		elem = at(_sortedList, m);
+		if (elem < T)
+			L = m + 1;
+		else if (elem > T)
+			R = m - 1;
+		else {
+			L = m;
+			break ;
+		}
+	}
+	intList::iterator	it = _sortedList.begin();
+	while (int i = 0 != L) {
+		it++;
+		i++;
+	}
+	_sortedList.insert(it, T);
+}
+
+// Ford-Johnson algorithm - insertion process <list> ***************************
+void	PmergeMe::sortList(pairList lChain) {
+	lIterator	it = lChain.begin();
+	lIterator	ite = lChain.end();
+
+	_sortedList.push_back(it->min);
+	while (it != ite) {
+		_sortedList.push_back(it->max);
+		it++;
+	}
+
+	size_t	jacobNumber = 3;
+	int		jacobIndex = 3;
+	int		jacobPos = 1;
+	int		cycles = 2;
+	bool	loop = true;
+	while (loop) {
+		if (jacobNumber >= lChain.size()) {
+			jacobNumber = lChain.size();
+			loop = false;
+		}
+		for (int i = jacobNumber - 1; i >= jacobPos; i--) {
+			listBinarySearch(std::pow(2, cycles) - 1, at(lChain, i).min);
+		}
+		jacobPos = jacobNumber;
+		jacobNumber = jacobsthal(++jacobIndex);
+		cycles++;
+	}
+	if (_straggler >= 0)
+		listBinarySearch(_sortedList.size(), _straggler);
+}
 
 // create vector<t_pair> *******************************************************
-pairVec	PmergeMe::makePairedVector(intVec intNumbers) {
+pairVec	PmergeMe::makePairedVector(std::deque<int> intNumbers) {
 	pairVec	vChain;
 	size_t	size = intNumbers.size();
 	t_pair	tChain;
@@ -74,10 +150,14 @@ pairVec	PmergeMe::makePairedVector(intVec intNumbers) {
 }
 
 void	PmergeMe::vecBinarySearch(int n, int T) {
+	int	size = static_cast<int>(_sortedVector.size());
 	int	L = 0;
 	int R = n;
 	int	m;
-	
+
+	if (R > size)
+		R = size;
+
 	while (L <= R) {
 		m = (L + R) / 2;
 		if (_sortedVector.at(m) < T)
@@ -90,10 +170,10 @@ void	PmergeMe::vecBinarySearch(int n, int T) {
 		}
 	}
 	_sortedVector.insert(_sortedVector.begin() + L, T);
-	_inserted++;
+	// _inserted++;
 }
 
-// Ford-Johnson algorithm - insertion process **********************************
+// Ford-Johnson algorithm - insertion process <vector> *************************
 void	PmergeMe::sortVector(pairVec vChain) {
 	vIterator	it = vChain.begin();
 	vIterator	ite = vChain.end();
@@ -105,22 +185,24 @@ void	PmergeMe::sortVector(pairVec vChain) {
 	}
 
 	size_t	jacobNumber = 3;
-	int		jacobIndex = 3;
-	int		jacobPos = 1;
+	size_t	jacobIndex = 3;
+	size_t	jacobPos = 1;
+	size_t	cycles = 2;
 	bool	loop = true;
-	// int		cicles = 2;
 	while (loop) {
 		if (jacobNumber >= vChain.size()) {
 			jacobNumber = vChain.size();
 			loop = false;
 		}
-		for (int i = jacobNumber - 1; i >= jacobPos; i--) {
-			vecBinarySearch(i + _inserted, vChain.at(i).min);
-			// vecBinarySearch(std::pow(2, cicles) - 1, vChain.at(i).min);
+		for (size_t i = jacobNumber - 1; i >= jacobPos; i--) {
+			// vecBinarySearch(i + _inserted, vChain.at(i).min);
+			/* if (i == jacobNumber - 1)
+				std::cout << "cycle: " << cycles << " | " << std::pow(2, cycles) - 1  << " mine: " << i + _inserted << std::endl; */
+			vecBinarySearch(std::pow(2, cycles) - 1, vChain.at(i).min);
 		}
 		jacobPos = jacobNumber;
 		jacobNumber = jacobsthal(++jacobIndex);
-		// cicles++;
+		cycles++;
 	}
 	if (_straggler >= 0)
 		vecBinarySearch(_sortedVector.size(), _straggler);
@@ -129,15 +211,100 @@ void	PmergeMe::sortVector(pairVec vChain) {
 // *****************************************************************************
 // parametrized constructor
 // *****************************************************************************
-PmergeMe::PmergeMe(std::string const& numbers) : _straggler(-1), _inserted(0) {
-	intVec	intNumbers = getUnsortedNumbers(numbers);
-	pairVec	vChain = makePairedVector(intNumbers);
+PmergeMe::PmergeMe(std::string const& numbers) : _straggler(-1) {
+	std::deque<int>		intNumbers = getUnsortedNumbers(numbers);
+	pairVec				vChain = makePairedVector(intNumbers);
+	pairList			lChain = makePairedList(intNumbers);
 
-	vecMergeSort(vChain);	// sort the larger elements
-	sortVector(vChain);		// insert pending elements into sorted vector
+  // sorting process for vector ************************************************
+	if (!vChain.empty()) {
+		vecMergeSort(vChain);	// sort the larger elements
+		sortVector(vChain);		// insert pending elements into sorted vector
+	}
+	else
+		_sortedVector.push_back(std::strtol(numbers.c_str(), NULL, 10));
 
-
+  // sorting process for list **************************************************
+	if (!lChain.empty()) {
+		listMergeSort(lChain);
+		// std::cout << lChain << std::endl;
+		sortList(lChain);
+	}
+	else
+		_sortedList.push_back(std::strtol(numbers.c_str(), NULL, 10));
 }
+
+// merge-sort algorithm for larger elements (list) *****************************
+void	PmergeMe::listMergeSort(pairList& inputList) {
+	int	iLen = inputList.size();
+	if (iLen < 2)
+		return ;
+
+	int	iMid = iLen / 2;
+	pairList	left;
+	pairList	right;
+
+ 	for (int i = 0; i < iMid; i++)
+		left.push_back(at(inputList, i));
+	for (int i = iMid; i < iLen; i++)
+		right.push_back(at(inputList, i));
+
+	// split in halves until one element is left
+	listMergeSort(left);
+	listMergeSort(right);
+
+	// merge the halves and sort
+	listMerge(inputList, left, right);
+}
+
+void	PmergeMe::listMerge(pairList& inputList,
+					pairList& left,
+					pairList& right) {
+	inputList.clear();
+	lIterator	lIt = left.begin(), lIte = left.end();
+	lIterator	rIt = right.begin(), rIte = right.end();
+
+	while (lIt != lIte && rIt != rIte) {
+		if (lIt->max <= rIt->max) {
+			inputList.push_back(*lIt);
+			lIt++;
+		}
+		else {
+			inputList.push_back(*rIt);
+			rIt++;
+		}
+	}
+	while (lIt != lIte)
+		inputList.push_back(*lIt++);
+	while (rIt != rIte)
+		inputList.push_back(*rIt++);
+}
+
+int	PmergeMe::at(intList& inputList, int& index) {
+	intList::iterator	it = inputList.begin();
+
+	if (index > static_cast<int>(inputList.size()))	
+		throw std::exception();
+	while (int i = 0 != index) {
+		it++;
+		i++;
+	}
+	return *it;
+}
+
+t_pair	PmergeMe::at(pairList& inputList, int& index){
+	lIterator	it = inputList.begin();
+	// lIterator	ite = inputList.end();
+
+	if (index > static_cast<int>(inputList.size()))	
+		throw std::exception();
+	while (int i = 0 != index) {
+		it++;
+		i++;
+	}
+	return *it;
+}
+// ***************************** merge-sort algorithm for larger elements (list)
 
 // merge-sort algorithm for larger elements (vector) ***************************
 void	PmergeMe::vecMergeSort(pairVec& inputVector) {
@@ -185,7 +352,7 @@ void	PmergeMe::vecMerge(pairVec& inputVector,
 	while (rIt != rIte)
 		inputVector.push_back(*rIt++);
 }
-// *****************************************************************************
+// *************************** merge-sort algorithm for larger elements (vector)
 
 // operator<< overload for vector<t_pair> **************************************
 std::ostream&	operator<<(std::ostream& os, pairVec& elem) {
@@ -224,12 +391,9 @@ std::ostream&	operator<<(std::ostream& os, intVec& elem) {
 	std::vector<int>::iterator	it = elem.begin();
 	std::vector<int>::iterator	ite = elem.end();
 
-	/* os << "Elements: " << elem.size() << std::endl;
-	os << "-------------" << std::endl; */
 	while (it != ite) {
 		os << *it++ << " ";
 	}
-	os << std::endl;
 	return os;
 }
 
@@ -238,11 +402,30 @@ std::ostream&	operator<<(std::ostream& os, intVec const& elem) {
 	std::vector<int>::const_iterator	it = elem.begin();
 	std::vector<int>::const_iterator	ite = elem.end();
 
-	/* os << "Elements: " << elem.size() << std::endl;
-	os << "-------------" << std::endl; */
 	while (it != ite) {
 		os << *it++ << " ";
 	}
-	os << std::endl;
+	return os;
+}
+
+// operator<< overload for list<int> *******************************************
+std::ostream&	operator<<(std::ostream& os, intList& elem) {
+	std::list<int>::iterator	it = elem.begin();
+	std::list<int>::iterator	ite = elem.end();
+
+	while (it != ite) {
+		os << *it++ << " ";
+	}
+	return os;
+}
+
+// operator<< overload for list<int> const **************************************
+std::ostream&	operator<<(std::ostream& os, intList const& elem) {
+	std::list<int>::const_iterator	it = elem.begin();
+	std::list<int>::const_iterator	ite = elem.end();
+
+	while (it != ite) {
+		os << *it++ << " ";
+	}
 	return os;
 }

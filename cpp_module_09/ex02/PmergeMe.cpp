@@ -1,5 +1,8 @@
 #include "PmergeMe.hpp"
 
+// *****************************************************************************
+// othodox canonical
+// *****************************************************************************
 PmergeMe::PmergeMe() : _straggler(-1) {
 	// std::cout << "PmergeMe: Default Constructor Called" << std::endl;
 }
@@ -21,9 +24,12 @@ PmergeMe	&PmergeMe::operator=(const PmergeMe &rhs) {
 		this->_straggler = rhs._straggler;
 		this->_sortedVector = rhs._sortedVector;
 		this->_sortedList = rhs._sortedList;
+		this->_vecTime = rhs._vecTime;
+		this->_listTime = rhs._listTime;
 	}
 	return (*this);
 }
+// *****************************************************************************
 
 // get jacobsthal sequence *****************************************************
 size_t	PmergeMe::jacobsthal(size_t n) {
@@ -38,7 +44,7 @@ size_t	PmergeMe::jacobsthal(size_t n) {
 std::deque<int>	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 	std::stringstream	ss(numbers);
 	std::string			item;
-	std::deque<int>		intNumbers; // use deque??
+	std::deque<int>		intNumbers;
 
 	while (ss >> item) {
 		char*	ending;
@@ -56,8 +62,18 @@ std::deque<int>	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 	return intNumbers;
 }
 
+// *****************************************************************************
+// getters
+// *****************************************************************************
 intVec	PmergeMe::getSortedVector() const { return this->_sortedVector; }
 intList	PmergeMe::getSortedList() const { return this->_sortedList; }
+long	PmergeMe::getVecTime() const { return this->_vecTime; }
+long	PmergeMe::getListTime() const { return this->_listTime; }
+// *****************************************************************************
+
+// *****************************************************************************
+// std::list related functions
+// *****************************************************************************
 
 // create list<t_pair> *********************************************************
 pairList	PmergeMe::makePairedList(std::deque<int> intNumbers) {
@@ -73,6 +89,7 @@ pairList	PmergeMe::makePairedList(std::deque<int> intNumbers) {
 	return lChain;
 }
 
+// search the corresponding position inside the sorted list ********************
 void	PmergeMe::listBinarySearch(int n, int T) {
 	int	size = static_cast<int>(_sortedList.size());
 	int	L = 0;
@@ -136,6 +153,10 @@ void	PmergeMe::sortList(pairList lChain) {
 		listBinarySearch(_sortedList.size(), _straggler);
 }
 
+// *****************************************************************************
+// std::vector related functions
+// *****************************************************************************
+
 // create vector<t_pair> *******************************************************
 pairVec	PmergeMe::makePairedVector(std::deque<int> intNumbers) {
 	pairVec	vChain;
@@ -150,6 +171,7 @@ pairVec	PmergeMe::makePairedVector(std::deque<int> intNumbers) {
 	return vChain;
 }
 
+// search the corresponding position inside the sorted vector ******************
 void	PmergeMe::vecBinarySearch(int n, int T) {
 	int	size = static_cast<int>(_sortedVector.size());
 	int	L = 0;
@@ -196,9 +218,6 @@ void	PmergeMe::sortVector(pairVec vChain) {
 			loop = false;
 		}
 		for (size_t i = jacobNumber - 1; i >= jacobPos; i--) {
-			// vecBinarySearch(i + _inserted, vChain.at(i).min);
-			/* if (i == jacobNumber - 1)
-				std::cout << "cycle: " << cycles << " | " << std::pow(2, cycles) - 1  << " mine: " << i + _inserted << std::endl; */
 			vecBinarySearch(std::pow(2, cycles) - 1, vChain.at(i).min);
 		}
 		jacobPos = jacobNumber;
@@ -217,22 +236,29 @@ PmergeMe::PmergeMe(std::string const& numbers) : _straggler(-1) {
 	pairVec				vChain = makePairedVector(intNumbers);
 	pairList			lChain = makePairedList(intNumbers);
 
-  // sorting process for vector ************************************************
+	// sorting process for vector
+	struct timeval	vStart, vEnd;
+	gettimeofday(&vStart, NULL);
 	if (!vChain.empty()) {
-		vecMergeSort(vChain);	// sort the larger elements
+		vecMergeSort(vChain);	// sort the pairs by larger elements
 		sortVector(vChain);		// insert pending elements into sorted vector
 	}
 	else
 		_sortedVector.push_back(std::strtol(numbers.c_str(), NULL, 10));
+	gettimeofday(&vEnd, NULL);
+	_vecTime = (vEnd.tv_sec - vStart.tv_sec) * 1000000 + (vEnd.tv_usec - vStart.tv_usec);
 
-  // sorting process for list **************************************************
+	// sorting process for list
+	struct timeval	lStart, lEnd;
+	gettimeofday(&lStart, NULL);
 	if (!lChain.empty()) {
-		listMergeSort(lChain);
-		// std::cout << lChain << std::endl;
-		sortList(lChain);
+		listMergeSort(lChain);	// sort the pairs by larger elements
+		sortList(lChain);		// insert pending elements into sorted list
 	}
 	else
 		_sortedList.push_back(std::strtol(numbers.c_str(), NULL, 10));
+	gettimeofday(&lEnd, NULL);
+	_listTime = (lEnd.tv_sec - lStart.tv_sec) * 1000000 + (lEnd.tv_usec - lStart.tv_usec);
 }
 
 // merge-sort algorithm for larger elements (list) *****************************
@@ -356,6 +382,11 @@ void	PmergeMe::vecMerge(pairVec& inputVector,
 		inputVector.push_back(*rIt++);
 }
 // *************************** merge-sort algorithm for larger elements (vector)
+
+
+// *****************************************************************************
+// overloads
+// *****************************************************************************
 
 // operator<< overload for vector<t_pair> **************************************
 std::ostream&	operator<<(std::ostream& os, pairVec& elem) {

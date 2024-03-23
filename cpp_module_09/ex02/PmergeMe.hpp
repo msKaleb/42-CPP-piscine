@@ -1,6 +1,7 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+# include <sys/time.h>
 # include <cstring>
 # include <iostream>
 # include <algorithm>
@@ -34,9 +35,10 @@ private:
 	PmergeMe();
 
 	int		_straggler;		// if the chain is odd, store it
-	// int		_inserted;		// counter for inserted pending elements
 	intVec	_sortedVector;	// sorted chain (vector)
 	intList	_sortedList;	// sorted chain (list)
+	long	_vecTime;
+	long	_listTime;
 
 	// First create an array with all the numbers passed as argument
 	std::deque<int>	getUnsortedNumbers(std::string const& numbers);
@@ -76,6 +78,9 @@ public:
 	PmergeMe(std::string const& numbers);
 	intVec	getSortedVector() const;
 	intList	getSortedList() const;
+
+	long	getListTime() const;
+	long	getVecTime() const;
 
 	class NotInt : public std::exception {
 		public: virtual const char* what() const throw() { return "Only positive integers"; }

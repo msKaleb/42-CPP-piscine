@@ -23,34 +23,13 @@ int main(int argc, char* argv[]) {
 		numbers += " ";
 		size++;
 	}
-	std::cout << "Original chain: " << numbers << std::endl;
-	PmergeMe	p(numbers); // get size wit stringstream
-	/* std::stringstream	ss(numbers);
-	int*	intNumbers = new int[size];
-	size = 0;
-	while (ss >> item) {
-		intNumbers[size++] = std::strtol(item.c_str(), NULL, 10);
-		std::cout << "Position " << size - 1 << ": " << intNumbers[size - 1] << std::endl;
-	} */
+	std::cout << "Before: " << numbers << std::endl;
+	try {
+		PmergeMe	p(numbers);
 
- // create double pointer array (in constructor?) ******************************
-	/* int**	chain = new int*[size / 2];
-	for (size_t i = 0; i < (size - 1); i += 2) {
-		chain[i] = new int[2];
-		chain[i][0] = std::min(intNumbers[i], intNumbers[i + 1]);
-		chain[i][1] = std::max(intNumbers[i], intNumbers[i + 1]);
-		std::cout << "chain a " << size - 1 << ":  " << chain[i][1] << std::endl;
-		std::cout << "chain b " << size - 1 << ": " << chain[i][0] << std::endl;
-	} */
- // ****************************************************************************
-
- // delete chain ***************************************************************
-	/* delete[]intNumbers;
-	for (size_t i = 0; i < (size / 2); i++) {
-		delete[]chain[i];
+		std::cout << "After:  " << p.getSortedVector() << std::endl;
+	} catch (PmergeMe::NotInt& e) {
+		std::cout << e.what() << std::endl;
 	}
-	delete[]chain; */
- // ****************************************************************************
-
 	return (0);
 }

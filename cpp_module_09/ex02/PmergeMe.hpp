@@ -28,14 +28,38 @@ class	PmergeMe
 {
 private:
 	/* data */
-	int		_straggler;
-	intVec	_sortedVector;
-	intList	_sortedList;
+	int		_straggler;		// if the chain is odd, store it
+	int		_inserted;		// counter for inserted pending elements
+	intVec	_sortedVector;	// sorted chain (vector)
+	intList	_sortedList;	// sorted chain (list)
 
+	// First create an array with all the numbers passed as argument
 	intVec	getUnsortedNumbers(std::string const& numbers);
-	pairVec	getPairedVector(intVec intN);
-	void	getSortedVector(pairVec vChain);
+
+	// make a min-max paired arrays
+	pairVec		getPairedVector(intVec intN);
+	// pairList	getPairedList(intList intN);
+
+	// return the Jacobsthal number at position n
 	size_t	jacobsthal(size_t n);
+
+	
+	void	binarySearch(int n, int T); // just for vector, add third argument <list/vector>??
+
+	// set of functions for the paired vector<t_pair>
+	void	sortVector(pairVec vChain);
+	void	vecMergeSort(pairVec& inputVector);
+	void	vecMerge(pairVec& inputVector,
+					pairVec& left,
+					pairVec& right);
+
+	// set of functions for the paired vector<t_pair>
+	/* void	sortList(pairList vChain);
+	void	listMergeSort(pairList& inputVector);
+	void	listMerge(pairList& inputVector,
+					pairList& left,
+					pairList& right); */
+
 public:
 	/* Orthodox canonical */
 	PmergeMe();
@@ -44,14 +68,17 @@ public:
 	PmergeMe &operator=(const PmergeMe &rhs);
 
 	PmergeMe(std::string const& numbers);
-	void	vecMergeSort(pairVec& inputVector);
-	void	vecMerge(pairVec& inputVector,
-					pairVec& left,
-					pairVec& right);
+	intVec	getSortedVector() const;
 
+	class NotInt : public std::exception {
+		public: virtual const char* what() const throw() { return "Only positive integers"; }
+	};
 };
 
 std::ostream&	operator<<(std::ostream& os, intVec& elem);
+std::ostream&	operator<<(std::ostream& os, intVec const& elem);
+std::ostream&	operator<<(std::ostream& os, intList& elem);
+std::ostream&	operator<<(std::ostream& os, intList const& elem);
 std::ostream&	operator<<(std::ostream& os, pairVec& elem);
 std::ostream&	operator<<(std::ostream& os, pairList& elem);
 

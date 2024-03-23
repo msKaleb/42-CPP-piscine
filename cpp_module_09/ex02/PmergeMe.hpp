@@ -4,6 +4,7 @@
 # include <cstring>
 # include <iostream>
 # include <algorithm>
+# include <cmath>
 # include <sstream>
 # include <limits>
 # include <vector>
@@ -28,6 +29,9 @@ class	PmergeMe
 {
 private:
 	/* data */
+	// make it private so that only can be instantiated with args
+	PmergeMe();
+
 	int		_straggler;		// if the chain is odd, store it
 	int		_inserted;		// counter for inserted pending elements
 	intVec	_sortedVector;	// sorted chain (vector)
@@ -37,14 +41,14 @@ private:
 	intVec	getUnsortedNumbers(std::string const& numbers);
 
 	// make a min-max paired arrays
-	pairVec		getPairedVector(intVec intN);
-	// pairList	getPairedList(intList intN);
+	pairVec		makePairedVector(intVec intN);
+	pairList	makePairedList(intList intN);
 
 	// return the Jacobsthal number at position n
 	size_t	jacobsthal(size_t n);
 
 	
-	void	binarySearch(int n, int T); // just for vector, add third argument <list/vector>??
+	void	vecBinarySearch(int n, int T);
 
 	// set of functions for the paired vector<t_pair>
 	void	sortVector(pairVec vChain);
@@ -54,15 +58,14 @@ private:
 					pairVec& right);
 
 	// set of functions for the paired vector<t_pair>
-	/* void	sortList(pairList vChain);
+	void	sortList(pairList vChain);
 	void	listMergeSort(pairList& inputVector);
 	void	listMerge(pairList& inputVector,
 					pairList& left,
-					pairList& right); */
+					pairList& right);
 
 public:
 	/* Orthodox canonical */
-	PmergeMe();
 	~PmergeMe();
 	PmergeMe(PmergeMe const &copy);
 	PmergeMe &operator=(const PmergeMe &rhs);
@@ -81,5 +84,6 @@ std::ostream&	operator<<(std::ostream& os, intList& elem);
 std::ostream&	operator<<(std::ostream& os, intList const& elem);
 std::ostream&	operator<<(std::ostream& os, pairVec& elem);
 std::ostream&	operator<<(std::ostream& os, pairList& elem);
+
 
 #endif /* PMERGEME_HPP */

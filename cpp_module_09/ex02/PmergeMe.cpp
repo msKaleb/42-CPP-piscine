@@ -6,11 +6,6 @@ PmergeMe::PmergeMe() : _straggler(-1), _inserted(0) {
 
 PmergeMe::~PmergeMe() {
 	// std::cout << "PmergeMe: Destructor Called" << std::endl;
-	/* for (size_t i = 0; i < (_size / 2); i++) {
-		delete[]_chain[i];
-	}
-	delete[]_chain; */
-	// delete[]_tChain;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &copy) {
@@ -44,22 +39,19 @@ size_t	PmergeMe::jacobsthal(size_t n) {
 intVec	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 	std::stringstream	ss(numbers);
 	std::string			item;
-	intVec				intNumbers;
-	size_t				size;
+	intVec				intNumbers; // use deque??
 
 	while (ss >> item) {
 		char*	ending;
 		long	lItem = std::strtol(item.c_str(), &ending, 10);
-		if (*ending != 0 || lItem > INTMAX)
+		if (lItem < 0 || *ending != 0 || lItem > INTMAX)
 			throw NotInt();
 		else
 			intNumbers.push_back(lItem);
 	}
 
-	size = intNumbers.size(); // needed?
-	bool	hasStraggler = intNumbers.size() % 2 == 0 ? false : true;
-	if (hasStraggler) {
-		_straggler = intNumbers[size - 1];
+	if (intNumbers.size() % 2 != 0) {
+		_straggler = intNumbers.back();
 		// std::cout << "straggler: " << _straggler << std::endl;
 	}
 	return intNumbers;
@@ -68,7 +60,7 @@ intVec	PmergeMe::getUnsortedNumbers(std::string const& numbers) {
 intVec	PmergeMe::getSortedVector() const { return this->_sortedVector; }
 
 // create vector<t_pair> *******************************************************
-pairVec	PmergeMe::getPairedVector(intVec intNumbers) {
+pairVec	PmergeMe::makePairedVector(intVec intNumbers) {
 	pairVec	vChain;
 	size_t	size = intNumbers.size();
 	t_pair	tChain;
@@ -81,24 +73,23 @@ pairVec	PmergeMe::getPairedVector(intVec intNumbers) {
 	return vChain;
 }
 
-void	PmergeMe::binarySearch(int n, int T) {
+void	PmergeMe::vecBinarySearch(int n, int T) {
 	int	L = 0;
 	int R = n;
 	int	m;
-	intVec::iterator	it = _sortedVector.begin();
+	
 	while (L <= R) {
 		m = (L + R) / 2;
 		if (_sortedVector.at(m) < T)
 			L = m + 1;
 		else if (_sortedVector.at(m) > T)
 			R = m - 1;
-		else { // else if _sortedVector.at(m) == T???
-			_sortedVector.insert(it + m, T);
-			_inserted++;
-			return ;
+		else {
+			L = m;
+			break ;
 		}
 	}
-	_sortedVector.insert(it + L, T);
+	_sortedVector.insert(_sortedVector.begin() + L, T);
 	_inserted++;
 }
 
@@ -117,30 +108,35 @@ void	PmergeMe::sortVector(pairVec vChain) {
 	int		jacobIndex = 3;
 	int		jacobPos = 1;
 	bool	loop = true;
+	// int		cicles = 2;
 	while (loop) {
 		if (jacobNumber >= vChain.size()) {
 			jacobNumber = vChain.size();
 			loop = false;
 		}
 		for (int i = jacobNumber - 1; i >= jacobPos; i--) {
-			binarySearch(i + _inserted, vChain.at(i).min);
+			vecBinarySearch(i + _inserted, vChain.at(i).min);
+			// vecBinarySearch(std::pow(2, cicles) - 1, vChain.at(i).min);
 		}
 		jacobPos = jacobNumber;
 		jacobNumber = jacobsthal(++jacobIndex);
+		// cicles++;
 	}
 	if (_straggler >= 0)
-		binarySearch(_sortedVector.size(), _straggler);
+		vecBinarySearch(_sortedVector.size(), _straggler);
 }
 
-// parametrized constructor ****************************************************
+// *****************************************************************************
+// parametrized constructor
+// *****************************************************************************
 PmergeMe::PmergeMe(std::string const& numbers) : _straggler(-1), _inserted(0) {
 	intVec	intNumbers = getUnsortedNumbers(numbers);
-	pairVec	vChain = getPairedVector(intNumbers);
+	pairVec	vChain = makePairedVector(intNumbers);
 
-	// std::cout << vChain << std::endl;
-	vecMergeSort(vChain);
-	// std::cout << vChain << std::endl;
-	sortVector(vChain);
+	vecMergeSort(vChain);	// sort the larger elements
+	sortVector(vChain);		// insert pending elements into sorted vector
+
+
 }
 
 // merge-sort algorithm for larger elements (vector) ***************************

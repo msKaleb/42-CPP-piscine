@@ -136,7 +136,7 @@ void	BitcoinExchange::readCSV() {
 	fin.open("./data.csv", std::ios::in);
 	if (!fin) {
 		std::cerr << "Couldn't open [data.csv] file" << std::endl;
-		return ;
+		throw std::exception();
 	}
 
 	while (!fin.eof()) {

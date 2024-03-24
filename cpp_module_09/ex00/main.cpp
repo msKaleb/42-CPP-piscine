@@ -10,10 +10,14 @@ int main(int argc, char* argv[]) {
 	std::string		input(argv[1]);
 	BitcoinExchange	be(input);
 
-	// load database into a map container
-	be.readCSV();
-	// input file to calculate the exchange rate
-	be.readInput();
+	try {
+		// load database into a map container
+		be.readCSV();
+		// input file to calculate the exchange rate
+		be.readInput();
+	} catch (std::exception& e) {
+		std::cout << e.what() << std::endl;
+	}
 
 	BitcoinExchange	copy = be;
 	// copy.printMap();

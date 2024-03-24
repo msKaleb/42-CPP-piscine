@@ -1,8 +1,5 @@
 #include "PmergeMe.hpp"
 
-/**
- * @todo remove Wno-unused
-  */
 int main(int argc, char* argv[]) {
 	// first check the number of arguments
 	if (argc < 2) {

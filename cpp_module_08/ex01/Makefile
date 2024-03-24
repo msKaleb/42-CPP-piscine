@@ -12,8 +12,8 @@
 SRC			=	main.cpp \
 				Span.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -Wno-unused -g -O0
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -Wno-unused -g -O0
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++ 
 NAME		=	span
 OBJ			=	$(SRC:.cpp=.o) 

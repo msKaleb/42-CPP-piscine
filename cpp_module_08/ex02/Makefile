@@ -11,8 +11,8 @@
 
 SRC			=	main.cpp \
 
-CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
-OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0 -Wno-unused
+CPPFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
+OBJFLAGS	=	-Wall -Wextra -Werror -pedantic -std=c++98 -g -O0
 CC			=	c++
 NAME		=	mutantstack
 OBJ			=	$(SRC:.cpp=.o)

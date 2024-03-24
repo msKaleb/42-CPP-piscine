@@ -229,15 +229,16 @@ void	PmergeMe::sortVector(pairVec vChain) {
 }
 
 // *****************************************************************************
-// parametrized constructor
+// the public method to sort the numbers
 // *****************************************************************************
 void	PmergeMe::sortNumbers(std::string const& numbers) {
 	std::deque<int>		intNumbers = getUnsortedNumbers(numbers);
-	pairVec				vChain = makePairedVector(intNumbers);
-	pairList			lChain = makePairedList(intNumbers);
+	pairVec				vChain;
+	pairList			lChain;
 
 	// sorting process for vector
 	struct timeval	vStart, vEnd;
+	vChain = makePairedVector(intNumbers);
 	gettimeofday(&vStart, NULL);
 	if (!vChain.empty()) {
 		vecMergeSort(vChain);	// sort the pairs by larger elements
@@ -250,6 +251,7 @@ void	PmergeMe::sortNumbers(std::string const& numbers) {
 
 	// sorting process for list
 	struct timeval	lStart, lEnd;
+	lChain = makePairedList(intNumbers);
 	gettimeofday(&lStart, NULL);
 	if (!lChain.empty()) {
 		listMergeSort(lChain);	// sort the pairs by larger elements

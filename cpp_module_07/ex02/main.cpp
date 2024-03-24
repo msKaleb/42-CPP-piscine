@@ -5,6 +5,7 @@
 
 int main(int, char**)
 {
+    Array<int>  i;
     Array<std::string> myStrings(5);
     myStrings[0] = "Consectetur eiusmod elit est sunt culpa laboris cillum labore id deserunt";
     myStrings[1] = "cupidatat culpa velit id. Duis excepteur consequat proident";

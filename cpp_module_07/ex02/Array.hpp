@@ -2,6 +2,7 @@
 # define ARRAY_HPP
 
 # include <iostream>
+# include <cstdlib>
 
 template<typename T>
 class Array
@@ -12,7 +13,7 @@ private:
 	T				*_array;
 public:
 
-	Array<T>() : _nElems(0), _array(new T[0]) {};
+	Array<T>() : _nElems(0), _array(NULL) {};
 	Array<T>(unsigned int elements) : _nElems(elements), _array(new T[elements]) {};
 	~Array<T>() { delete[] this->_array; };
 	Array<T>(Array<T> const& copy) : _nElems(copy._nElems), _array(new T[copy._nElems]) {
@@ -38,21 +39,13 @@ public:
 	}
 
 	T&	operator[](const unsigned int index) {
-		if (index >= 0 && index < this->_nElems)
+		if (index < this->_nElems)
 			return this->_array[index];
 		else
 			throw OutOfBoundsException();
 	}
 
 	unsigned int	size() const { return this->_nElems; };
-
-	/* T&	operator=(const int& rhs) {
-		this->operator[]=
-	} */
 };
-/* template<typename T>
-std::ostream&	operator<<(std::ostream& o, T const& obj) {
-	
-} */
 
 #endif /* ARRAY_HPP */

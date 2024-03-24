@@ -4,32 +4,43 @@
  * @todo remove Wno-unused
   */
 int main(int argc, char* argv[]) {
+	// first check the number of arguments
 	if (argc < 2) {
 		std::cout << "Series of numbers needed" << std::endl;
 		return 1;
 	}
 
+	// get the whole list of numbers
 	std::string	numbers = "";
 	for (int i = 1; i < argc; i++) {
 		numbers += argv[i];
 		numbers += " ";
 	}
 
+	PmergeMe	p;
 	try {
-		PmergeMe	p(numbers);
+		// compute
+		p.sortNumbers(numbers);
+		// print both the unsorted and sorted lists
+		std::cout << WHITE 
+			<< "Before:           " << numbers << RESET << std::endl;
+		std::cout << BLUE 
+			<< "After <vector>:   " << p.getSortedVector() << RESET <<std::endl;
+		std::cout << YELLOW 
+			<< "After <list>:     " << p.getSortedList() << RESET <<std::endl;
 
-		std::cout << "Before:           " << numbers << std::endl;
-		std::cout << "After <vector>:   " << p.getSortedVector() << std::endl;
-		std::cout << "After <list>:     " << p.getSortedList() << std::endl;
-		std::cout << "Time to process a range of " 
+		// print the computation time for each container
+		std::cout << GREEN << "Time to process a range of " 
 				<< p.getSortedVector().size() 
 				<< " elements with std::vector: " 
-				<< p.getVecTime() << "μs" << std::endl;
+				<< p.getVecTime() << "μs" << RESET << std::endl;
 
-		std::cout << "Time to process a range of "
+		std::cout << MAGENTA << "Time to process a range of "
 				 << p.getSortedList().size() 
 				 << " elements with std::list:   " 
-				 << p.getListTime() << "μs" << std::endl;
+				 << p.getListTime() << "μs" << RESET << std::endl;
+	
+	// error catching
 	} catch (PmergeMe::NotInt& e) {
 		std::cout << e.what() << std::endl;
 	} catch (std::exception& e) {

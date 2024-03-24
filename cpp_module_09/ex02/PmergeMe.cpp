@@ -231,7 +231,7 @@ void	PmergeMe::sortVector(pairVec vChain) {
 // *****************************************************************************
 // parametrized constructor
 // *****************************************************************************
-PmergeMe::PmergeMe(std::string const& numbers) : _straggler(-1) {
+void	PmergeMe::sortNumbers(std::string const& numbers) {
 	std::deque<int>		intNumbers = getUnsortedNumbers(numbers);
 	pairVec				vChain = makePairedVector(intNumbers);
 	pairList			lChain = makePairedList(intNumbers);

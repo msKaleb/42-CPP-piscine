@@ -120,9 +120,8 @@ void	BitcoinExchange::readInput() {
 void	BitcoinExchange::parseDate(const char* dateString) const {
 	struct tm	tmStruct;
 
-	// initialize all fields to 0 -- check norm
-	// std::memset(&tmStruct, 0, sizeof(struct tm));
-
+	// initialize all fields to 0
+	std::memset(&tmStruct, 0, sizeof(struct tm));
 	if (strptime(dateString, "%Y-%m-%d", &tmStruct) == NULL)
 		throw BadInput();
 	if (mktime(&tmStruct) == -1)

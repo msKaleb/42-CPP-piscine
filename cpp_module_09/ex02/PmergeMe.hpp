@@ -1,6 +1,7 @@
 #ifndef PMERGEME_HPP
 # define PMERGEME_HPP
 
+# include "colors.h"
 # include <sys/time.h>
 # include <cstring>
 # include <iostream>
@@ -31,14 +32,11 @@ class	PmergeMe
 {
 private:
 	/* data */
-	// make it private so that only can be instantiated with args (change??)
-	PmergeMe();
-
 	int		_straggler;		// if the chain is odd, store it
 	intVec	_sortedVector;	// sorted chain (vector)
 	intList	_sortedList;	// sorted chain (list)
-	long	_vecTime;
-	long	_listTime;
+	long	_vecTime;		// timer for vector
+	long	_listTime;		// timer for list
 
 	// First create an array with all the numbers passed as argument
 	std::deque<int>	getUnsortedNumbers(std::string const& numbers);
@@ -71,19 +69,19 @@ private:
 
 public:
 	/* Orthodox canonical */
+	PmergeMe();
 	~PmergeMe();
 	PmergeMe(PmergeMe const &copy);
 	PmergeMe &operator=(const PmergeMe &rhs);
 
-	PmergeMe(std::string const& numbers);
 	intVec	getSortedVector() const;
 	intList	getSortedList() const;
-
 	long	getListTime() const;
 	long	getVecTime() const;
+	void	sortNumbers(std::string const& numbers);
 
 	class NotInt : public std::exception {
-		public: virtual const char* what() const throw() { return "Only positive integers"; }
+		public: virtual const char* what() const throw() { return RED "Only positive integers" RESET; }
 	};
 };
 

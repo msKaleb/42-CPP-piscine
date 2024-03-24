@@ -39,6 +39,9 @@ public:
 	class BadInput : public std::exception {
 		public: virtual const char* what() const throw() { return RED "Error: bad input => " RESET; }
 	};
+	class NoDB : public std::exception {
+		public: virtual const char* what() const throw() { return RED "Error: Couldn't load [data.csv] file" RESET; }
+	};
 
 	/* Orthodox canonical */
 	~BitcoinExchange();

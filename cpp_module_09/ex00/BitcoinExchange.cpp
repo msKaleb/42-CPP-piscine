@@ -13,8 +13,6 @@ BitcoinExchange::~BitcoinExchange() {
 
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &copy) : _input(copy._input), _date(copy._date) {
 	// std::cout << "BitcoinExchange: Copy Constructor Called" << std::endl;
-	/* if (this != &copy)
-		*this = copy; */
 }
 
 BitcoinExchange	&BitcoinExchange::operator=(const BitcoinExchange &rhs) {
@@ -65,7 +63,8 @@ float	BitcoinExchange::getExchangeRate(std::string const& inputDate,
 		myMap::iterator	it;
 		// get first element greater or equal than inputDate
 		it = _date.lower_bound(inputDate);
-		--it; // go one step backward
+		if (it != _date.begin())
+			--it; // go one step backward
 		// it->first => key | it->second => value
 		product = it->second * fValue;
 	}
@@ -134,10 +133,8 @@ void	BitcoinExchange::readCSV() {
 	std::string			row, key, value;
 
 	fin.open("./data.csv", std::ios::in);
-	if (!fin) {
-		std::cerr << "Couldn't open [data.csv] file" << std::endl;
-		throw std::exception();
-	}
+	if (!fin)
+		throw NoDB();
 
 	while (!fin.eof()) {
 		std::getline(fin, row);
